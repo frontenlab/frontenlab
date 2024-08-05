@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Inter:wght@100..900&display=swap');
+
+
+
+:root {
+    --PrimaryColor: #5a647d;
+    --SecondaryColor:  #a1b2c3;
+    --AccentColor: #ff6f61;
+    --BackgroundColor: #f3f3fa;
+    --TextColor: #4a4a4a;
+    --BlackColor: #090917;
+    --WhiteColor: #ffffff;
+    --BorderColor: #BDC1CA;
+    --HoverColor: #E65C50;
+}
+
+body {
+    margin: 0px 60px;
+    padding: 0;
+    font-family: 'Alata', 'Helvetica Neue', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f3f3fa;
+    max-width: 1440px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+

@@ -1,0 +1,91 @@
+.Navbar {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+    width: 100%;
+    border: 1px solid var(--BorderColor);
+    border-radius: 14px;
+    padding-right: 30px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.Navbar-logo-img{
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.Navbar-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Navbar-links {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.Navbar-links ul {
+    list-style-type:none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 330px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.Navbar-links a {
+    text-decoration: none;
+    color: var(--TextColor);
+}
+
+.Navbar-links a:hover {
+    color: var(--HoverColor);
+}
+
+
+.Navbar-links ul li a.active {
+    color: var(--AccentColor);
+}
+
+.Navbar-buttons {
+    width: 192px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.Navbar-button {
+    width: 140px;
+    height: 50px;
+    background-color: var(--AccentColor);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+.Navbar-button:hover {
+    background-color: var(--HoverColor);
+}
+
+.Navbar-menu {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .Navbar-menu {
+        display: block;
+        margin-left: 20px;
+    }
+
+    .Navbar-links {
+        display: none;
+    }
+}
