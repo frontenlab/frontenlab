@@ -15,7 +15,6 @@
 }
 
 body {
-    margin: 0px 60px;
     padding: 0;
     font-family: 'Alata', 'Helvetica Neue', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -23,9 +22,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #f3f3fa;
-    max-width: 1440px;
-    margin: 0 auto;
-    overflow-x: hidden;
 }
 
 
