@@ -10,6 +10,7 @@ import Profile from './Pages/Profile/Profile'
 import Challenge from './Components/Common/Challenge/Challenge'
 
 
+
 const App = () => {
   return (
     <BrowserRouter>

@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&family=Inter:wght@100..900&display=swap');
 
 
+* {
+    margin: 0;
+    padding: 0;
+}
 
 :root {
     --PrimaryColor: #5a647d;
@@ -22,6 +26,10 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #f3f3fa;
+    width: calc(100% - 40px); 
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 

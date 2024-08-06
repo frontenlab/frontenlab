@@ -1,6 +1,6 @@
 import React from 'react'
 import './Navbar.css'
-import frontenlabImage from '../../Assets/Images/frontenlab.png'
+import frontenlabImage from '../../../Assets/Images/frontenlab.png'
 import { NavLink } from 'react-router-dom';
 import { SlMenu } from "react-icons/sl";
 import { RiCloseLargeFill } from "react-icons/ri";
