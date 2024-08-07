@@ -27,7 +27,10 @@ const Features = () => {
             <div className="feature-box4 box">
                 <img className='feature' src={feature4} alt="feature4" />
             </div>
+
         </div>
+
+        <hr />
     </div>
   )
 }
