@@ -1,0 +1,43 @@
+.title {
+    font-size: 48px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: var(--PrimaryColor);
+}
+
+.challenges {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    
+}
+
+hr {
+    color: var(--BorderColor);
+    width: 100%;
+    margin: 50px 0px;
+}
+
+@media screen and (max-width:978px ) {
+    .title {
+        font-size: 42px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .challenges {
+        flex-direction: column;
+    }
+
+    .title {
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .title {
+        font-size: 30px;
+    }
+}

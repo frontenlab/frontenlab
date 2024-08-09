@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Inter:wght@100..900&display=swap');
 
 
 .Homepage-content {
@@ -29,6 +30,8 @@
     background-color: var(--AccentColor);
     margin: 20px 0px 70px;
     border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Alata', 'Helvetica Neue';
 }
 
 .Homepage-banner {
@@ -47,7 +50,8 @@
 
 hr {
     color: var(--BorderColor);
-    margin: 40px 0px;
+    width: 100%;
+    margin: 50px 0px;
 }
 
 @media (max-width: 768px) {
@@ -71,7 +75,7 @@ hr {
 
 @media (max-width: 480px){
     .Homepage-content h1 {
-        font-size: 36px;
+        font-size: 32px;
         padding: 0px 20px;
         margin: auto;
     }

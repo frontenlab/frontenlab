@@ -1,0 +1,28 @@
+.challenge {
+    width: 390px;
+    background-color: var(--BoxColor);
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.challenge img {
+    width: 100%;
+    height: auto;
+}
+
+.challenge h3 {
+    color: var(--PrimaryColor);
+    margin-bottom: 3px;
+    padding: 10px 15px 0px;
+}
+
+.challenge p {
+    color: var(--PrimaryColor);
+    padding: 0px 15px 30px;
+}
+
+@media screen and (max-width: 480px) {
+    .challenge {
+        width: 280px;
+    }
+}
