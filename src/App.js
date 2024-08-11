@@ -13,19 +13,19 @@ import Challenge from './Components/Common/Challenge/Challenge'
 
 const App = () => {
   return (
-    <BrowserRouter>
-      
-      <Routes>
-        <Route exact path='/' element={<Home />} />
-        <Route path='/challenges' element={<Challenges />}> 
-          <Route path=':challengeId' element={<Challenge />} />
-        </Route>
-        <Route path='/about' element={<About />} />
-        <Route path='/my' element={<Dashboard />} />
-        <Route path='/leaderboard' element={<Leaderboard />} />
-        <Route path='profile' element={<Profile />} />
-      </Routes>
-    </BrowserRouter>
+
+      <BrowserRouter> 
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+          <Route path='/challenges' element={<Challenges />}> 
+            <Route path=':challengeId' element={<Challenge />} />
+          </Route>
+          <Route path='/about' element={<About />} />
+          <Route path='/my' element={<Dashboard />} />
+          <Route path='/leaderboard' element={<Leaderboard />} />
+          <Route path='profile' element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
   )
 }
 

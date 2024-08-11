@@ -1,6 +1,6 @@
-import NC1 from '../Assets/NC1.png'
-import NC2 from '../Assets/NC2.png'
-import NC3 from '../Assets/NC3.png'
+import NC1 from '../Assets/Images/NC1.png'
+import NC2 from '../Assets/Images/NC2.png'
+import NC3 from '../Assets/Images/NC3.png'
 
 const NewChallenge = [
     {

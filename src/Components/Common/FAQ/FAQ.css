@@ -1,0 +1,44 @@
+.FAQ {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq-container {
+    width: 60%;
+}
+
+.FAQ .title {
+    color: var(--PrimaryColor);
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+@media screen and (max-width: 978px) {
+    .faq-container {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .faq-container {
+        width: 80%;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .faq-container {
+        width: 90%;
+    }
+
+    .FAQ .title {
+        font-size: 30px;
+    }
+
+}

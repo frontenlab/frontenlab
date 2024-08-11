@@ -3,6 +3,7 @@
     background-color: var(--BoxColor);
     border-radius: 18px;
     cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .challenge img {
@@ -19,6 +20,10 @@
 .challenge p {
     color: var(--PrimaryColor);
     padding: 0px 15px 30px;
+}
+
+.challenge:hover {
+    transform: translateY(-5px);
 }
 
 @media screen and (max-width: 480px) {

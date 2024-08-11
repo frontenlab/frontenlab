@@ -1,0 +1,163 @@
+.Cta {
+    width: 100%;
+    height: 350px;
+    background-color: var(--DarkBlue);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    color: var(--WhiteColor);
+}
+
+.Cta > h1 {
+    font-size: 48px;
+    position: relative;
+    text-align: center;
+}
+
+.cta-button {
+    width: 200px;
+    height: 50px;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    background-color: var(--AccentColor);
+}
+
+.cta-button:hover {
+    background-color:#e55b50;
+}
+
+.bulb {
+    position: absolute;
+    left: 190px;
+    bottom: 200px;
+    font-size: 38px;
+    color: var(--AccentColor);
+    transform: rotate(40deg);
+}
+
+.code {
+    position: absolute;
+    right: 190px;
+    bottom: 200px;
+    font-size: 38px;
+    color: var(--AccentColor);
+    transform: rotate(-23deg);
+}
+
+.star {
+    position: absolute;
+    left: 100px;
+    bottom: 100px;
+    font-size: 38px;
+    color: var(--AccentColor);
+    transform: rotate(-39deg);
+}
+
+.computer {
+    position: absolute;
+    right: 100px;
+    bottom: 100px;
+    font-size: 38px;
+    color: var(--AccentColor);
+    transform: rotate(-23deg);
+}
+
+@media screen and (max-width: 1200px) {
+    .bulb {
+        left: 130px;
+    }
+
+    .code {
+        right: 130px;
+    }
+
+    .star {
+        left: 70px;
+    }
+
+    .computer {
+        right: 70px;
+    }
+}
+
+@media screen and (max-width:978px) {
+    .Cta > h1 {
+        font-size: 42px;
+    }
+
+    .bulb {
+        left: 60px;
+    }
+
+    .code {
+        right: 60px;
+    }
+
+    .star {
+        left: 20px;
+    }
+
+    .computer {
+        right: 20px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .Cta > h1 {
+        font-size: 36px;
+    }
+
+    .Cta > h1 {
+        font-size: 42px;
+    }
+
+    .bulb {
+        left: 60px;
+        bottom: 250px;
+    }
+
+    .code {
+        right: 60px;
+        bottom: 250px;
+    }
+
+    .star {
+        left: 20px;
+        bottom: 50px;
+    }
+
+    .computer {
+        right: 20px;
+        bottom: 50px;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .Cta > h1 {
+        font-size: 26px;
+    }
+
+    .bulb {
+        left: 60px;
+        bottom: 270px;
+    }
+
+    .code {
+        right: 60px;
+        bottom: 270px;
+    }
+
+    .star {
+        left: 20px;
+        bottom: 50px;
+    }
+
+    .computer {
+        right: 20px;
+        bottom: 50px;
+    }
+}

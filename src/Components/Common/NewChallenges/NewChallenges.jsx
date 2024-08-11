@@ -13,6 +13,7 @@ const NewChallenges = () => {
             })}
         </div>
         
+        <button>Explore more</button>
         <hr />
     </div>
   )
