@@ -8,6 +8,7 @@ import Competition from '../../Components/Common/Competition/Competition'
 import HIW from '../../Components/Common/HIW/HIW'
 import FAQ from '../../Components/Common/FAQ/FAQ'
 import Cta from '../../Components/Common/CTA/Cta'
+import Footer from '../../Components/Common/Footer/Footer'
 
 const Home = () => {
   return (
@@ -19,7 +20,8 @@ const Home = () => {
       <Competition />
       <HIW />
       <FAQ />
-      <Cta />
+      <Cta /> 
+      <Footer />
     </div>
   )
 }

@@ -1,0 +1,149 @@
+.footer-first {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+
+}
+
+
+.footer-logo-image {
+    margin-bottom: 10px;
+}
+
+.footer-slogan {
+    color: var(--PrimaryColor);
+    font-size: 42px;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--PrimaryColor);
+}
+
+.footer-links a:hover {
+    color: var(--AccentColor);
+}
+
+li {
+    list-style-type:none ;
+}
+
+.footer-secondary {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.social > a{
+    text-decoration: none;
+    color: var(--PrimaryColor);
+}
+
+.social:hover a {
+    color: var(--AccentColor);
+}
+
+.social > .footer-icon {
+    font-size: 22px;
+    color: var(--PrimaryColor);
+}
+
+.social:hover .footer-icon {
+    color: var(--AccentColor);
+}
+
+
+.footer-second {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    color: var(--PrimaryColor);
+}
+
+.footer-second-links  a{
+    text-decoration: none;
+    color: var(--PrimaryColor);
+}
+
+.footer-second-links a:hover {
+    color: var(--AccentColor);
+}
+
+.footer-second-links {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 978px) {
+    .footer-slogan {
+        font-size: 36px;
+    }
+
+    .footer-first {
+        gap: 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer-slogan {
+        font-size: 30px;
+        text-align: center;
+        padding-right: 0px;
+    }
+
+    .footer-first {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .footer-logo-image {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        margin-bottom: 10px;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .footer-slogan {
+        font-size: 24px;
+    }
+
+    .footer-second {
+        align-items: center;
+    }
+
+    .footer-second-links {
+        flex-direction: column;
+    }
+}

@@ -9,11 +9,11 @@
     justify-content: center;
     align-items: center;
     color: var(--WhiteColor);
+    position: relative;
 }
 
 .Cta > h1 {
     font-size: 48px;
-    position: relative;
     text-align: center;
 }
 
@@ -24,6 +24,7 @@
     outline: none;
     border: none;
     background-color: var(--AccentColor);
+    color: var(--WhiteColor);
 }
 
 .cta-button:hover {
@@ -107,22 +108,23 @@
 }
 
 @media screen and (max-width:768px) {
+    .Cta {
+        height: 300px;
+    }
+
     .Cta > h1 {
         font-size: 36px;
     }
 
-    .Cta > h1 {
-        font-size: 42px;
-    }
 
     .bulb {
         left: 60px;
-        bottom: 250px;
+        bottom: 200px;
     }
 
     .code {
         right: 60px;
-        bottom: 250px;
+        bottom: 200px;
     }
 
     .star {
@@ -137,6 +139,15 @@
 }
 
 @media screen and (max-width:480px) {
+    .Cta {
+        height: 250px;
+    }
+
+    .cta-button {
+        width: 150px;
+        height: 40px;
+    }
+
     .Cta > h1 {
         font-size: 26px;
     }
