@@ -1,0 +1,21 @@
+.Tac {
+    margin: 40px;
+    color: var(--PrimaryColor);
+}
+
+.Tac-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.Tac-content h1 {
+    text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    .Tac {
+        margin: 40px 10px;
+    }
+}

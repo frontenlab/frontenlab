@@ -8,6 +8,8 @@ import Dashboard from './Pages/Dashboard/Dashboard'
 import Leaderboard from './Pages/Leaderboard/Leaderboard'
 import Profile from './Pages/Profile/Profile'
 import Challenge from './Components/Common/Challenge/Challenge'
+import Terms from './Pages/Terms/Terms';
+import Privacy from './Pages/Privacy/Privacy';
 
 
 
@@ -24,6 +26,8 @@ const App = () => {
           <Route path='/my' element={<Dashboard />} />
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='profile' element={<Profile />} />
+          <Route path='/terms' element={<Terms />} />
+          <Route path='/privacy' element={<Privacy />} />
         </Routes>
       </BrowserRouter>
   )

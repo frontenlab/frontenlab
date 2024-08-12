@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ChakraProvider } from '@chakra-ui/react'
 import './FAQ.css';
 import {
     Accordion,
@@ -20,45 +21,45 @@ const FAQ = () => {
     return (
         <div className="FAQ">
             <h1 className='title'>FAQs</h1>
-
-            <div className="faq-container">
-                <Accordion index={expandedIndex} onChange={(index) => setExpandedIndex(index)}>
-                    {Faqs.map((faq, index) => (
-                        <AccordionItem key={faq.id}>
-                            {({ isExpanded }) => (
-                                <>
-                                    <h2>
-                                        <AccordionButton onClick={() => handleAccordionChange(index)}>
-                                            <Box
-                                                as='span'
-                                                flex='1'
-                                                textAlign='left'
-                                                color={expandedIndex === index ? "#ff6f61" : "#5a647d"}
-                                                height="42px"
-                                                display="flex"
-                                                alignItems="center"
-                                                fontSize="20px"
-                                                padding="40px 0px"
-                                            >
-                                                {faq.question}
-                                            </Box>
-                                            <AccordionIcon />
-                                        </AccordionButton>
-                                    </h2>
-                                    <AccordionPanel
-                                        pb={4}
-                                        className={`accordion-panel ${isExpanded ? 'expanded' : 'collapsed'}`}
-                                        color="#5a647d"
-                                    >
-                                        {faq.answer}
-                                    </AccordionPanel>
-                                </>
-                            )}
-                        </AccordionItem>
-                    ))}
-                </Accordion>
-            </div>
-
+            <ChakraProvider>
+                <div className="faq-container">
+                    <Accordion index={expandedIndex} onChange={(index) => setExpandedIndex(index)}>
+                        {Faqs.map((faq, index) => (
+                            <AccordionItem key={faq.id}>
+                                {({ isExpanded }) => (
+                                    <>
+                                        <h2>
+                                            <AccordionButton onClick={() => handleAccordionChange(index)}>
+                                                <Box
+                                                    as='span'
+                                                    flex='1'
+                                                    textAlign='left'
+                                                    color={expandedIndex === index ? "#ff6f61" : "#5a647d"}
+                                                    height="42px"
+                                                    display="flex"
+                                                    alignItems="center"
+                                                    fontSize="20px"
+                                                    padding="40px 0px"
+                                                >
+                                                    {faq.question}
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+                                        </h2>
+                                        <AccordionPanel
+                                            pb={4}
+                                            className={`accordion-panel ${isExpanded ? 'expanded' : 'collapsed'}`}
+                                            color="#5a647d"
+                                        >
+                                            {faq.answer}
+                                        </AccordionPanel>
+                                    </>
+                                )}
+                            </AccordionItem>
+                        ))}
+                    </Accordion>
+                </div>
+            </ChakraProvider>
             <hr />
         </div>
     );

@@ -1,0 +1,21 @@
+.Privacy {
+    margin: 40px;
+    color: var(--PrimaryColor);
+}
+
+.privacy-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.privacy-content h1 {
+    text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    .privacy {
+        margin: 40px 10px;
+    }
+}

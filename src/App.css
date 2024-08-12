@@ -20,6 +20,7 @@
     --DarkBlue: #171A1F;
 }
 
+
 body {
     padding: 0;
     font-family: 'Alata', 'Helvetica Neue', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -35,7 +36,7 @@ body {
 }
 
 button {
-    font-family: 'alata';
+    font-family: 'alata' ;
 }
 
 hr {
