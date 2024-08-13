@@ -1,7 +1,7 @@
 import React from 'react'
 import './NewChallenges.css'
 import NewChallenge from '../../../Helpers/NewChallenge'
-import Challenge from '../Challenge/Challenge'
+import ChallengeStructure from '../Challenge/ChallengeStructure'
 
 const NewChallenges = () => {
   return (
@@ -9,7 +9,7 @@ const NewChallenges = () => {
         <h1 className="title">New Challenges</h1>
         <div className="New-Challenge challenges">
             {NewChallenge.map((challenge, index) => {
-                return <Challenge key={challenge.id} id={challenge.id} img={challenge.img} title={challenge.title} description={challenge.description} />
+                return <ChallengeStructure key={challenge.id} id={challenge.id} img={challenge.img} title={challenge.title} description={challenge.description} />
             })}
         </div>
         

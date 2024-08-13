@@ -1,0 +1,32 @@
+.AllChallenges {
+    width: 100%;
+    margin: 50px 0px;
+}
+
+.AllChallenges-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.AllChallenges-content h1 {
+    color: var(--PrimaryColor);
+    font-size: 48px;
+}
+
+.AllChallenges-content p {
+    color: var(--PrimaryColor);
+}
+
+.AllChallenges-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin: 50px 0px;
+
+}

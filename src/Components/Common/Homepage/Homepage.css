@@ -34,6 +34,10 @@
     font-family: 'Alata', 'Helvetica Neue';
 }
 
+.Homepage-content button:hover {
+    background-color: var(--HoverColor);
+}
+
 .Homepage-banner {
     display: flex;
     justify-content: center;

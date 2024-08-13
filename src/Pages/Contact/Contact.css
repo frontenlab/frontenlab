@@ -1,0 +1,122 @@
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.contact-content {
+    margin-top: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-container h1 {
+    font-size: 48px;
+    color: var(--PrimaryColor);
+}
+
+.contact-container p {
+    color: var(--PrimaryColor);
+    margin-bottom: 5px;
+}
+
+.contact-container input {
+    width: 100%;
+    height: 46px;
+    outline: none;
+    border: 1px solid var(--BorderColor);
+    border-radius: 5px;
+    padding: 0px 15px;
+    box-sizing: border-box;
+    color: var(--PrimaryColor);
+    background-color: var(--BackgroundColor);
+}
+
+.contact-container::placeholder {
+    color: var(--BorderColor);
+}
+
+.contact-container textarea {
+    width: 100%;
+    height: 300px;
+    outline: none;
+    border: 1px solid var(--BorderColor);
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: var(--BackgroundColor);
+    color: var(--PrimaryColor);
+}
+
+.contact-content button {
+    width: 200px;
+    height: 43px;
+    outline: none;
+    border: none;
+    color: var(--WhiteColor);
+    background-color: var(--AccentColor);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Alata', 'Helvetica Neue';
+}
+
+.contact-content button:hover {
+    background-color: var(--HoverColor);
+}
+
+
+
+.contact-img img{
+    width: 100%;
+    height: auto;
+}
+
+@media screen and (max-width:1200px) {
+    .contact-container {
+        gap: 80px;
+    }
+
+    .contact-container h1 {
+        font-size: 42px;
+    }
+}
+
+@media screen and (max-width: 978px) {
+    .contact-container {
+        gap: 30px;
+    }
+
+    .contact-container {
+        width: 100%;
+    }
+
+    
+}
+
+@media screen and (max-width: 768px) {
+    .contact-container {
+        flex-direction: column-reverse;
+    }
+
+    .contact-container h1 {
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-container h1 {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .contact-content button {
+        margin: 0 auto;
+        width: 150px;
+    }
+}
