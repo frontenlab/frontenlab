@@ -12,7 +12,7 @@ const AllChallenges = () => {
 
           <div className="AllChallenges-container">
             {AllChallengesContent.map((challenge, index) => {
-                return <ChallengeStructure key={challenge.id} id={challenge.id} img={challenge.img} title={challenge.title} description={challenge.description} />
+                return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.imgDesktop} imgTablet={challenge.imgTablet} imgMobile={challenge.imgMobile} title={challenge.title} description={challenge.description} />
             })}
           </div>
         </div>

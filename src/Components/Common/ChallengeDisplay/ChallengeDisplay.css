@@ -1,0 +1,51 @@
+.challengeDisplay-box {
+    width: 90%;
+    height: 70%;
+    background-color: var(--BoxColor);
+    margin:0 auto;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.challengeDisplay-box-img {
+    width: 80%;
+    height: auto;
+    padding: 30px;
+}
+
+.challengeDisplay-box-img img {
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.challengeDisplay-box-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 30px;
+}
+
+.challengeDisplay-box-buttons > button {
+    width: 144px;
+    height: 36px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    background-color: var(--SecondaryColor);
+    color: var(--WhiteColor);
+    cursor: pointer;
+}
+
+.challengeDisplay-box-buttons > button:hover {
+    background-color: var(--PrimaryColor);
+}
+
+.active-btn {
+    background-color: var(--PrimaryColor)!important;
+}
+
