@@ -1,3 +1,10 @@
+.ChallengeDisplay {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
 .challengeDisplay-box {
     width: 90%;
     height: 70%;
@@ -42,10 +49,152 @@
 }
 
 .challengeDisplay-box-buttons > button:hover {
-    background-color: var(--PrimaryColor);
+    background-color:#7a8a99
 }
 
 .active-btn {
     background-color: var(--PrimaryColor)!important;
 }
 
+.challengeDisplay-content {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+}
+
+.challengeDisplay-content-box1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.challengeDisplay-challengeDescription {
+    flex: 1;
+
+}
+
+.challengeDisplay-assets {
+    flex:1;
+}
+
+.contentBox {
+    padding: 30px;
+    border-radius: 28px;
+    background-color: var(--BoxColor);
+    box-sizing: border-box;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.challengeDisplay-content-box2 {
+    padding: 30px;
+    border-radius: 28px;
+    background-color: var(--BoxColor);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.challengeDisplay-content h1,p{
+    color: var(--PrimaryColor);
+}
+
+.challengeDisplay-content h1{
+    font-size: 32px;
+}
+
+.challengeDisplay-assets > ul li {
+    color: var(--PrimaryColor);
+}
+
+.challengeDisplay-assets > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.challengeDisplay-content button {
+    padding: 8px 15px;
+    background-color: var(--AccentColor);
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    color: var(--WhiteColor);
+}
+
+.challengeDisplay-content button:hover {
+    background-color: #e55b50;
+}
+
+.challengeDisplay-challengeDescription button {
+    width: 122px;
+}
+
+.challengeDisplay-content-box2 button {
+    width: 180px;
+}
+
+@media screen and (max-width: 978px) {
+    .challengeDisplay-box-buttons > button {
+        width: 122px;
+        height: 36px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .challengeDisplay-content-box1 {
+        flex-direction: column;
+    }
+
+    .contentBox {
+        width: 100%;
+    }
+
+    .challengeDisplay-box-buttons > button {
+        width: 80px;
+        height: 36px;
+    }
+
+    .challengeDisplay-box-buttons {
+        gap: 10px;
+    }
+    
+}
+
+@media screen and (max-width: 480px) {
+    .challengeDisplay-box-buttons > button {
+        width: 70px;
+        height: 26px;
+    }
+    
+    .contentBox {
+        padding: 20px;
+    }
+
+    .challengeDisplay-content-box2 {
+        padding: 20px;
+    }
+
+    .challengeDisplay-content h1{
+        font-size: 28px;
+    }
+
+    .challengeDisplay-content-box2 {
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+}

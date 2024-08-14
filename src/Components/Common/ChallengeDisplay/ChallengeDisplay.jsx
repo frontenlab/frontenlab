@@ -43,6 +43,34 @@ const ChallengeDisplay = (props) => {
                 <button className={`button1 ${activeBtn=== "button3"? "active-btn": ""}` } onClick={handleButtonClick("button3")}>Mobile</button>
             </div>
         </div>
+
+        <div className="challengeDisplay-content">
+            <div className="challengeDisplay-content-box1 ">
+                <div className="challengeDisplay-challengeDescription contentBox">
+                    <h1>Description</h1>
+                    <p>Craft an easy-level homepage showcasing buttons and images. Design a clean layout that incorporates buttons for navigation or calls to action, along with relevant images to enhance visual appeal.</p>
+                    <button>Start</button>
+                </div>  
+
+                <div className="challengeDisplay-assets contentBox">
+                    <h1>Assets Provided</h1>
+                    <ul>
+                        <li>Figma file</li>
+                        <li>PNG format designs</li>
+                        <li>Style guide with color and font details</li>
+                        <li>Style guide with color and font details</li>
+                        <li>Required Images</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div className="challengeDisplay-content-box2">
+                <h1>Submit Solution</h1>
+                <p>Craft an easy-level homepage showcasing buttons and images. Design a clean layout that incorporates buttons for navigation or calls to action, along with relevant images to enhance visual appeal.</p>
+                <button>Submit Solution</button>
+            </div>
+        </div>
+
     </div>
   )
 }
