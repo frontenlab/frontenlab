@@ -1,0 +1,138 @@
+.Sidebar {
+    width: 250px;
+    height: 100vh;
+    border: 1px solid var(--BorderColor);
+    border-radius: 18px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.sidebar-profile {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--PrimaryColor);
+}
+
+.sidebar-profile-img {
+    width: 44px;
+    height: 44px;
+}
+
+.sidebar-profile-img img {
+    width: 100%;
+    height: auto;
+}
+
+.sidebar-line {
+    width: 100%;
+    border: 1px solid var(--BorderColor);
+    margin-bottom: 30px;
+}
+
+.sidebar-links {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.sidebar-links a {
+    text-decoration: none;
+    color: var(--TextColor);
+}
+
+.sidebar-links li  {
+    width: 100%;
+    display: block;
+    height: 40px;
+    border: 1px solid var(--BorderColor);
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+.sidebar li a {
+    width: 100%;
+    display: block;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s;
+    color: var(--PrimaryColor);
+}
+
+
+.sidebar-links li a:hover {
+    color: var(--AccentColor);
+    cursor: pointer;
+}
+
+.sidebar-links li:hover {
+    border-color: var(--AccentColor);
+}   
+
+.sidebar-icon:hover {
+    color: var(--AccentColor);
+}
+
+.sidebar-menu-container .sidebar-icon {
+    cursor: pointer;
+    transition: color 0.3s;
+
+}
+
+.sidebar-menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    flex-direction: column;
+    gap: 20px;
+    display: none;
+}
+
+.sidebar-icon-container {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--BorderColor);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width:768px) {
+    .Sidebar {
+        width: 80px;
+    }
+    
+    .sidebar-line {
+        display: none;
+    }
+
+    .sidebar-profile {
+        display: none;
+    }
+
+    .sidebar-menu-container {
+        display: block;
+
+    }
+
+    .sidebar-links {
+        display: none;
+    }
+
+
+}
+

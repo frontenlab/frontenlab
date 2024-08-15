@@ -11,12 +11,15 @@ import Terms from './Pages/Terms/Terms';
 import Privacy from './Pages/Privacy/Privacy';
 import Contact from './Pages/Contact/Contact';
 import Challenge from './Pages/Challenge';
+import ScrollToTop from './Helpers/ScrollToTop';
 
 
 const App = () => {
+
   return (
 
-      <BrowserRouter> 
+      <BrowserRouter>
+      <ScrollToTop /> 
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/challenges' element={<Challenges />} /> 
