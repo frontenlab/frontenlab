@@ -1,11 +1,15 @@
 .Sidebar {
     width: 250px;
-    height: 100vh;
+    height: 100%;
     border: 1px solid var(--BorderColor);
     border-radius: 18px;
     padding: 10px 20px;
     box-sizing: border-box;
     position: relative;
+}
+
+.Sidebar-hide {
+    display: none;
 }
 
 .sidebar-profile {
@@ -17,6 +21,18 @@
     flex-direction: column;
     gap: 10px;
     color: var(--PrimaryColor);
+    position: relative;
+}
+
+.sidebar-profile-close-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: color 0.3s;
+}
+
+.sidebar-profile-close-icon:hover {
+    color: var(--AccentColor);
 }
 
 .sidebar-profile-img {
@@ -56,11 +72,13 @@
     border: 1px solid var(--BorderColor);
     border-radius: 8px;
     transition: border-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sidebar li a {
     width: 100%;
-    display: block;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -71,24 +89,36 @@
 }
 
 
-.sidebar-links li a:hover {
+.sidebar-links li:hover a {
     color: var(--AccentColor);
+    transition: color 0.3s;
     cursor: pointer;
 }
 
 .sidebar-links li:hover {
     border-color: var(--AccentColor);
-}   
+}
 
-.sidebar-icon:hover {
+
+.sidebar-icon-container:hover {
+    border-color: var(--AccentColor);
+    transition: border-color 0.3s;
+}
+
+.sidebar-icon-container:hover .sidebar-icon{
     color: var(--AccentColor);
+
 }
 
 .sidebar-menu-container .sidebar-icon {
     cursor: pointer;
     transition: color 0.3s;
-
 }
+
+.sidebar-menu-container {
+    transition: border-color 0.3s;
+}
+
 
 .sidebar-menu-container {
     display: flex;
@@ -108,30 +138,47 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 
+.sidebar-menu-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sidebar-links-hide {
+    display: none;
+}
+
+.sidebar-menu-container {
+    border: 1px solid var(--BorderColor);
+    display: block;
+    width: 60px;
+    border-radius: 4px;
+    padding: 20px 0px;
+}
+
+.sidebar-menu-container-hide {
+    display: none;
+}
+
+.Sidebar-active {
+    display: block;
+    width: 250px;
+    height: 100%;
+    border: 1px solid var(--BorderColor);
+    border-radius: 18px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+
 @media screen and (max-width:768px) {
-    .Sidebar {
-        width: 80px;
-    }
-    
-    .sidebar-line {
-        display: none;
-    }
-
-    .sidebar-profile {
-        display: none;
-    }
-
-    .sidebar-menu-container {
-        display: block;
-
-    }
-
-    .sidebar-links {
-        display: none;
-    }
 
 
 }
