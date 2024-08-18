@@ -8,18 +8,46 @@ import { MdOutlineLeaderboard } from "react-icons/md";
 import { SlMenu } from "react-icons/sl";
 import { useState } from 'react';
 import { IoMdClose } from "react-icons/io";
+import { useEffect } from 'react';
 
 const Sidebar = () => {
 
 
 
   const [menuIcon, setMenuIcon] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); //To use for handleResize function
 
   const handleMenuClick = () => {
     setMenuIcon(prev_val => (prev_val === 0 ? 1 : 0));
   }
 
+  // UseEffect function for hiding the sidebar when the screen size reaches 768px
 
+  useEffect(()=>{
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    
+    return () => window.removeEventListener('resize', handleResize);
+  },[])
+
+  useEffect(()=> {
+    if (isMobile) {
+      if (menuIcon === 1) {
+        document.body.style.overflow = "auto"; // Allow scrolling
+      } else {
+        document.body.style.overflow = "hidden"; // Prevent scrolling
+      }
+    } else {
+      document.body.style.overflow = "auto"; // Always allow scrolling on non-mobile view
+    }
+  },[menuIcon, isMobile])
+  
   return (
 
 

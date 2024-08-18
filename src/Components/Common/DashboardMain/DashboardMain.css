@@ -1,0 +1,68 @@
+.DashboardMain {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-grow: 1; 
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.dashboardMain-box {
+    width: 360px;
+    min-width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid var(--BorderColor);
+    background-color: transparent;
+    color: var(--PrimaryColor);
+    border-radius: 18px;
+    flex: 1 1 calc(33.333% - 40px);
+}
+
+.dashboardMain-box .dashboardMain-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboardMain-box .dashboardMain-line {
+    width: 100%;
+    border: 1px solid var(--BorderColor);
+}
+
+.dashboardMain-arrow-icon {
+    font-size: 22px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.dashboardMain-arrow-icon:hover {
+    color: var(--AccentColor);
+}
+
+@media (max-width: 768px) {
+    .dashboardMain-box {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboardMain-box {
+        flex: 1 1 100%; 
+        min-width: 100%; 
+    }
+}
+
+.dashboardMain-box .dashboardMain-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboardMain-box .dashboardMain-line {
+    width: 100%;
+    border: 1px solid var(--BorderColor);
+}

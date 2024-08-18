@@ -17,13 +17,10 @@ const Navbar = () => {
   return (
     <div className="Navbar">
 
-        
         <div className="Navbar-logo">
-            
             <div className="Navbar-logo-image">
                 <img src={frontenlabImage} alt="fronenlab-logo" />
             </div>
-            
         </div>
 
         <div className={menu? "Navbar-links": "Navbar-links Navbar-links-active"}>

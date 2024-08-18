@@ -1,0 +1,66 @@
+.Contribution-graph {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-x: hidden; /* Prevents horizontal overflow */
+}
+
+.Contribution h1 {
+    color: var(--PrimaryColor);
+    text-align: center;
+    margin-top: 10px;
+    font-size: 36px;
+}
+
+
+.react-calendar-heatmap .color-empty {
+    fill: #e0e0e0;
+}
+
+.react-calendar-heatmap .color-github-1 {
+    fill: #d0e9f5; 
+}
+
+.react-calendar-heatmap .color-github-2 {
+    fill: #a2c2e7;
+}
+
+.react-calendar-heatmap .color-github-3 {
+    fill: #6b9ac1;
+}
+
+.react-calendar-heatmap .color-github-4 {
+    fill: #1e7a9d;
+}
+
+
+@media screen and (max-width: 768px) {
+    .Contribution-graph {
+        overflow-x: auto; /* Allows horizontal scrolling */
+        padding: 10px;
+    }
+
+    .react-calendar-heatmap {
+        width: 800px; /*width that exceeds the viewport to enable scrolling */
+        height: auto;
+    }
+    
+    .Contribution h1 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Contribution h1 {
+        font-size: 24px;
+    }
+    
+    .react-calendar-heatmap .color-github-1,
+    .react-calendar-heatmap .color-github-2,
+    .react-calendar-heatmap .color-github-3,
+    .react-calendar-heatmap .color-github-4,
+    .react-calendar-heatmap .color-empty {
+        width: 10px; 
+        height: 10px;
+    }
+}
