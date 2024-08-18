@@ -12,6 +12,7 @@ import Privacy from './Pages/Privacy/Privacy';
 import Contact from './Pages/Contact/Contact';
 import Challenge from './Pages/Challenge';
 import ScrollToTop from './Helpers/ScrollToTop';
+import DashboardChallenges from './Components/Common/DashboardChallenges/DashboardChallenges';
 
 
 const App = () => {
@@ -22,7 +23,13 @@ const App = () => {
       <ScrollToTop /> 
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/challenges' element={<Challenges />} /> 
+          <Route path='/challenges' element={<Challenges />} > 
+            <Route path='navbar' element={<DashboardChallenges />} />
+            <Route path='footer' element={<DashboardChallenges />} />
+            <Route path='ladingpage' element={<Challenges />} />
+            <Route path='features' element={<Challenges />} />
+            <Route path='hero' element={<Challenges />} />
+          </Route>
           <Route path='/challenge' element={<Challenge />}> 
             <Route path=':challengeId' element={<Challenge />} />
           </Route>

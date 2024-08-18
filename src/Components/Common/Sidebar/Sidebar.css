@@ -1,6 +1,6 @@
 .Sidebar {
     width: 250px;
-    height: 100%;
+    min-height: 80vh;
     border: 1px solid var(--BorderColor);
     border-radius: 18px;
     padding: 10px 20px;
@@ -98,6 +98,7 @@
     cursor: pointer;
 }
 
+
 .sidebar-links li:hover {
     border-color: var(--AccentColor);
 }
@@ -167,6 +168,73 @@
     display: none;
 }
 
+/* Target challenge */
+
+.targetChallengeContainer {
+    width: 100%;
+    padding-left: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.steps {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.steps:hover .targetChallengeArrow {
+    color: var(--AccentColor);
+}
+
+
+.targetChallengeArrow {
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    color: var(--PrimaryColor);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.targetChallenge-link div {
+    color: var(--PrimaryColor);
+    display: flex;
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.targetChallenge-link div:hover {
+    color: var(--AccentColor);
+}
+
+.targetChallenge-link div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.targetChallengeContainer {
+    max-height: 0;
+    display: none;
+    transition: max-height 0.5s ease;
+    width: 100%;
+}
+
+.targetChallengeContainer-active {
+    max-height: fit-content;
+    display: flex;
+}
 
 @media screen and (max-width: 590px) {
     .Sidebar {

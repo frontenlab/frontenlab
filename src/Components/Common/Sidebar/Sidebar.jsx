@@ -9,13 +9,20 @@ import { SlMenu } from "react-icons/sl";
 import { useState } from 'react';
 import { IoMdClose } from "react-icons/io";
 import { useEffect } from 'react';
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
 
-
-
   const [menuIcon, setMenuIcon] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); //To use for handleResize function
+  const [targetActive, setTargetActive] = useState(0);
+
+  const handleTargetClick = () => {
+    setTargetActive(prev_val => (prev_val === 0?1:0));
+    console.log(targetActive)
+  }
 
   const handleMenuClick = () => {
     setMenuIcon(prev_val => (prev_val === 0 ? 1 : 0));
@@ -63,8 +70,20 @@ const Sidebar = () => {
           <div className='sidebar-line'></div>
 
           <div className="sidebar-links">
-              <li><NavLink to="/" > <RiHome7Line className='sidebar-icon' /> Home</NavLink></li>
-              <li><NavLink to="/challenges" > <PiSteps className='sidebar-icon' />Challenges</NavLink></li>
+              <li ><NavLink to="/my" > <RiHome7Line className='sidebar-icon' />Dashboard</NavLink></li>
+              <li className='steps targetChallenge-link' onClick={handleTargetClick}>
+                <div>
+                  <PiSteps className='sidebar-icon' /> Challenges {targetActive === 0? <IoIosArrowDown className='targetChallengeArrow' /> : <IoIosArrowUp className='targetChallengeArrow'/> }
+                </div>
+              </li>
+                <div className={ `targetChallengeContainer ${targetActive === 1 ? 'targetChallengeContainer-active' : ''}`}>
+                <li className='steps targetChallenge-link'><div><Link to={"/challenges/navbar"}>Navbar</Link></div></li>
+                <li className='steps targetChallenge-link'><div>Landing Page</div></li>
+                <li className='steps targetChallenge-link'><div>Features</div></li>
+                <li className='steps targetChallenge-link'><div>Hero</div></li>
+                <li className='steps targetChallenge-link'><div>Footer</div></li>
+                </div>
+                
               <li><NavLink to="/leaderboard" > <MdOutlineLeaderboard className='sidebar-icon' /> Leaderboard</NavLink></li>
           </div>
         </div>
