@@ -17,11 +17,16 @@ const Sidebar = () => {
 
   const [menuIcon, setMenuIcon] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); //To use for handleResize function
-  const [targetActive, setTargetActive] = useState(0);
+  const [targetActive, setTargetActive] = useState(1);
+  const [activeLink, setActiveLink] = useState('');
 
+  const handleLinkClick = (linkName) => {
+    setActiveLink(linkName);
+  };
+
+  
   const handleTargetClick = () => {
     setTargetActive(prev_val => (prev_val === 0?1:0));
-    console.log(targetActive)
   }
 
   const handleMenuClick = () => {
@@ -77,11 +82,11 @@ const Sidebar = () => {
                 </div>
               </li>
                 <div className={ `targetChallengeContainer ${targetActive === 1 ? 'targetChallengeContainer-active' : ''}`}>
-                <li className='steps targetChallenge-link'><div><Link to={"/challenges/navbar"}>Navbar</Link></div></li>
-                <li className='steps targetChallenge-link'><div>Landing Page</div></li>
-                <li className='steps targetChallenge-link'><div>Features</div></li>
-                <li className='steps targetChallenge-link'><div>Hero</div></li>
-                <li className='steps targetChallenge-link'><div>Footer</div></li>
+                  <li className={`steps targetChallenge-link ${activeLink === 'navbar' ? 'targetActive-link' : ''}` } onClick={() => handleLinkClick('navbar')}><div><NavLink to={"/challenges/navbar"}>Navbar</NavLink></div></li>
+                  <li className='steps targetChallenge-link'><div>Landing Page</div></li>
+                  <li className='steps targetChallenge-link'><div>Features</div></li>
+                  <li className='steps targetChallenge-link'><div>Hero</div></li>
+                  <li className='steps targetChallenge-link'><div>Footer</div></li>
                 </div>
                 
               <li><NavLink to="/leaderboard" > <MdOutlineLeaderboard className='sidebar-icon' /> Leaderboard</NavLink></li>

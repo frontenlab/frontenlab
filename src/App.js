@@ -23,13 +23,8 @@ const App = () => {
       <ScrollToTop /> 
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/challenges' element={<Challenges />} > 
-            <Route path='navbar' element={<DashboardChallenges />} />
-            <Route path='footer' element={<DashboardChallenges />} />
-            <Route path='ladingpage' element={<Challenges />} />
-            <Route path='features' element={<Challenges />} />
-            <Route path='hero' element={<Challenges />} />
-          </Route>
+          <Route path='/challenges' element={<Challenges />} />
+          <Route path='/challenges/navbar' element={<DashboardChallenges />} ></Route>
           <Route path='/challenge' element={<Challenge />}> 
             <Route path=':challengeId' element={<Challenge />} />
           </Route>
