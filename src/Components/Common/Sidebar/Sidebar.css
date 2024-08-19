@@ -219,6 +219,9 @@
 }
 
 
+
+/* For target challenges border and color when it is active */
+
 .sidebar-links .targetChallengeContainer .targetActive-link {
     border-color: var(--AccentColor);
 }
@@ -227,6 +230,8 @@
     color: var(--AccentColor); 
     border-color: var(--AccentColor);
 }
+
+
 
 .targetChallenge-link div {
     width: 100%;

@@ -11,7 +11,6 @@ import { IoMdClose } from "react-icons/io";
 import { useEffect } from 'react';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
-import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
 
@@ -22,6 +21,7 @@ const Sidebar = () => {
 
   const handleLinkClick = (linkName) => {
     setActiveLink(linkName);
+    localStorage.setItem('activeLink', linkName);
   };
 
   
@@ -59,6 +59,15 @@ const Sidebar = () => {
       document.body.style.overflow = "auto"; // Always allow scrolling on non-mobile view
     }
   },[menuIcon, isMobile])
+
+  // UseEffect for Active target links
+
+  useEffect(()=> {
+    const savedLink = localStorage.getItem('activeLink');
+    if(savedLink ) {
+      setActiveLink(savedLink);
+    }
+  },[])
   
   return (
 
@@ -83,10 +92,10 @@ const Sidebar = () => {
               </li>
                 <div className={ `targetChallengeContainer ${targetActive === 1 ? 'targetChallengeContainer-active' : ''}`}>
                   <li className={`steps targetChallenge-link ${activeLink === 'navbar' ? 'targetActive-link' : ''}` } onClick={() => handleLinkClick('navbar')}><div><NavLink to={"/challenges/navbar"}>Navbar</NavLink></div></li>
-                  <li className='steps targetChallenge-link'><div>Landing Page</div></li>
-                  <li className='steps targetChallenge-link'><div>Features</div></li>
-                  <li className='steps targetChallenge-link'><div>Hero</div></li>
-                  <li className='steps targetChallenge-link'><div>Footer</div></li>
+                  <li className={`steps targetChallenge-link ${activeLink === 'footer' ? 'targetActive-link' : ''}` } onClick={() => handleLinkClick('footer')}><div><NavLink to={"/challenges/footer"}>Footer</NavLink></div></li>
+                  <li className={`steps targetChallenge-link ${activeLink === 'landingpage' ? 'targetActive-link' : ''}` } onClick={() => handleLinkClick('landingpage')}><div><NavLink to={"/challenges/landingpage"}>Landing Page</NavLink></div></li>
+                  <li className={`steps targetChallenge-link ${activeLink === 'features' ? 'targetActive-link' : ''}` } onClick={() => handleLinkClick('features')}><div><NavLink to={"/challenges/features"}>Features</NavLink></div></li>
+                  <li className={`steps targetChallenge-link ${activeLink === 'hero' ? 'targetActive-link' : ''}` } onClick={() => handleLinkClick('hero')}><div><NavLink to={"/challenges/hero"}>Hero</NavLink></div></li>
                 </div>
                 
               <li><NavLink to="/leaderboard" > <MdOutlineLeaderboard className='sidebar-icon' /> Leaderboard</NavLink></li>
