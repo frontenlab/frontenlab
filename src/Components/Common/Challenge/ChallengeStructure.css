@@ -1,6 +1,7 @@
 .challenge {
     max-width: 390px;
     min-width: 300px;
+    height: fit-content;
     background-color: var(--BoxColor);
     border-radius: 18px;
     cursor: pointer;

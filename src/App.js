@@ -24,11 +24,11 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/challenges' element={<Challenges />} />
-          <Route path='/challenges/navbar' element={<DashboardChallenges />} ></Route>
-          <Route path='/challenges/footer' element={<DashboardChallenges />} ></Route>
-          <Route path='/challenges/landingpage' element={<DashboardChallenges />} ></Route>
-          <Route path='/challenges/hero' element={<DashboardChallenges />} ></Route>
-          <Route path='/challenges/features' element={<DashboardChallenges />} ></Route>
+          <Route path='/challenges/navbar' element={<DashboardChallenges category="navbar" />} ></Route>
+          <Route path='/challenges/footer' element={<DashboardChallenges category="footer"/>} ></Route>
+          <Route path='/challenges/landingpage' element={<DashboardChallenges category="landingpage"/>} ></Route>
+          <Route path='/challenges/hero' element={<DashboardChallenges category="hero"/>} ></Route>
+          <Route path='/challenges/features' element={<DashboardChallenges category="features"/>} ></Route>
           <Route path='/challenge' element={<Challenge />}> 
             <Route path=':challengeId' element={<Challenge />} />
           </Route>

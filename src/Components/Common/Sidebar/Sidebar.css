@@ -103,7 +103,6 @@
     border-color: var(--AccentColor);
 }
 
-
 .sidebar-icon-container:hover {
     border-color: var(--AccentColor);
     transition: border-color 0.3s;

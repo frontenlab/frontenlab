@@ -1,7 +1,7 @@
 import React from 'react'
 import './Sidebar.css'
 import male2 from '../../../Assets/Images/male2.jpg'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { RiHome7Line } from "react-icons/ri";
 import { PiSteps } from "react-icons/pi";
 import { MdOutlineLeaderboard } from "react-icons/md";
@@ -19,12 +19,24 @@ const Sidebar = () => {
   const [targetActive, setTargetActive] = useState(1);
   const [activeLink, setActiveLink] = useState('');
 
+  const location = useLocation();
+
+  //For changing the color of the challenge link when it is not active
+  useEffect(()=>{
+    if(!location.pathname.includes('/challenges')){
+      setActiveLink('');
+    }
+  },[location])
+
   const handleLinkClick = (linkName) => {
     setActiveLink(linkName);
     localStorage.setItem('activeLink', linkName);
   };
 
-  
+  const handleNonChallengeLinkClick = () => {
+    setActiveLink('');
+  };
+
   const handleTargetClick = () => {
     setTargetActive(prev_val => (prev_val === 0?1:0));
   }
@@ -84,7 +96,7 @@ const Sidebar = () => {
           <div className='sidebar-line'></div>
 
           <div className="sidebar-links">
-              <li ><NavLink to="/my" > <RiHome7Line className='sidebar-icon' />Dashboard</NavLink></li>
+              <li onClick={handleNonChallengeLinkClick}><NavLink to="/my" > <RiHome7Line className='sidebar-icon' />Dashboard</NavLink></li>
               <li className='steps targetChallenge-link' onClick={handleTargetClick}>
                 <div>
                   <PiSteps className='sidebar-icon' /> Challenges {targetActive === 0? <IoIosArrowDown className='targetChallengeArrow' /> : <IoIosArrowUp className='targetChallengeArrow'/> }

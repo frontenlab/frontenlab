@@ -1,0 +1,23 @@
+.dashboardChallenges-container {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+}
+
+.dashboardChallenges-challenge-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.dashboardChallenges-challenge-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dashboardChallenges-challenge-content h1 {
+    color: var(--PrimaryColor);
+}
