@@ -13,6 +13,7 @@ import Contact from './Pages/Contact/Contact';
 import Challenge from './Pages/Challenge';
 import ScrollToTop from './Helpers/ScrollToTop';
 import DashboardChallenges from './Components/Common/DashboardChallenges/DashboardChallenges';
+import Settings from './Components/Common/SettingsPage/Settings';
 
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
           <Route path='/terms' element={<Terms />} />
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='/settings' element={<Settings />} />
         </Routes>
       </BrowserRouter>
   )

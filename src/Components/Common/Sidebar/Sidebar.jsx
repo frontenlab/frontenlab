@@ -11,6 +11,7 @@ import { IoMdClose } from "react-icons/io";
 import { useEffect } from 'react';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
+import { IoSettingsOutline } from "react-icons/io5";
 
 const Sidebar = () => {
 
@@ -35,6 +36,7 @@ const Sidebar = () => {
 
   const handleNonChallengeLinkClick = () => {
     setActiveLink('');
+    localStorage.removeItem('activeLink');
   };
 
   const handleTargetClick = () => {
@@ -74,12 +76,17 @@ const Sidebar = () => {
 
   // UseEffect for Active target links
 
-  useEffect(()=> {
+  useEffect(() => {
     const savedLink = localStorage.getItem('activeLink');
-    if(savedLink ) {
+    if (savedLink) {
       setActiveLink(savedLink);
     }
-  },[])
+
+    if (!location.pathname.includes('/challenges')) {
+      setActiveLink('');
+      localStorage.removeItem('activeLink');
+    }
+  }, [location]);
   
   return (
 
@@ -111,6 +118,8 @@ const Sidebar = () => {
                 </div>
                 
               <li><NavLink to="/leaderboard" > <MdOutlineLeaderboard className='sidebar-icon' /> Leaderboard</NavLink></li>
+              <li onClick={handleNonChallengeLinkClick}><NavLink to="/settings" > <IoSettingsOutline className='sidebar-icon' />Settings</NavLink></li>
+
           </div>
         </div>
 
