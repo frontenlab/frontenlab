@@ -3,3 +3,18 @@
     gap: 50px;
     width: 100%;
 }
+
+.settings-content {
+    width: 100%;
+}
+
+.settings-content h1 {
+    color: var(--PrimaryColor);
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 480px) {
+    .settings-container {
+        gap: 20px;
+    }
+}

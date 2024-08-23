@@ -1,0 +1,85 @@
+.Settings-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.settings-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+    border: 1px solid var(--BorderColor);
+    border-radius: 18px;
+    box-sizing: border-box;
+    color: var(--PrimaryColor);
+}
+
+.settings-profile .settings-profile-img {
+    width: 50px;
+    height: 50px;
+}
+
+.settings-profile .settings-profile-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.Settings-content input {
+    padding: 10px 15px;
+    border: 1px solid var(--BorderColor);
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+    color: var(--PrimaryColor);
+    transition: border-color 0.3s;
+}
+
+.Settings-content textarea {
+    padding: 10px 15px;
+    border: 1px solid var(--BorderColor);
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+    color: var(--PrimaryColor);
+    height: 150px;
+    transition: border-color 0.3s;
+}
+
+.Settings-content input:hover {
+    border-color: var(--AccentColor);
+}
+
+.Settings-content textarea:hover {
+    border-color: var(--AccentColor);
+}
+
+.settings-social {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+    border: 1px solid var(--BorderColor);
+    border-radius: 18px;
+    box-sizing: border-box;
+    color: var(--PrimaryColor);
+}
+
+
+.settings-button button {
+    width: 120px;
+    height: 43px;
+    outline: none;
+    border: none;
+    color: var(--WhiteColor);
+    background-color: var(--AccentColor);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.settings-button button:hover {
+    background-color: var(--HoverColor);
+}

@@ -3,7 +3,7 @@ import './Settings.css'
 import Navbar from '../Navbar/Navbar'
 import Sidebar from '../Sidebar/Sidebar'
 import Footer from '../Footer/Footer'
-
+import SettingsContent from '../SettingsContent/SettingsContent'
 
 const Settings = () => {
   return (
@@ -12,8 +12,7 @@ const Settings = () => {
       <div className="settings-container">
         <Sidebar />
         <div className="settings-content">
-          <h1>Settings</h1>
-          
+          <SettingsContent />
         </div>
       </div>
       <Footer />

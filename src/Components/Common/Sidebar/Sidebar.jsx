@@ -45,6 +45,7 @@ const Sidebar = () => {
 
   const handleMenuClick = () => {
     setMenuIcon(prev_val => (prev_val === 0 ? 1 : 0));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   // UseEffect function for hiding the sidebar when the screen size reaches 768px

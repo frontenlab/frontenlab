@@ -1,6 +1,6 @@
 .challenge {
     max-width: 390px;
-    min-width: 300px;
+    min-width: 150px;
     height: fit-content;
     background-color: var(--BoxColor);
     border-radius: 18px;

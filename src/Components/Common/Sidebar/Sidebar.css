@@ -1,9 +1,9 @@
 .Sidebar {
     width: 250px;
-    min-height: 80vh;
+    min-height: fit-content;
     border: 1px solid var(--BorderColor);
     border-radius: 18px;
-    padding: 10px 20px;
+    padding: 20px;
     box-sizing: border-box;
     position: relative;
 }

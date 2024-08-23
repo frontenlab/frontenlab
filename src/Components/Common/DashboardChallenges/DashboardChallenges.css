@@ -21,3 +21,9 @@
 .dashboardChallenges-challenge-content h1 {
     color: var(--PrimaryColor);
 }
+
+@media screen and (max-width: 480px) {
+    .dashboardChallenges-container{
+        gap: 5px;
+    }
+}
