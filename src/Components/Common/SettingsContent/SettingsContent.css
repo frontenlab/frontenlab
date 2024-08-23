@@ -83,3 +83,9 @@
 .settings-button button:hover {
     background-color: var(--HoverColor);
 }
+
+.error-message {
+    color: #FF0000;
+    font-style: italic;
+    font-size: 14px;
+}
