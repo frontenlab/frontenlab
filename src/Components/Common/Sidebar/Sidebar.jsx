@@ -127,9 +127,10 @@ const Sidebar = () => {
         <div className={menuIcon === 1 ? "sidebar-menu-container": "sidebar-menu-container-hide"}>
           <div className="sidebar-menu-content" >
               <div className="sidebar-icon-container" onClick={handleMenuClick}><SlMenu className='sidebar-menu sidebar-icon'  /></div>
-              <div className="sidebar-icon-container" onClick={handleMenuClick}><RiHome7Line className='sidebar-icon sidebar-icon' /></div>
+              <li className="sidebar-icon-container" ><NavLink to="/my" ><RiHome7Line className='sidebar-icon sidebar-icon' /></NavLink></li>
               <div className="sidebar-icon-container" onClick={handleMenuClick}><PiSteps className='sidebar-icon sidebar-icon' /></div>
-              <div className="sidebar-icon-container" onClick={handleMenuClick}><MdOutlineLeaderboard className='sidebar-icon sidebar-icon' /></div> 
+              <li className="sidebar-icon-container" ><NavLink to="/leaderboard"><MdOutlineLeaderboard className='sidebar-icon sidebar-icon' /></NavLink></li> 
+              <li className="sidebar-icon-container" ><NavLink to="/settings" ><IoSettingsOutline className='sidebar-icon' /></NavLink></li> 
           </div>
             
         </div>

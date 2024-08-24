@@ -1,0 +1,26 @@
+.leaderboard-table {
+    color: var(--PrimaryColor);
+}
+
+.leaderboard-table .css-1zts0j {
+    color: var(--PrimaryColor);
+    font-size: 16px;
+    text-align: center;
+    padding: 25px;
+}
+
+.leaderboard-table .css-xumdn4  {
+    border-bottom: 1px solid var(--BorderColor);
+    text-align: center;
+    padding: 25px;
+}
+
+@media screen and (max-width: 480px) {
+    .leaderboard-table .css-xumdn4 {
+        padding: 10px 5px;
+    }
+    
+    .leaderboard-table .css-1zts0j {
+        padding: 10px 5px;
+    }
+}
