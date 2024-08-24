@@ -1,6 +1,7 @@
 import React from 'react'
 import './ChallengeDisplay.css'
 import { useState, useEffect } from 'react';
+import SubmitOverlay from '../SubmitOverlay/SubmitOverlay';
 
 const ChallengeDisplay = (props) => {
 
@@ -69,6 +70,7 @@ const ChallengeDisplay = (props) => {
                 <p>Craft an easy-level homepage showcasing buttons and images. Design a clean layout that incorporates buttons for navigation or calls to action, along with relevant images to enhance visual appeal.</p>
                 <button>Submit Solution</button>
             </div>
+            <SubmitOverlay />
         </div>
 
     </div>

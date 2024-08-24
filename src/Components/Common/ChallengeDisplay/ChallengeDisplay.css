@@ -35,6 +35,7 @@
     align-items: center;
     gap: 20px;
     padding-bottom: 30px;
+    cursor: pointer;
 }
 
 .challengeDisplay-box-buttons > button {

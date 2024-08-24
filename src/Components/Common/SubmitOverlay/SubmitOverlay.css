@@ -1,0 +1,71 @@
+.SubmitOverlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--OverlayColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content {
+    background-color: var(--BackgroundColor);
+    min-width: 300px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 18px;
+    color: var(--PrimaryColor);
+}
+
+.overlay-content h2 {
+    text-align: center;
+}
+
+
+.overlay-input {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 1px solid var(--BorderColor);
+    outline: none;
+    border-radius: 5px;
+    color: var(--PrimaryColor);
+    transition: border-color 0.3s;
+    background-color: var(--BackgroundColor);
+}
+
+.overlay-content input:hover {
+    border-color: var(--AccentColor);
+}
+
+.overlay-content input::placeholder {
+    color: var(--PrimaryColor);
+}
+
+.overlay-content p {
+    margin-bottom: 5px;
+}
+
+.overlay-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.overlay-buttons button{
+    padding: 15px 0px;
+    cursor: pointer;
+}
+
+.overlay-cancel {
+    background-color: var(--BackgroundColor) !important;
+    color: var(--PrimaryColor) !important;
+    border: 1px solid var(--BorderColor) !important;
+}
