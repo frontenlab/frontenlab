@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 const ChallengeStructure = (props) => {
   return (
-    <div className="challenge">
+    <div className={`challenge ${props.isSmallWidth ? 'small-width' : ''}`}>
       <Link to={`/challenge/${props.title}`}><img src={props.imgDesktop} alt="challenge-img" /></Link>
       <h3>{props.title}</h3>
       <p>{props.description}</p>

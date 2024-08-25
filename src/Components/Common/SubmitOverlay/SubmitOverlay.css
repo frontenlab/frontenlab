@@ -14,8 +14,9 @@
 
 .overlay-content {
     background-color: var(--BackgroundColor);
-    min-width: 300px;
+    min-width: 250px;
     width: 500px;
+    margin: 0px 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;

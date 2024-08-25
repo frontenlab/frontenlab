@@ -8,6 +8,11 @@
     transition: transform 0.3s ease;
 }
 
+.small-width {
+    max-width: 340px;
+    height: fit-content;
+}
+
 .challenge img {
     width: 100%;
     height: auto;
