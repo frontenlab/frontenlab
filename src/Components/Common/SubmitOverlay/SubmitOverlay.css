@@ -68,4 +68,23 @@
     background-color: var(--BackgroundColor) !important;
     color: var(--PrimaryColor) !important;
     border: 1px solid var(--BorderColor) !important;
+    transition: border-color 0.3s,color 0.3s !important;
+}
+
+.overlay-cancel:hover {
+    color: var(--AccentColor) !important;
+    border-color: var(--AccentColor) !important;
+}
+
+.overlay-input-error{
+    color: #FF0000;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    justify-content: flex-start;
 }

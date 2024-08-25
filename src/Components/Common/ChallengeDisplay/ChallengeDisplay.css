@@ -140,10 +140,18 @@
 
 .challengeDisplay-challengeDescription button {
     width: 122px;
+    height: 36px;
+    cursor: pointer;
 }
 
 .challengeDisplay-content-box2 button {
     width: 180px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.no-scroll {
+    overflow: hidden;
 }
 
 @media screen and (max-width: 978px) {

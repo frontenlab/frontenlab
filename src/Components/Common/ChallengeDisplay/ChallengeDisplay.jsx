@@ -7,6 +7,11 @@ const ChallengeDisplay = (props) => {
 
     const [activeBtn, setActiveBtn] = useState("button1");
     const [imgUrl, setImgUrl] = useState(props.currentChallenge.imgDesktop);
+    const [overlayActive, setOverlayActive] = useState(false);
+
+    const handleSubmitSolutionClick = () => {
+        setOverlayActive(!overlayActive);
+    }
 
     useEffect(()=> {
         setActiveBtn("button1");
@@ -30,6 +35,18 @@ const ChallengeDisplay = (props) => {
                 setImgUrl(props.currentChallenge.imgDesktop);
         }
     }
+
+    useEffect(()=>{
+        if(overlayActive) {
+            document.body.classList.add("no-scroll");
+        } else {
+            document.body.classList.remove("no-scroll");
+        }
+
+        return () => {
+            document.body.classList.remove('no-scroll');
+        };
+    },[overlayActive]);
 
   return (
     <div className="ChallengeDisplay">
@@ -68,9 +85,9 @@ const ChallengeDisplay = (props) => {
             <div className="challengeDisplay-content-box2">
                 <h1>Submit Solution</h1>
                 <p>Craft an easy-level homepage showcasing buttons and images. Design a clean layout that incorporates buttons for navigation or calls to action, along with relevant images to enhance visual appeal.</p>
-                <button>Submit Solution</button>
+                <button onClick={handleSubmitSolutionClick}>Submit Solution</button>
             </div>
-            <SubmitOverlay />
+            {overlayActive && <SubmitOverlay overlayActive={overlayActive} setOverlayActive={setOverlayActive} />}
         </div>
 
     </div>
