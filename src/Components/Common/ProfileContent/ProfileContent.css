@@ -6,8 +6,7 @@
 }
 
 .profile-content-left {
-    min-width: 22%;
-    max-width: 22%;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -77,6 +76,7 @@
     color: var(--PrimaryColor);
     justify-content: center;
     gap: 20px;
+    align-items: center;
 }
 
 .submission-challenge {
@@ -84,5 +84,12 @@
     height: auto;
     flex-wrap: wrap;
     gap: 30px;
-    
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .Profile-content {
+        flex-direction: column;
+    }
 }

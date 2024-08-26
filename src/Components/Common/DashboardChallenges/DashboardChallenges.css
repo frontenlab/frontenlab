@@ -24,6 +24,6 @@
 
 @media screen and (max-width: 480px) {
     .dashboardChallenges-container{
-        gap: 5px;
+        gap: 15px;
     }
 }

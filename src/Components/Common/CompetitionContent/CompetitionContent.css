@@ -1,0 +1,76 @@
+.CompetitionContent {
+    height: 80vh;
+}
+
+.competitionContent-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 50px;
+    color: var(--PrimaryColor);
+}
+
+.competitionContent-competition-box {
+    width: 360px;
+    min-width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid var(--BorderColor);
+    background-color: transparent;
+    color: var(--PrimaryColor);
+    border-radius: 18px;
+    flex: 1 1 calc(33.333% - 40px);
+    cursor: pointer;
+}
+
+.competitionContent-competition-box-top {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.competitionContent-competition-box-top .competition-line {
+    width: 100%;
+    border: 1px solid var(--BorderColor);
+    margin-top: 5px;
+}
+
+.competition-no {
+    width: 44px;
+    height: 44px;
+    background-color: var(--SecondaryColor);
+    border-radius: 5px;
+    color: var(--WhiteColor);
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.competition-name {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.competitionContent-competition-box-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.competition-arrow-icon {
+    cursor: pointer;
+}
+
+

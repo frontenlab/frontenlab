@@ -27,7 +27,7 @@ const Navbar = () => {
             <ul>
                 <li><NavLink exact to="/" >Home</NavLink></li>
                 <li><NavLink to="/challenges" >Challenges</NavLink></li>
-                <li><NavLink to="/leaderboard" >Leaderboard</NavLink></li>
+                <li><NavLink to="/Competition" >Competition</NavLink></li>
                 <button className="Navbar-button mobile-button">Login</button>
             </ul>
         </div>

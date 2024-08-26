@@ -38,7 +38,7 @@ const ProfileContent = () => {
             <h1>Submissions</h1>
             <div className="submission-challenge">
                 {AllChallengesContent.map((challenge, index)=> {
-                    return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.imgDesktop} imgTablet={challenge.imgTablet} imgMobile={challenge.imgMobile} title={challenge.title} description={challenge.description} category={challenge.category} isSmallWidth={true} />
+                    return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.imgDesktop} imgTablet={challenge.imgTablet} imgMobile={challenge.imgMobile} title={challenge.title} description={challenge.description} category={challenge.category} />
                 })}
             </div>
         </div>

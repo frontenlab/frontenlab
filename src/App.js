@@ -14,6 +14,9 @@ import Challenge from './Pages/Challenge';
 import ScrollToTop from './Helpers/ScrollToTop';
 import DashboardChallenges from './Components/Common/DashboardChallenges/DashboardChallenges';
 import Settings from './Components/Common/SettingsPage/Settings';
+import Competition from './Pages/Competition/Competition';
+import WeeklyCompetition from './Pages/WeeklyCompetition';
+
 
 
 const App = () => {
@@ -41,6 +44,11 @@ const App = () => {
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/settings' element={<Settings />} />
+          <Route path='/competitions' element={<Competition />} />
+          <Route path='/competitions' element={<WeeklyCompetition />}>
+            <Route path=':competitionName' element={<WeeklyCompetition />} />
+          </Route>
+          
         </Routes>
       </BrowserRouter>
   )

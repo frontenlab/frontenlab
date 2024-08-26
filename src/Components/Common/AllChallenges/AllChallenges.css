@@ -14,10 +14,12 @@
 .AllChallenges-content h1 {
     color: var(--PrimaryColor);
     font-size: 48px;
+    text-align: center;
 }
 
 .AllChallenges-content p {
     color: var(--PrimaryColor);
+    text-align: center;
 }
 
 .AllChallenges-container {
