@@ -22,6 +22,7 @@
 .footer-links a {
     text-decoration: none;
     color: var(--PrimaryColor);
+    transition: color 0.3s;
 }
 
 .footer-links a:hover {
@@ -65,6 +66,7 @@ li {
 .social > a{
     text-decoration: none;
     color: var(--PrimaryColor);
+    transition: color 0.3s;
 }
 
 .social:hover a {
@@ -74,6 +76,7 @@ li {
 .social > .footer-icon {
     font-size: 22px;
     color: var(--PrimaryColor);
+    transition: color 0.3s;
 }
 
 .social:hover .footer-icon {
@@ -91,6 +94,7 @@ li {
 .footer-second-links  a{
     text-decoration: none;
     color: var(--PrimaryColor);
+    transition: color 0.3s;
 }
 
 .footer-second-links a:hover {

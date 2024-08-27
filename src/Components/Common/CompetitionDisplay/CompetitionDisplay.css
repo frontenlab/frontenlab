@@ -1,0 +1,104 @@
+.CompetitionDisplay{
+    display: flex;
+    gap: 30px;
+}
+
+
+.competitionDisplay-left {
+    max-width: 75%;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid var(--BorderColor);
+    color: var(--PrimaryColor);
+}
+
+.competitionDisplay-left h1 {
+    margin-bottom: 10px;
+}
+
+.rule-heading {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.competition-title {
+    color:var(--PrimaryColor);
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.rules-list {
+    list-style-type: decimal;
+    margin-left: 20px;
+}
+
+.rules-list li {
+    margin-bottom: 15px;
+}
+
+
+.rules-list ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.rules-list ul li {
+    margin-bottom: 8px;
+}
+
+
+.competitionDisplay-right {
+    width: 250px;
+    min-width: 250px;
+    padding: 25px 15px;
+    height: fit-content;
+    border-radius: 14px;
+    border: 1px solid var(--BorderColor);
+    color: var(--PrimaryColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.competitionDisplay-right {
+    color: var(--PrimaryColor);
+}
+
+.prize-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.prize-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+    .CompetitionDisplay {
+        flex-direction: column;
+    }
+
+    .competitionDisplay-left {
+        max-width: 100%;
+    }
+
+    .competitionDisplay-right {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .competitionDisplay-left {
+        padding: 15px;
+    }
+}

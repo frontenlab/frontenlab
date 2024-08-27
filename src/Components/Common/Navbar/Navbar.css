@@ -47,6 +47,7 @@
 .Navbar-links a {
     text-decoration: none;
     color: var(--TextColor);
+    transition: color 0.3s;
 }
 
 .Navbar-links a:hover {
@@ -75,6 +76,7 @@
     cursor: pointer;
     display: block;
     font-family: 'alata';
+    transition: background-color 0.3s;
 }
 
 .Navbar-button:hover {

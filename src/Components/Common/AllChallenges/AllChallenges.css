@@ -19,6 +19,10 @@
 
 .AllChallenges-content p {
     color: var(--PrimaryColor);
+    
+}
+
+.allChallenge-description {
     text-align: center;
 }
 

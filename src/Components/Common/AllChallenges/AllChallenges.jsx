@@ -8,7 +8,7 @@ const AllChallenges = () => {
     <div className="AllChallenges">
         <div className="AllChallenges-content">
           <h1>Explore Frontend Challenges</h1>
-          <p>Find categorized frontend challenges and projects to sharpen your skills and advance your frontend development expertise.</p>
+          <p className='allChallenge-description'>Find categorized frontend challenges and projects to sharpen your skills and advance your frontend development expertise.</p>
 
           <div className="AllChallenges-container">
             {AllChallengesContent.map((challenge, index) => {

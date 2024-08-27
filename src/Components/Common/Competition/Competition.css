@@ -51,6 +51,7 @@
     background-color: var(--AccentColor);
     color: var(--WhiteColor);
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .competition-content-description button:hover {

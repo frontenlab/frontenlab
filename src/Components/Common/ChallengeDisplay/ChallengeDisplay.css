@@ -132,6 +132,7 @@
     border: none;
     outline: none;
     color: var(--WhiteColor);
+    transition: background-color 0.3s;
 }
 
 .challengeDisplay-content button:hover {
@@ -151,7 +152,8 @@
 }
 
 .no-scroll {
-    overflow: hidden;
+    overflow: hidden !important;
+    height: 100%; 
 }
 
 @media screen and (max-width: 978px) {

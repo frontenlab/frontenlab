@@ -25,6 +25,7 @@
     border: none;
     background-color: var(--AccentColor);
     color: var(--WhiteColor);
+    transition: background-color 0.3s;
 }
 
 .cta-button:hover {
