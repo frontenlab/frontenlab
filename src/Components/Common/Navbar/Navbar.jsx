@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { SlMenu } from "react-icons/sl";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { useState } from 'react';
+import Login from '../../../Helpers/Login';
 
 const Navbar = () => {
 
@@ -14,7 +15,12 @@ const Navbar = () => {
         setMenu(!menu);
     }
 
+    
+
+
   return (
+
+    
     <div className="Navbar">
 
         <div className="Navbar-logo">
@@ -28,12 +34,13 @@ const Navbar = () => {
                 <li><NavLink exact to="/" >Home</NavLink></li>
                 <li><NavLink to="/challenges" >Challenges</NavLink></li>
                 <li><NavLink to="/competitions" >Competitions</NavLink></li>
-                <button className="Navbar-button mobile-button">Login</button>
+                <button className="Navbar-button mobile-button" >Login</button>
             </ul>
         </div>
 
         <div className="Navbar-buttons">
-            <button className="Navbar-button">Login</button>
+            {/* <button className="Navbar-button">Login</button> */}
+            <Login />
             <div className="Navbar-menu">
                 {
                     menu?<SlMenu className='menu-icon icon' onClick={handleMenuClick}/>
