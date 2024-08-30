@@ -55,48 +55,50 @@ const Navbar = () => {
         };
     },[dropdownActive]);
 
-    useEffect(()=> {
-        //Fetching current Session
-        const fetchUser = async() => {
+    useEffect(() => {
+        // Function to fetch user and upsert data
+        const fetchUser = async () => {
             setLoading(true);
-            const {data : {session} } = await supabase.auth.getSession();
+            const { data: { session } } = await supabase.auth.getSession();
 
-            if(session) {
-                setUser(session.user)
+            if (session) {
+                setUser(session.user);
 
                 const { error } = await supabase
-                    .from('users')
-                    .upsert({
-                        id: session.user.id, 
-                        username: session.user.user_metadata?.user_name || '',
-                        email: session.user.email,
-                        avatar_url: session.user.user_metadata?.avatar_url || ''
+                    .rpc('upsert_user', {
+                        p_id: session.user.id,
+                        p_username: session.user.user_metadata?.user_name || '',
+                        p_email: session.user.email,
+                        p_avatar_url: session.user.user_metadata?.avatar_url || ''
                     });
 
                 if (error) {
                     console.error('Error storing user info:', error);
                 }
-            }else {
+            } else {
                 setUser(null);
             }
             setLoading(false);
-        }
+        };
 
         fetchUser();
 
-        const { data: {subscription} } = supabase.auth.onAuthStateChange((event, session) => {
+        // Subscription for auth state changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
             if (event === 'SIGNED_IN') {
                 setUser(session.user);
 
-                supabase
-                .from('users')
-                .upsert({
-                    id: session.user.id,
-                    username: session.user.user_metadata?.user_name || '',
-                    email: session.user.email,
-                    avatar_url: session.user.user_metadata?.avatar_url || ''
-                });
+                const { error } = await supabase
+                    .rpc('upsert_user', {
+                        p_id: session.user.id,
+                        p_username: session.user.user_metadata?.user_name || '',
+                        p_email: session.user.email,
+                        p_avatar_url: session.user.user_metadata?.avatar_url || ''
+                    });
 
+                if (error) {
+                    console.error('Error storing user info:', error);
+                }
             } else if (event === 'SIGNED_OUT') {
                 setUser(null);
             }
@@ -105,8 +107,7 @@ const Navbar = () => {
         return () => {
             subscription?.unsubscribe();
         };
-    }, [])
-
+    }, []);
 
   return (
 
