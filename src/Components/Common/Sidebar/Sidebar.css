@@ -108,6 +108,11 @@
     transition: border-color 0.3s;
 }
 
+.sidebar-icon-container .sidebar-icon {
+    color: var(--PrimaryColor);
+}
+
+
 .sidebar-icon-container:hover .sidebar-icon{
     color: var(--AccentColor);
 
@@ -159,7 +164,7 @@
     border: 1px solid var(--BorderColor);
     display: block;
     width: 60px;
-    border-radius: 4px;
+    border-radius: 18px;
     padding: 20px 0px;
 }
 

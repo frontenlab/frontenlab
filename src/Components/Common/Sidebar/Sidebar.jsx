@@ -48,6 +48,7 @@ const Sidebar = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+
   // UseEffect function for hiding the sidebar when the screen size reaches 768px
 
   useEffect(()=>{

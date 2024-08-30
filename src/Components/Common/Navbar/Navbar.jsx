@@ -63,6 +63,19 @@ const Navbar = () => {
 
             if(session) {
                 setUser(session.user)
+
+                const { error } = await supabase
+                    .from('users')
+                    .upsert({
+                        id: session.user.id, 
+                        username: session.user.user_metadata?.user_name || '',
+                        email: session.user.email,
+                        avatar_url: session.user.user_metadata?.avatar_url || ''
+                    });
+
+                if (error) {
+                    console.error('Error storing user info:', error);
+                }
             }else {
                 setUser(null);
             }
@@ -74,6 +87,16 @@ const Navbar = () => {
         const { data: {subscription} } = supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_IN') {
                 setUser(session.user);
+
+                supabase
+                .from('users')
+                .upsert({
+                    id: session.user.id,
+                    username: session.user.user_metadata?.user_name || '',
+                    email: session.user.email,
+                    avatar_url: session.user.user_metadata?.avatar_url || ''
+                });
+
             } else if (event === 'SIGNED_OUT') {
                 setUser(null);
             }
