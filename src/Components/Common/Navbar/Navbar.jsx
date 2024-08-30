@@ -6,20 +6,54 @@ import { SlMenu } from "react-icons/sl";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { useState } from 'react';
 import Login from '../../../Helpers/Login';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { supabase } from '../../../Helpers/SupabaseClient';
 import Skeleton from 'react-loading-skeleton'; 
 import 'react-loading-skeleton/dist/skeleton.css';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [menu, setMenu] = useState(true);
+    const [dropdownActive, setDropdownActive] = useState(false);
+    const dropdownRef = useRef(null);
+    const navigate = useNavigate();
 
     const handleMenuClick = () =>{
         setMenu(!menu);
     }
+
+    const handleDropdownClick = () => {
+        setDropdownActive(!dropdownActive);
+    }
+
+    const handleSignOut = async () => {
+        const {error} = await supabase.auth.signOut();
+        if(error){
+            console.log("Error Sign Out", error);
+        } else {
+            setUser(null);
+            navigate('/');
+        }
+    }
+
+    useEffect(()=>{
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownActive(false);
+            }
+        }
+
+        if(dropdownActive) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } 
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    },[dropdownActive]);
 
     useEffect(()=> {
         //Fetching current Session
@@ -75,8 +109,9 @@ const Navbar = () => {
             {   loading ? (<Skeleton circle={true} height={40} width={40} />):
                 user ? (
                 <div className="login-profile">
+                    <li><NavLink to="/my" >Dashboard</NavLink></li>
                     <div className="login-profile-img" >
-                        <img src={user.user_metadata.avatar_url} alt="github-profile-img" className="login-profile-image" />
+                        <img src={user.user_metadata.avatar_url} alt="github-profile-img" className="login-profile-image" onClick={handleDropdownClick} />
                     </div>
                 </div>
                 ): (
@@ -91,8 +126,18 @@ const Navbar = () => {
                     <RiCloseLargeFill className='close-icon icon' onClick={handleMenuClick} />
                 }
                 
+
                 
             </div>
+
+            { dropdownActive &&
+                <div className="profile-dropdown" ref={dropdownRef}>
+                    <li><NavLink to="/" >Home</NavLink></li>
+                    <li><NavLink to="/profile" >Profile</NavLink></li>
+                    <li><NavLink to="/settings" >Settings</NavLink></li>
+                    <button onClick={handleSignOut} className='profile-dropdown-button'>Sign Out</button>
+                </div>
+            }
         </div>
     </div>
   )

@@ -11,6 +11,7 @@ const Profile = () => {
       <div className="Profile-container">
         <ProfileContent />
       </div>
+      <Footer />
       
     </div>
   )
