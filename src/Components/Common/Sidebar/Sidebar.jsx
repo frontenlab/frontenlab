@@ -6,12 +6,14 @@ import { RiHome7Line } from "react-icons/ri";
 import { PiSteps } from "react-icons/pi";
 import { MdOutlineLeaderboard } from "react-icons/md";
 import { SlMenu } from "react-icons/sl";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IoMdClose } from "react-icons/io";
-import { useEffect } from 'react';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoSettingsOutline } from "react-icons/io5";
+import { supabase } from '../../../Helpers/SupabaseClient';
+import Skeleton from 'react-loading-skeleton'; 
+import 'react-loading-skeleton/dist/skeleton.css'; 
 
 const Sidebar = () => {
 
@@ -20,7 +22,60 @@ const Sidebar = () => {
   const [targetActive, setTargetActive] = useState(1);
   const [activeLink, setActiveLink] = useState('');
 
+  const [userData, setUserData] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
   const location = useLocation();
+
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        // Get session from Supabase
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) {
+          throw new Error(`Session error: ${sessionError.message}`);
+        }
+
+        console.log('Session:', session);
+
+        if (session) {
+          // Fetch user data from 'users' table
+          const { data, error } = await supabase
+            .from('users')
+            .select('avatar_url, username') // Specify the columns you need
+            .eq('id', session.user.id)
+            .single(); // Fetch a single row
+
+          console.log('Fetched data:', data);
+          console.log('Fetch error:', error);
+          console.log(session.user.id);
+
+          if (error) {
+            throw new Error(`Fetch error: ${error.message}`);
+          }
+
+          if (data) {
+            setUserData(data);
+            setFetchError(null);
+          } else {
+            setUserData(null);
+            setFetchError("User data is empty");
+          }
+        } else {
+          setUserData(null);
+          setFetchError("No session found");
+        }
+      } catch (error) {
+        setFetchError(error.message);
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   //For changing the color of the challenge link when it is not active
   useEffect(()=>{
@@ -29,35 +84,13 @@ const Sidebar = () => {
     }
   },[location])
 
-  const handleLinkClick = (linkName) => {
-    setActiveLink(linkName);
-    localStorage.setItem('activeLink', linkName);
-  };
+   // UseEffect function for hiding the sidebar when the screen size reaches 768px
 
-  const handleNonChallengeLinkClick = () => {
-    setActiveLink('');
-    localStorage.removeItem('activeLink');
-  };
-
-  const handleTargetClick = () => {
-    setTargetActive(prev_val => (prev_val === 0?1:0));
-  }
-
-  const handleMenuClick = () => {
-    setMenuIcon(prev_val => (prev_val === 0 ? 1 : 0));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-
-  // UseEffect function for hiding the sidebar when the screen size reaches 768px
-
-  useEffect(()=>{
+   useEffect(()=>{
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
-
-
+    
     window.addEventListener('resize', handleResize);
     handleResize();
     
@@ -89,19 +122,65 @@ const Sidebar = () => {
       localStorage.removeItem('activeLink');
     }
   }, [location]);
-  
+
+  //Handlers
+
+  const handleLinkClick = (linkName) => {
+    setActiveLink(linkName);
+    localStorage.setItem('activeLink', linkName);
+  };
+
+  const handleNonChallengeLinkClick = () => {
+    setActiveLink('');
+    localStorage.removeItem('activeLink');
+  };
+
+  const handleTargetClick = () => {
+    setTargetActive(prev_val => (prev_val === 0?1:0));
+  }
+
+  const handleMenuClick = () => {
+    setMenuIcon(prev_val => (prev_val === 0 ? 1 : 0));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+
+  // Conditional rendering within JSX
+  // if (loading) {
+  //   return (
+  //     <div>
+  //       <h1><Skeleton width={200} /></h1>
+  //       <Skeleton circle={true} height={100} width={100} />
+  //       <Skeleton count={2} />
+  //     </div>
+  //   );
+  // }
+
+  // Render nothing or an error message if userData is still null
+  // if (!userData) {
+  //   return <div>No user data found. Please log in.</div>;
+  // }
+
   return (
 
 
     <div>
         <div className={menuIcon === 0 ? "Sidebar":"Sidebar-hide" }>
-          <div className="sidebar-profile">
-              <div className="sidebar-profile-close-icon "><IoMdClose onClick={handleMenuClick} /></div>
-              <div className="sidebar-profile-img"><img src={male2} alt="profile-img" /></div>
-              <h2 className="sidebar-profile-name">Alan Mickle</h2>
-              <h4 className="sidebar-exp">Newbie</h4>
+        {fetchError && <p>{fetchError}</p>}
+      {userData && (
+        <div className="user-profile">
+          <div className="user-profile-img">
+            {userData.avatar_url ? (
+              <img src={userData.avatar_url} alt="profile-img" />
+            ) : (
+              <div className="default-avatar">No Image</div>
+            )}
           </div>
-          
+          <h2 className="user-profile-name">{userData.username || 'No Username'}</h2>
+        </div>
+      )}
+    {console.log('User Data:', userData)}
+
           <div className='sidebar-line'></div>
 
           <div className="sidebar-links">

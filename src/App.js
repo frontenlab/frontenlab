@@ -16,7 +16,7 @@ import DashboardChallenges from './Components/Common/DashboardChallenges/Dashboa
 import Settings from './Components/Common/SettingsPage/Settings';
 import Competition from './Pages/Competition/Competition';
 import WeeklyCompetition from './Pages/WeeklyCompetition';
-
+import ProtectedRoute from './Helpers/ProtectedRoute';
 
 
 const App = () => {
@@ -37,7 +37,9 @@ const App = () => {
             <Route path=':challengeId' element={<Challenge />} />
           </Route>
           <Route path='/about' element={<About />} />
-          <Route path='/my' element={<Dashboard />} />
+          <Route element = {<ProtectedRoute />}>
+            <Route path='/my' element={<Dashboard />} />
+          </Route>
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/terms' element={<Terms />} />
