@@ -45,9 +45,9 @@ const Sidebar = () => {
           // Fetch user data from 'users' table
           const { data, error } = await supabase
             .from('users')
-            .select('avatar_url, username') // Specify the columns you need
+            .select('avatar_url, username, bio') // Specify the columns you need
             .eq('id', session.user.id)
-            .single(); // Fetch a single row
+            .maybeSingle(); // Fetch a single row
 
           console.log('Fetched data:', data);
           console.log('Fetch error:', error);
@@ -71,6 +71,8 @@ const Sidebar = () => {
       } catch (error) {
         setFetchError(error.message);
         console.error('Error fetching user data:', error);
+      }  finally {
+        setLoading(false); // Ensure loading is set to false after fetching
       }
     };
 
@@ -146,20 +148,20 @@ const Sidebar = () => {
 
 
   // Conditional rendering within JSX
-  // if (loading) {
-  //   return (
-  //     <div>
-  //       <h1><Skeleton width={200} /></h1>
-  //       <Skeleton circle={true} height={100} width={100} />
-  //       <Skeleton count={2} />
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div>
+        <h1><Skeleton width={250} /></h1>
+        <Skeleton circle={true} height={70} width={70} />
+        <Skeleton count={2} />
+      </div>
+    );
+  }
 
   // Render nothing or an error message if userData is still null
-  // if (!userData) {
-  //   return <div>No user data found. Please log in.</div>;
-  // }
+  if (!userData) {
+    return <div>No user data found. Please log in.</div>;
+  }
 
   return (
 
@@ -168,8 +170,8 @@ const Sidebar = () => {
         <div className={menuIcon === 0 ? "Sidebar":"Sidebar-hide" }>
         {fetchError && <p>{fetchError}</p>}
       {userData && (
-        <div className="user-profile">
-          <div className="user-profile-img">
+        <div className="sidebar-profile">
+          <div className="sidebar-profile-img">
             {userData.avatar_url ? (
               <img src={userData.avatar_url} alt="profile-img" />
             ) : (
@@ -177,9 +179,9 @@ const Sidebar = () => {
             )}
           </div>
           <h2 className="user-profile-name">{userData.username || 'No Username'}</h2>
+          <p>{userData.bio}</p>
         </div>
       )}
-    {console.log('User Data:', userData)}
 
           <div className='sidebar-line'></div>
 

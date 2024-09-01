@@ -29,16 +29,6 @@ const Navbar = () => {
         setDropdownActive(!dropdownActive);
     }
 
-    const handleSignOut = async () => {
-        const {error} = await supabase.auth.signOut();
-        if(error){
-            console.log("Error Sign Out", error);
-        } else {
-            setUser(null);
-            navigate('/');
-        }
-    }
-
     useEffect(()=>{
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -55,6 +45,16 @@ const Navbar = () => {
         };
     },[dropdownActive]);
 
+    const handleSignOut = async () => {
+        const {error} = await supabase.auth.signOut();
+        if(error){
+            console.log("Error Sign Out", error);
+        } else {
+            setUser(null);
+            navigate('/');
+        }
+    }
+
     useEffect(() => {
         // Function to fetch user and upsert data
         const fetchUser = async () => {
@@ -70,6 +70,7 @@ const Navbar = () => {
                         p_username: session.user.user_metadata?.user_name || '',
                         p_email: session.user.email,
                         p_avatar_url: session.user.user_metadata?.avatar_url || ''
+
                     });
 
                 if (error) {
