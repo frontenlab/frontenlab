@@ -179,7 +179,7 @@ const Sidebar = () => {
             )}
           </div>
           <h2 className="user-profile-name">{userData.username || 'No Username'}</h2>
-          <p>{userData.bio}</p>
+          <p className='user-profile-bio'>{userData.bio}</p>
         </div>
       )}
 

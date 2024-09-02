@@ -172,6 +172,9 @@
     display: none;
 }
 
+.user-profile-bio {
+    text-align: center;
+}
 /* Target challenge */
 
 .targetChallengeContainer {

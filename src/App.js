@@ -17,7 +17,8 @@ import Settings from './Components/Common/SettingsPage/Settings';
 import Competition from './Pages/Competition/Competition';
 import WeeklyCompetition from './Pages/WeeklyCompetition';
 import ProtectedRoute from './Helpers/ProtectedRoute';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 
@@ -25,6 +26,7 @@ const App = () => {
 
       <BrowserRouter>
       <ScrollToTop /> 
+      <ToastContainer />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/challenges' element={<Challenges />} />
