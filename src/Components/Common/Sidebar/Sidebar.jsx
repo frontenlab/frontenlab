@@ -1,6 +1,5 @@
 import React from 'react'
 import './Sidebar.css'
-import male2 from '../../../Assets/Images/male2.jpg'
 import { NavLink, useLocation } from 'react-router-dom';
 import { RiHome7Line } from "react-icons/ri";
 import { PiSteps } from "react-icons/pi";
@@ -150,10 +149,10 @@ const Sidebar = () => {
   // Conditional rendering within JSX
   if (loading) {
     return (
-      <div>
-        <h1><Skeleton width={250} /></h1>
+      <div className='sidebar-skeleton'>
         <Skeleton circle={true} height={70} width={70} />
-        <Skeleton count={2} />
+        <h1><Skeleton width={250} /></h1>
+        <Skeleton count={6} />
       </div>
     );
   }
@@ -171,6 +170,7 @@ const Sidebar = () => {
         {fetchError && <p>{fetchError}</p>}
       {userData && (
         <div className="sidebar-profile">
+          <div className="sidebar-profile-close-icon "><IoMdClose onClick={handleMenuClick} /></div>
           <div className="sidebar-profile-img">
             {userData.avatar_url ? (
               <img src={userData.avatar_url} alt="profile-img" />

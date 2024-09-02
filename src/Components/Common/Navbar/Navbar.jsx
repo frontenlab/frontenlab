@@ -52,6 +52,7 @@ const Navbar = () => {
         } else {
             setUser(null);
             navigate('/');
+            setDropdownActive(false);
         }
     }
 

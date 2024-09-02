@@ -39,13 +39,13 @@ const App = () => {
           <Route path='/about' element={<About />} />
           <Route element = {<ProtectedRoute />}>
             <Route path='/my' element={<Dashboard />} />
+            <Route path='/settings' element={<Settings />} />
           </Route>
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/terms' element={<Terms />} />
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/settings' element={<Settings />} />
           <Route path='/competitions' element={<Competition />} />
           <Route path='/competitions' element={<WeeklyCompetition />}>
             <Route path=':competitionName' element={<WeeklyCompetition />} />
