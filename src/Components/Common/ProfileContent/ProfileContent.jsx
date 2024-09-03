@@ -13,6 +13,7 @@ const ProfileContent = () => {
 
     const location = useLocation();
 
+
     useEffect(()=>{
         if(location.state?.showToast){
             toast.success('Your profile has been successfully updated.');

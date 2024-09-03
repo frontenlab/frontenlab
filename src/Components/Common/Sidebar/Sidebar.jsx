@@ -44,7 +44,7 @@ const Sidebar = () => {
           // Fetch user data from 'users' table
           const { data, error } = await supabase
             .from('users')
-            .select('avatar_url, username, bio') // Specify the columns you need
+            .select('avatar_url, username, name') // Specify the columns you need
             .eq('id', session.user.id)
             .maybeSingle(); // Fetch a single row
 
@@ -178,8 +178,8 @@ const Sidebar = () => {
               <div className="default-avatar">No Image</div>
             )}
           </div>
-          <h2 className="user-profile-name">{userData.username || 'No Username'}</h2>
-          <p className='user-profile-bio'>{userData.bio}</p>
+          <h2 className="user-profile-name">{userData.name || 'No Username'}</h2>
+          <p className='user-profile-username'>@{userData.username}</p>
         </div>
       )}
 

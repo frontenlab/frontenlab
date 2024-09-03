@@ -172,8 +172,10 @@
     display: none;
 }
 
-.user-profile-bio {
+.user-profile-username {
     text-align: center;
+    font-size: 14px;
+
 }
 /* Target challenge */
 

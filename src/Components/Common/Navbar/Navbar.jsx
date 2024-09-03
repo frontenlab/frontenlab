@@ -69,6 +69,7 @@ const Navbar = () => {
                     .rpc('upsert_user', {
                         p_id: session.user.id,
                         p_username: session.user.user_metadata?.user_name || '',
+                        p_name: session.user.user_metadata?.user_name || '',
                         p_email: session.user.email,
                         p_avatar_url: session.user.user_metadata?.avatar_url || ''
 
@@ -94,6 +95,7 @@ const Navbar = () => {
                     .rpc('upsert_user', {
                         p_id: session.user.id,
                         p_username: session.user.user_metadata?.user_name || '',
+                        p_name: session.user.user_metadata?.user_name || '',
                         p_email: session.user.email,
                         p_avatar_url: session.user.user_metadata?.avatar_url || ''
                     });

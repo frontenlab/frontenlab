@@ -67,6 +67,10 @@
     color: var(--PrimaryColor);
 }
 
+.settings-social input {
+    font-size: 15px;
+}
+
 
 .settings-button button {
     width: 120px;
@@ -78,6 +82,7 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 16px;
 }
 
 .settings-button button:hover {
@@ -88,4 +93,14 @@
     color: #FF0000;
     font-style: italic;
     font-size: 14px;
+}
+
+
+
+.profile-name-input {
+    font-size: 15px;
+}
+
+.profile-bio-input {
+    font-size: 15px;
 }

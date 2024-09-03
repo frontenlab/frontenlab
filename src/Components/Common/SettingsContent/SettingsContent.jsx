@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { supabase } from '../../../Helpers/SupabaseClient';
 import './SettingsContent.css';
 import { useNavigate } from 'react-router-dom';
+import SettingsSkeleton from '../../../Helpers/SettingsLoadingSkeleton';
 
 
 const SettingsContent = () => {
@@ -28,7 +29,7 @@ const SettingsContent = () => {
         if (session) {
           const { data, error } = await supabase
             .from('users')
-            .select('avatar_url, username, bio, linkedin_url, github_url')
+            .select('avatar_url, name, bio, linkedin_url, github_url')
             .eq('id', session.user.id)
             .single();
 
@@ -36,7 +37,7 @@ const SettingsContent = () => {
             console.error('Error fetching user data:', error);
           } else {
             setUserData(data);
-            setName(data.username || '');
+            setName(data.name || '');
             setBio(data.bio || '');
             setLinkedinUrl(data.linkedin_url || '');
             setGithubUrl(data.github_url || '');
@@ -60,7 +61,7 @@ const SettingsContent = () => {
         const { error } = await supabase
           .from('users')
           .update({
-            username: name,
+            name: name,
             bio,
             linkedin_url: linkedinUrl,
             github_url: githubUrl,
@@ -112,7 +113,7 @@ const SettingsContent = () => {
     handleUpdate();
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <SettingsSkeleton />;
 
   return (
     <div className="Settings-content">
@@ -121,18 +122,19 @@ const SettingsContent = () => {
         <div className="settings-profile-img">
           <img src={userData?.avatar_url} alt="profile-img" className="avatar" />
         </div>
-        <p>Name</p>
+        <p className='profile-label'>Name</p>
         <input
           type="text"
           placeholder="Name"
           className="profile-name-input"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          
         />
         <p>Bio</p>
         <textarea
           placeholder="Bio"
-          className="profile-bio"
+          className="profile-bio-input"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
