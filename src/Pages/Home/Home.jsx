@@ -9,7 +9,6 @@ import HIW from '../../Components/Common/HIW/HIW'
 import FAQ from '../../Components/Common/FAQ/FAQ'
 import Cta from '../../Components/Common/CTA/Cta'
 import Footer from '../../Components/Common/Footer/Footer'
-import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
 

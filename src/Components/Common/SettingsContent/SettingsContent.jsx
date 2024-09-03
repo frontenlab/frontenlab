@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { supabase } from '../../../Helpers/SupabaseClient';
 import './SettingsContent.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const SettingsContent = () => {
@@ -16,6 +17,8 @@ const SettingsContent = () => {
 
   const linkedinPattern = /^https:\/\/(www\.)?linkedin\.com\/.*$/i;
   const githubPattern = /^https:\/\/(www\.)?github\.com\/.*$/i;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -67,12 +70,12 @@ const SettingsContent = () => {
         if (error) {
           toast.error('There was an issue updating your profile.');
         } else {
-          toast.success('Your profile has been successfully updated.');
-          
+          navigate('/profile', { state: { showToast: true } });
         }
       }
     } catch (error) {
       console.error('Error updating profile:', error);
+      toast.error('An unexpected error occurred.');
     }
   };
 

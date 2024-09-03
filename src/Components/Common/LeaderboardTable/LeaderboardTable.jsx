@@ -1,5 +1,5 @@
 import './LeaderboardTable.css'
-import React, { useState } from 'react';
+import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react'
 import {
     Table,

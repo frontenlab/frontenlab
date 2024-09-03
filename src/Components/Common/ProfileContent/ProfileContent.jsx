@@ -3,8 +3,23 @@ import './ProfileContent.css'
 import male2 from '../../../Assets/Images/male2.jpg'
 import ChallengeStructure from '../Challenge/ChallengeStructure'
 import AllChallengesContent from '../../../Helpers/AllChallengesContent'
+import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+
 
 const ProfileContent = () => {
+
+
+    const location = useLocation();
+
+    useEffect(()=>{
+        if(location.state?.showToast){
+            toast.success('Your profile has been successfully updated.');
+            location.state.showToast = false;
+        }
+    }, [location.state])
+
   return (
     <div className="Profile-content">
         <div className="profile-content-left">
