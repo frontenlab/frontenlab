@@ -61,57 +61,85 @@ const Navbar = () => {
         const fetchUser = async () => {
             setLoading(true);
             const { data: { session } } = await supabase.auth.getSession();
-
+    
             if (session) {
                 setUser(session.user);
-
-                const { error } = await supabase
-                    .rpc('upsert_user', {
+    
+                // Fetch current user data to check the name
+                const { data: existingUser, error: fetchError } = await supabase
+                    .from('users')
+                    .select('name')
+                    .eq('id', session.user.id)
+                    .maybeSingle();
+    
+                if (fetchError) {
+                    console.error('Error fetching user data:', fetchError);
+                } else {
+                    // Update name only if it's empty
+                    const nameToUpdate = existingUser?.name || '';
+                    const updatedName = nameToUpdate ? nameToUpdate : session.user.user_metadata?.user_name || '';
+    
+                    const { error } = await supabase.rpc('upsert_user', {
                         p_id: session.user.id,
                         p_username: session.user.user_metadata?.user_name || '',
-                        p_name: session.user.user_metadata?.user_name || '',
+                        p_name: updatedName,
                         p_email: session.user.email,
-                        p_avatar_url: session.user.user_metadata?.avatar_url || ''
-
+                        p_avatar_url: session.user.user_metadata?.avatar_url || '',
                     });
-
-                if (error) {
-                    console.error('Error storing user info:', error);
+    
+                    if (error) {
+                        console.error('Error storing user info:', error);
+                    }
                 }
             } else {
                 setUser(null);
             }
             setLoading(false);
         };
-
+    
         fetchUser();
-
+    
         // Subscription for auth state changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
             if (event === 'SIGNED_IN') {
                 setUser(session.user);
-
-                const { error } = await supabase
-                    .rpc('upsert_user', {
+    
+                // Fetch current user data to check the name
+                const { data: existingUser, error: fetchError } = await supabase
+                    .from('users')
+                    .select('name')
+                    .eq('id', session.user.id)
+                    .maybeSingle();
+    
+                if (fetchError) {
+                    console.error('Error fetching user data:', fetchError);
+                } else {
+                    // Update name only if it's empty
+                    const nameToUpdate = existingUser?.name || '';
+                    const updatedName = nameToUpdate ? nameToUpdate : session.user.user_metadata?.user_name || '';
+    
+                    const { error } = await supabase.rpc('upsert_user', {
                         p_id: session.user.id,
                         p_username: session.user.user_metadata?.user_name || '',
-                        p_name: session.user.user_metadata?.user_name || '',
+                        p_name: updatedName,
                         p_email: session.user.email,
-                        p_avatar_url: session.user.user_metadata?.avatar_url || ''
+                        p_avatar_url: session.user.user_metadata?.avatar_url || '',
                     });
-
-                if (error) {
-                    console.error('Error storing user info:', error);
+    
+                    if (error) {
+                        console.error('Error storing user info:', error);
+                    }
                 }
             } else if (event === 'SIGNED_OUT') {
                 setUser(null);
             }
         });
-
+    
         return () => {
             subscription?.unsubscribe();
         };
     }, []);
+    
 
   return (
 

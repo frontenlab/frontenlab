@@ -130,6 +130,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    z-index: 9999;
 }
 
 .profile-dropdown-button {

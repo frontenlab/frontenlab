@@ -50,6 +50,7 @@ const SettingsContent = () => {
       }
     };
 
+
     fetchUserData();
   }, []);
 
@@ -61,7 +62,7 @@ const SettingsContent = () => {
         const { error } = await supabase
           .from('users')
           .update({
-            name: name,
+            name,
             bio,
             linkedin_url: linkedinUrl,
             github_url: githubUrl,
@@ -78,6 +79,8 @@ const SettingsContent = () => {
       console.error('Error updating profile:', error);
       toast.error('An unexpected error occurred.');
     }
+    console.log("Attempting to update:", { name, bio, linkedinUrl, githubUrl });
+
   };
 
   const handleLinkedinChange = (e) => {
@@ -116,6 +119,7 @@ const SettingsContent = () => {
   if (loading) return <SettingsSkeleton />;
 
   return (
+
     <div className="Settings-content">
       <div className="settings-profile">
         <h2>Profile</h2>
