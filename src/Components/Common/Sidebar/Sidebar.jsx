@@ -150,9 +150,12 @@ const Sidebar = () => {
   if (loading) {
     return (
       <div className='sidebar-skeleton'>
-        <Skeleton circle={true} height={70} width={70} />
-        <h1><Skeleton width={250} /></h1>
-        <Skeleton count={6} />
+        <Skeleton className='skeleton-circle' circle={true} height={70} width={70} />
+        
+        <div>
+          <h1><Skeleton width={250} /></h1>
+          <Skeleton count={3} />
+        </div>
       </div>
     );
   }

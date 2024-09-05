@@ -1,10 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { toast } from 'react-toastify';
 import { supabase } from '../../../Helpers/SupabaseClient';
 import './SettingsContent.css';
 import { useNavigate } from 'react-router-dom';
 import SettingsSkeleton from '../../../Helpers/SettingsLoadingSkeleton';
 
+// Debounce function
+function debounce(func, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => func(...args), delay);
+  };
+}
+
+const pattern = /^[a-zA-Z0-9 ]*$/; // Pattern to allow only alphanumeric characters and spaces
+const nameMaxLength = 50; 
+const bioMaxLength = 150; 
+const socialMinLength = 15;
+const socialMaxLength = 100;
 
 const SettingsContent = () => {
   const [linkedinUrl, setLinkedinUrl] = useState('');
@@ -18,6 +32,8 @@ const SettingsContent = () => {
 
   const linkedinPattern = /^https:\/\/(www\.)?linkedin\.com\/.*$/i;
   const githubPattern = /^https:\/\/(www\.)?github\.com\/.*$/i;
+
+  const allowedUrlCharacters = /^[a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]*$/;
 
   const navigate = useNavigate();
 
@@ -50,7 +66,6 @@ const SettingsContent = () => {
       }
     };
 
-
     fetchUserData();
   }, []);
 
@@ -80,16 +95,53 @@ const SettingsContent = () => {
       toast.error('An unexpected error occurred.');
     }
     console.log("Attempting to update:", { name, bio, linkedinUrl, githubUrl });
+  };
 
+
+  const showToast = debounce((message) => toast.error(message), 1100);
+
+  const handleNameChange = (e) => {
+    const value = e.target.value;
+
+    if (!pattern.test(value)) {
+      showToast('Name cannot contain special characters.');
+      return;
+    }
+
+    if (value.length > nameMaxLength) {
+      showToast(`Name cannot exceed ${nameMaxLength} characters.`);
+      return;
+    }
+
+    setName(value);
+  };
+
+  const handleBioChange = (e) => {
+    const value = e.target.value;
+
+    if (!pattern.test(value)) {
+      showToast('Bio cannot contain special characters.');
+      return;
+    }
+
+    if (value.length > bioMaxLength) {
+      showToast(`Bio cannot exceed ${bioMaxLength} characters.`);
+      return;
+    }
+
+    setBio(value);
   };
 
   const handleLinkedinChange = (e) => {
-    const value = e.target.value;
+    let value = e.target.value;
+
+    if (!allowedUrlCharacters.test(value)) {
+      value = value.replace(/[^a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]/g, ''); // Replace unwanted characters with ''
+    }
+
     setLinkedinUrl(value);
 
-    if (value === '') {
-      setLinkedinErrorMessage('');
-    } else if (linkedinPattern.test(value)) {
+    if (!value || (linkedinPattern.test(value) && value.length >= socialMinLength && value.length <= socialMaxLength)) {
       setLinkedinErrorMessage('');
     } else {
       setLinkedinErrorMessage('Please enter a valid LinkedIn URL.');
@@ -97,12 +149,15 @@ const SettingsContent = () => {
   };
 
   const handleGithubChange = (e) => {
-    const value = e.target.value;
+    let value = e.target.value;
+
+    if (!allowedUrlCharacters.test(value)) {
+      value = value.replace(/[^a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]/g, ''); // Replace unwanted characters with ''
+    }
+
     setGithubUrl(value);
 
-    if (value === '') {
-      setGithubErrorMessage('');
-    } else if (githubPattern.test(value)) {
+    if (!value || (githubPattern.test(value) && value.length >= socialMinLength && value.length <= socialMaxLength)) {
       setGithubErrorMessage('');
     } else {
       setGithubErrorMessage('Please enter a valid GitHub URL.');
@@ -119,7 +174,6 @@ const SettingsContent = () => {
   if (loading) return <SettingsSkeleton />;
 
   return (
-
     <div className="Settings-content">
       <div className="settings-profile">
         <h2>Profile</h2>
@@ -132,15 +186,14 @@ const SettingsContent = () => {
           placeholder="Name"
           className="profile-name-input"
           value={name}
-          onChange={(e) => setName(e.target.value)}
-          
+          onChange={handleNameChange}
         />
         <p>Bio</p>
         <textarea
           placeholder="Bio"
           className="profile-bio-input"
           value={bio}
-          onChange={(e) => setBio(e.target.value)}
+          onChange={handleBioChange}
         />
       </div>
 

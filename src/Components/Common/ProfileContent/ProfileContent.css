@@ -89,6 +89,10 @@
     justify-content: center;
 }
 
+.profile-skeleton {
+    width: 300px;
+}
+
 @media screen and (max-width: 768px) {
     .Profile-content {
         flex-direction: column;
