@@ -85,6 +85,23 @@
     background-color: var(--HoverColor);
 }
 
+.mobile-sidebar-login-btn button {
+    width: 140px;
+    height: 50px;
+    background-color: var(--AccentColor);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    font-family: 'alata';
+    transition: background-color 0.3s;
+}
+
+.mobile-sidebar-login-btn button{
+    background-color: var(--HoverColor);
+}
+
 .Navbar-menu {
     display: none;
 }
@@ -159,6 +176,9 @@
     color: var(--WhiteColor) !important;
 }
 
+.mobile-sidebar-login-btn {
+    display: none;
+}
 
 @media screen and (max-width: 768px) {
     .Navbar-menu {
@@ -213,5 +233,10 @@
     
     .navbar-skeleton  {
         display: none;
+    }
+
+
+    .mobile-sidebar-login-btn {
+        display: block;
     }
 }

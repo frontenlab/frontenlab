@@ -162,8 +162,11 @@ const Navbar = () => {
                         <button onClick={handleSignOut} className='profile-dropdown-button mobile-signout-btn'>Sign Out</button>
                     </div>
                     
-                )   :
-                    <Login />
+                )   :   
+                    <div className="mobile-sidebar-login-btn">
+                        <Login class_name={"mobile-sidebar-btn"} name={"Login"} />
+                    </div>
+                    
                 }
                 
             </ul>
