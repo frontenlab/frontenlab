@@ -1,7 +1,8 @@
 import React from 'react';
 import { supabase } from '../Helpers/SupabaseClient';
 
-const Login = () => {
+
+const Login = ({name, class_name}) => {
 
 
     const handleGithubLogin = async () => {
@@ -19,7 +20,7 @@ const Login = () => {
 
     return (
         <div>
-            <button className="Navbar-button" onClick={handleGithubLogin}>Login</button>
+            <button className={`${class_name}`} onClick={handleGithubLogin}>{name}</button>
         </div>
     )
 }

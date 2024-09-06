@@ -156,22 +156,31 @@ const Navbar = () => {
                 <li><NavLink exact to="/" >Home</NavLink></li>
                 <li><NavLink to="/challenges" >Challenges</NavLink></li>
                 <li><NavLink to="/competitions" >Competitions</NavLink></li>
-                <button className="Navbar-button mobile-button" >Login</button>
+                {user ? (
+                    <div className='users-mobile-navbar-links'>
+                        <li><NavLink to="/my" >Dashboard</NavLink></li>
+                        <button onClick={handleSignOut} className='profile-dropdown-button mobile-signout-btn'>Sign Out</button>
+                    </div>
+                    
+                )   :
+                    <Login />
+                }
+                
             </ul>
         </div>
 
         <div className="Navbar-buttons">
 
-            {   loading ? (<Skeleton circle={true} height={40} width={40} />):
+            {   loading ? (<Skeleton className='navbar-skeleton' circle={true} height={40} width={40} />):
                 user ? (
                 <div className="login-profile">
-                    <li><NavLink to="/my" >Dashboard</NavLink></li>
+                    <li className='navbar-dashboard-link'><NavLink to="/my" >Dashboard</NavLink></li>
                     <div className="login-profile-img" >
                         <img src={user.user_metadata.avatar_url} alt="github-profile-img" className="login-profile-image" onClick={handleDropdownClick} />
                     </div>
                 </div>
                 ): (
-                    <Login />
+                    <Login class_name={"Navbar-button"} name={"Login"} />
                 )
             }
             
