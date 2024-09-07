@@ -5,20 +5,43 @@ import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
 import ChallengeStructure from '../Challenge/ChallengeStructure'
 import AllChallengesContent from '../../../Helpers/AllChallengesContent'
+import useChallenges from '../../../Helpers/fetchChallenges'
+import SkeletonCard from '../../UI/SkeletonCard/SkeletonCard'
 
 
 const DashboardChallenges = ({category}) => {
-  const filteredChallenges = AllChallengesContent.filter(challenge => challenge.category === category);
+
+  const {challenges, loading, error} = useChallenges();
+  const filteredChallenges = challenges.filter(challenge => challenge.category === category);
+
+  if (loading) {
+    return (
+        <div className="AllChallenges">
+            <h1 className='allChallenge-title'>Explore Frontend Challenges</h1>
+            <p className='allChallenge-description'>
+                Find categorized frontend challenges and projects to sharpen your skills and advance your frontend development expertise.
+            </p>
+            <div className="AllChallenges-container">
+                {[...Array(6)].map((_, index) => (
+                    <SkeletonCard key={index} />
+                ))}
+            </div>
+        </div>
+    );
+}
+
+  if(error) return <p>Error : {error}</p>
+  
   return (
     <div className="DashboardChallenges">
         <Navbar />
         <div className='dashboardChallenges-container'>
           <Sidebar />
           <div className="dashboardChallenges-challenge-content">
-            <h1>{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
+            <h1>{category.split('-').map(e => e.charAt(0).toUpperCase() + e.slice(1)).join(' ')}</h1>
             <div className="dashboardChallenges-challenge-container">
                 {filteredChallenges.map((challenge, index)=> {
-                  return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.imgDesktop} imgTablet={challenge.imgTablet} imgMobile={challenge.imgMobile} title={challenge.title} description={challenge.description} category={challenge.category} />
+                  return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.template_img} imgTablet={challenge.tablets_img} imgMobile={challenge.mobile_img} title={challenge.title} description={challenge.description} />
                 })}
 
               

@@ -11,10 +11,6 @@ const AllChallenges = () => {
   if (loading) {
     return (
         <div className="AllChallenges">
-            <h1 className='allChallenge-title'>Explore Frontend Challenges</h1>
-            <p className='allChallenge-description'>
-                Find categorized frontend challenges and projects to sharpen your skills and advance your frontend development expertise.
-            </p>
             <div className="AllChallenges-container">
                 {[...Array(6)].map((_, index) => (
                     <SkeletonCard key={index} />
@@ -33,7 +29,7 @@ const AllChallenges = () => {
 
           <div className="AllChallenges-container">
             {challenges.map((challenge, index) => {
-                return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.template_img} imgTablet={challenge.tablets_img} imgMobile={challenge.mobile_img} title={challenge.title} description={challenge.description} />
+                return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.template_img} imgTablet={challenge.tablets_img} imgMobile={challenge.mobile_img} title={challenge.title} description={challenge.description} category={challenge.category}/>
             })}
           </div>
         </div>
