@@ -1,9 +1,13 @@
 import React from 'react'
 import './ChallengeDisplay.css'
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import SubmitOverlay from '../SubmitOverlay/SubmitOverlay';
 
 const ChallengeDisplay = (props) => {
+
+    const location = useLocation();
+    const currentChallenge = location.state?.currentChallenge;
 
     const [activeBtn, setActiveBtn] = useState("button1");
     const [imgUrl, setImgUrl] = useState(props.currentChallenge.imgDesktop);
@@ -13,26 +17,28 @@ const ChallengeDisplay = (props) => {
         setOverlayActive(!overlayActive);
     }
 
-    useEffect(()=> {
-        setActiveBtn("button1");
-        setImgUrl(props.currentChallenge.imgDesktop)
-    }, [props.currentChallenge]);
-
+    useEffect(() => {
+        if (currentChallenge) {
+          setActiveBtn("button1");
+          setImgUrl(currentChallenge.imgDesktop);
+        }
+      }, [currentChallenge]);
+      
     const handleButtonClick = (button) => () => {
         setActiveBtn(button);
 
         switch(button) {
             case "button1":
-                setImgUrl(props.currentChallenge.imgDesktop);
+                setImgUrl(props.currentChallenge.template_img);
                 break;
             case "button2":
-                setImgUrl(props.currentChallenge.imgTablet);
+                setImgUrl(props.currentChallenge.tablet_img);
                 break;
             case "button3":
-                setImgUrl(props.currentChallenge.imgMobile);
+                setImgUrl(props.currentChallenge.mobile_img);
                 break;
             default:
-                setImgUrl(props.currentChallenge.imgDesktop);
+                setImgUrl(props.currentChallenge.template_img);
         }
     }
 
@@ -55,6 +61,7 @@ const ChallengeDisplay = (props) => {
                 <img src={imgUrl} alt="box-img" />
             </div>
 
+
             <div className="challengeDisplay-box-buttons">
                 <button className={`button1 ${activeBtn=== "button1"? "active-btn": ""}` } onClick={handleButtonClick("button1")}>Desktop</button>
                 <button className={`button1 ${activeBtn=== "button2"? "active-btn": ""}` } onClick={handleButtonClick("button2")}>Tablet</button>
@@ -66,7 +73,7 @@ const ChallengeDisplay = (props) => {
             <div className="challengeDisplay-content-box1 ">
                 <div className="challengeDisplay-challengeDescription contentBox">
                     <h1>Description</h1>
-                    <p>Craft an easy-level homepage showcasing buttons and images. Design a clean layout that incorporates buttons for navigation or calls to action, along with relevant images to enhance visual appeal.</p>
+                    <p>{currentChallenge.description}</p>
                     <button>Start</button>
                 </div>  
 

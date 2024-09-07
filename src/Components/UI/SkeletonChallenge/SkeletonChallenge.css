@@ -1,0 +1,23 @@
+.skeleton-challenge-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.skeleton-header {
+    width: 100%;
+}
+
+.skeleton-header {
+    margin-bottom: 20px;
+}
+
+.skeleton-content {
+    min-width: 300px; 
+    max-width: 1200px; 
+    width: 100%;
+    margin: 0 auto;
+}

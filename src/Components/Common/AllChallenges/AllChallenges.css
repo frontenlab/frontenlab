@@ -3,19 +3,21 @@
     margin: 50px 0px;
 }
 
+.allChallenge-title {
+    color: var(--PrimaryColor);
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
 .AllChallenges-content {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 10px;
 }
 
-.AllChallenges-content h1 {
-    color: var(--PrimaryColor);
-    font-size: 48px;
-    text-align: center;
-}
 
 .AllChallenges-content p {
     color: var(--PrimaryColor);

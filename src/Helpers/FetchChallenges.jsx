@@ -12,7 +12,7 @@ const useChallenges = () => {
         const { data, error } = await supabase
           .from('challenges')
           .select('*');
-          console.log('Fetched Data:', data);
+
 
         if (error) throw error;
 
@@ -26,7 +26,6 @@ const useChallenges = () => {
 
     fetchChallenges();
   }, []);
-  console.log('Challenges:', challenges);
   return { challenges, loading, error };
 };
 
