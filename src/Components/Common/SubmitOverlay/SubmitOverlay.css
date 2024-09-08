@@ -63,6 +63,7 @@
 .overlay-buttons button{
     padding: 15px 0px;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 .overlay-cancel {
@@ -70,6 +71,13 @@
     color: var(--PrimaryColor) !important;
     border: 1px solid var(--BorderColor) !important;
     transition: border-color 0.3s,color 0.3s !important;
+}
+
+.overlay-submit {
+    background-color: var(--AccentColor);
+    color: var(--WhiteColor);
+    border: none;
+    outline: none;
 }
 
 .overlay-cancel:hover {

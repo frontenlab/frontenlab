@@ -125,7 +125,7 @@
     gap: 8px;
 }
 
-.challengeDisplay-content button {
+.challengeDescription-start-button, .challengeDescription-submit-button {
     padding: 8px 15px;
     background-color: var(--AccentColor);
     border-radius: 4px;
@@ -135,13 +135,12 @@
     transition: background-color 0.3s;
 }
 
-.challengeDisplay-content button:hover {
+.challengeDescription-start-button:hover, .challengeDescription-submit-button:hover{
     background-color: #e55b50;
 }
 
 .challengeDisplay-challengeDescription button {
-    width: 122px;
-    height: 36px;
+    padding: 8px 20px;
     cursor: pointer;
 }
 
@@ -155,6 +154,33 @@
     overflow: hidden !important;
     height: 100%; 
 }
+
+.challengeDisplay-challengeDescription-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.challengeDisplay-status {
+    border: 1px solid rgb(6, 167, 6);
+    border-radius: 18px;
+    background-color: transparent;
+    color: rgb(6, 167, 6);
+    cursor:none;
+    display: none;
+}
+
+.challengeDisplay-status-active {
+    display: block;
+    border: 1px solid rgb(6, 167, 6);
+    border-radius: 18px;
+    background-color: transparent;
+    color: rgb(6, 167, 6);
+    cursor:none;
+
+}
+
+
 
 @media screen and (max-width: 978px) {
     .challengeDisplay-box-buttons > button {
