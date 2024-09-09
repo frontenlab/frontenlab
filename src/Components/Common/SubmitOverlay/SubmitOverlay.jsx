@@ -16,14 +16,6 @@ const SubmitOverlay = ({ overlayActive, setOverlayActive, status, setStatus, cur
   useEffect(() => {
     const checkUserStatus = async () => {
       const { data: { user }, error: userError } = await supabase.auth.getUser();
-      
-      console.log("User:", user); // Debugging line
-
-      if (userError) {
-        console.error("Error fetching user:", userError);
-        return;
-      }
-
       setIsLoggedIn(!!user);
 
       if (user) {
@@ -34,12 +26,6 @@ const SubmitOverlay = ({ overlayActive, setOverlayActive, status, setStatus, cur
           .eq('challenge_id', currentChallenge.id)
           .maybeSingle();
 
-        if (data) {
-          setStatus(data.status);
-          setStartedAt(data.started_at);
-        } else if (error) {
-          console.error("Error fetching status", error);
-        }
       }
     };
 
@@ -87,10 +73,13 @@ const SubmitOverlay = ({ overlayActive, setOverlayActive, status, setStatus, cur
 
     if (hasError) return;
 
+    
+
     if (!isLoggedIn) {
       alert('Please log in to submit your solution.');
       return;
     }
+
 
     try {
       const { data: { user }, error: userError } = await supabase.auth.getUser();
