@@ -11,7 +11,6 @@ const ChallengeDisplay = (props) => {
 
     const [activeBtn, setActiveBtn] = useState("button1");
     const [imgUrl, setImgUrl] = useState(props.currentChallenge.imgDesktop);
-    const [overlayActive, setOverlayActive] = useState(false);
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [status, setStatus] = useState('not-started');
@@ -26,7 +25,7 @@ const ChallengeDisplay = (props) => {
                 // Fetch user's status for the challenge from user_challenges
                 const { data, error } = await supabase
                     .from('user_challenges')
-                    .select('status, started_at')
+                    .select('*')
                     .eq('user_id', user.id)
                     .eq('challenge_id', currentChallenge.id)
                     .maybeSingle();
@@ -42,6 +41,129 @@ const ChallengeDisplay = (props) => {
 
         checkUserStatus();
     }, [currentChallenge.id]);
+
+    // new method
+    const repoUrlPattern = /^https?:\/\/github\.com\/[\w-]+\/[\w-]+$/;
+    const liveUrlPattern = /^https?:\/\/([\w-]+\.)?github\.io(\/[\w- ./?%&=]*)?$/;
+    const [repoUrl, setRepoUrl] = useState('');
+    const [liveUrl, setLiveUrl] = useState('');
+    const [repoErrorMessage, setRepoErrorMessage] = useState('');
+    const [liveErrorMessage, setLiveErrorMessage] = useState('');
+
+    const handleRepoUrlChange = (e) => {
+        const value = e.target.value;
+        setRepoUrl(value);
+    
+        // Validate repository URL
+        if (!value) {
+          setRepoErrorMessage('Repository URL is required.');
+        } else if (!repoUrlPattern.test(value)) {
+          setRepoErrorMessage('Please enter a valid GitHub repository URL.');
+        } else {
+          setRepoErrorMessage(''); // Clear error if valid
+        }
+      };
+    
+      // Handler for live site URL input
+      const handleLiveUrlChange = (e) => {
+        const value = e.target.value;
+        setLiveUrl(value);
+    
+        // Validate live site URL
+        if (!value) {
+          setLiveErrorMessage('Live site URL is required.');
+        } else if (!liveUrlPattern.test(value)) {
+          setLiveErrorMessage('Please enter a valid GitHub live URL.');
+        } else {
+          setLiveErrorMessage(''); // Clear error if valid
+        }
+      };
+
+      const newRepoUrl = repoUrl;
+      const newLiveUrl = liveUrl;
+      const demo = "hello.com"
+    
+    //   Form submission handler
+      const handleChallengeSubmit = async () => {
+        console.log("test button clicked")
+        if (!isLoggedIn) {
+            window.location.href = '/'; // Redirect to login if not logged in
+            return;
+        }
+
+        try {
+            // Initialize started_at only if it hasn't been set
+            const currentStartedAt = startedAt || new Date().toISOString();
+
+            // Upsert into the user_challenges table
+            const { data: { user } } = await supabase.auth.getUser();
+            const { error } = await supabase
+                .from('user_challenges')
+                .upsert({
+                    user_id: user.id,
+                    challenge_id: currentChallenge.id,
+                    challenge_repo: demo,
+                    challenge_live: demo,
+                }, { onConflict: ['user_id', 'challenge_id'] });
+
+            if (error) throw error;
+
+            // Update local state after successful update
+            setStatus('ongoing');
+            setStartedAt(currentStartedAt);
+        } catch (error) {
+            console.error('Error updating status:', error);
+        }
+    };
+    
+
+        
+
+      //New method
+
+
+
+
+
+    
+    // test click
+
+    // const repo = "https://github.com/Mr-Anas1/Learnerr";
+    // const live = "https://mr-anas1.github.io/Learnerr/";
+
+    // const handleTestClick = async () => {
+    //     console.log("test button clicked")
+    //     if (!isLoggedIn) {
+    //         window.location.href = '/'; // Redirect to login if not logged in
+    //         return;
+    //     }
+
+    //     try {
+    //         // Initialize started_at only if it hasn't been set
+    //         const currentStartedAt = startedAt || new Date().toISOString();
+
+    //         // Upsert into the user_challenges table
+    //         const { data: { user } } = await supabase.auth.getUser();
+    //         const { error } = await supabase
+    //             .from('user_challenges')
+    //             .upsert({
+    //                 user_id: user.id,
+    //                 challenge_id: currentChallenge.id,
+    //                 challenge_repo: "repo",
+    //                 challenge_live: live,
+    //             }, { onConflict: ['user_id', 'challenge_id'] });
+
+    //         if (error) throw error;
+
+    //         // Update local state after successful update
+    //         setStatus('ongoing');
+    //         setStartedAt(currentStartedAt);
+    //     } catch (error) {
+    //         console.error('Error updating status:', error);
+    //     }
+    // };
+    // test click
+
 
     const handleStartClick = async () => {
         if (!isLoggedIn) {
@@ -61,6 +183,8 @@ const ChallengeDisplay = (props) => {
                     user_id: user.id,
                     challenge_id: currentChallenge.id,
                     status: 'ongoing',
+                    challenge_live: " ", 
+                    challenge_repo: " ",
                     started_at: currentStartedAt,
                 }, { onConflict: ['user_id', 'challenge_id'] });
 
@@ -74,6 +198,8 @@ const ChallengeDisplay = (props) => {
         }
     };
 
+        
+        
     useEffect(() => {
         if (currentChallenge) {
             setActiveBtn("button1");
@@ -81,9 +207,6 @@ const ChallengeDisplay = (props) => {
         }
     }, [currentChallenge]);
 
-    const handleSubmitSolutionClick = () => {
-        setOverlayActive(!overlayActive);
-    };
 
     const handleButtonClick = (button) => () => {
         setActiveBtn(button);
@@ -103,17 +226,7 @@ const ChallengeDisplay = (props) => {
         }
     };
 
-    useEffect(() => {
-        if (overlayActive) {
-            document.body.classList.add("no-scroll");
-        } else {
-            document.body.classList.remove("no-scroll");
-        }
-
-        return () => {
-            document.body.classList.remove('no-scroll');
-        };
-    }, [overlayActive]);
+   
 
     return (
         <div className="ChallengeDisplay">
@@ -159,13 +272,45 @@ const ChallengeDisplay = (props) => {
                     <div className="challengeDisplay-content-box2">
                         <h1>Submit Solution</h1>
                         <p>Submit your finished work to show your skills. Earn points, get feedback, and move up on the leaderboard as you improve your frontend development!</p>
-                        <button className='challengeDescription-submit-button' onClick={handleSubmitSolutionClick}>Submit Solution</button>
+                        <div className="challengeDisplay-input-links">
+                        <div className="challengeDisplay-repo-url-input challengeDisplay-input-box">
+                            <p>Repository URL</p>
+                            <input
+                                type="text"
+                                className="overlay-input repo-url"
+                                placeholder="GitHub repository URL"
+                                value={repoUrl}
+                                onChange={handleRepoUrlChange}
+                            />
+                            {repoErrorMessage && <div className="overlay-input-error">{repoErrorMessage}</div>}
+                            </div>
+
+                            <div className="challengeDisplay-live-url-input challengeDisplay-input-box">
+                            <p>Live site URL</p>
+                            <input
+                                type="text"
+                                className="overlay-input live-url"
+                                placeholder="GitHub live site URL"
+                                value={liveUrl}
+                                onChange={handleLiveUrlChange}
+                            />
+                            {liveErrorMessage && <div className="overlay-input-error">{liveErrorMessage}</div>}
+                            </div>
+                        </div>
+                        <button className='challengeDescription-submit-button' onClick={handleChallengeSubmit}>Submit Solution</button>
+                        {/* <button className='challengeDescription-submit-button' onClick={handleTestClick}>Submit test</button> */}
+
+
+                    
                     </div>
                     : 
                     null
                 }
                 
-                {overlayActive && <SubmitOverlay overlayActive={overlayActive} setOverlayActive={setOverlayActive} status={status} setStatus = {setStatus} currentChallenge={currentChallenge} />}
+                
+
+                
+
             </div>
         </div>
     );

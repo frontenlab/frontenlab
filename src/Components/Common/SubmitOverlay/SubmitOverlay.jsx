@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './SubmitOverlay.css';
-import { supabase } from '../../../Helpers/SupabaseClient';
 
-const SubmitOverlay = ({ overlayActive, setOverlayActive, status, setStatus, currentChallenge }) => {
+const SubmitOverlay = ({ overlayActive, setOverlayActive, handleOverlaySubmit }) => {
   const repoUrlPattern = /^https?:\/\/github\.com\/[\w-]+\/[\w-]+$/;
   const liveUrlPattern = /^https?:\/\/([\w-]+\.)?github\.io(\/[\w- ./?%&=]*)?$/;
 
@@ -10,55 +9,39 @@ const SubmitOverlay = ({ overlayActive, setOverlayActive, status, setStatus, cur
   const [liveUrl, setLiveUrl] = useState('');
   const [repoErrorMessage, setRepoErrorMessage] = useState('');
   const [liveErrorMessage, setLiveErrorMessage] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [startedAt, setStartedAt] = useState('');
 
-  useEffect(() => {
-    const checkUserStatus = async () => {
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      setIsLoggedIn(!!user);
-
-      if (user) {
-        const { data, error } = await supabase
-          .from('user_challenges')
-          .select('status, started_at, challenge_repo, challenge_live, completed_at')
-          .eq('user_id', user.id)
-          .eq('challenge_id', currentChallenge.id)
-          .maybeSingle();
-
-      }
-    };
-
-    checkUserStatus();
-  }, [currentChallenge.id]);
 
   const handleChallengeCancel = () => {
-    setOverlayActive(!overlayActive);
+    setOverlayActive(false); // This should correctly close the overlay
   };
 
   const handleLiveUrlChange = (e) => {
     const value = e.target.value;
     setLiveUrl(value);
-    setLiveErrorMessage(value === '' ? '' : liveUrlPattern.test(value) ? '' : 'Please enter a valid GitHub live URL.');
+    if (value === '') {
+      setLiveErrorMessage('');
+    } else if (liveUrlPattern.test(value)) {
+      setLiveErrorMessage('');
+    }
   };
 
   const handleRepoUrlChange = (e) => {
     const value = e.target.value;
     setRepoUrl(value);
-    setRepoErrorMessage(value === '' ? '' : repoUrlPattern.test(value) ? '' : 'Please enter a valid GitHub repository URL.');
+    if (value === '') {
+      setRepoErrorMessage('');
+    } else if (repoUrlPattern.test(value)) {
+      setRepoErrorMessage('');
+    }
   };
 
-  const handleChallengeSubmit = async () => {
-    console.log('Submit button clicked');
-    console.log('Repo URL on submit:', repoUrl);
-    console.log('Live URL on submit:', liveUrl);
-
+  const handleChallengeSubmit = () => {
     let hasError = false;
 
     if (!repoUrl) {
       setRepoErrorMessage('Repository URL is required.');
       hasError = true;
-    } else if (!repoUrlPattern.test(repoUrl)) {
+    } else if (repoUrl && !repoUrlPattern.test(repoUrl)) {
       setRepoErrorMessage('Please enter a valid GitHub repository URL.');
       hasError = true;
     }
@@ -66,57 +49,17 @@ const SubmitOverlay = ({ overlayActive, setOverlayActive, status, setStatus, cur
     if (!liveUrl) {
       setLiveErrorMessage('Live site URL is required.');
       hasError = true;
-    } else if (!liveUrlPattern.test(liveUrl)) {
+    } else if (liveUrl && !liveUrlPattern.test(liveUrl)) {
       setLiveErrorMessage('Please enter a valid GitHub live URL.');
       hasError = true;
     }
 
-    if (hasError) return;
-
-    
-
-    if (!isLoggedIn) {
-      alert('Please log in to submit your solution.');
+    if (hasError) {
       return;
     }
 
-
-    try {
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-
-      if (userError || !user) {
-        console.error('Error fetching user:', userError);
-        alert('User not logged in.');
-        return;
-      }
-
-      const currentTime = new Date().toISOString(); // Set the current time for completed_at
-
-      const { error: upsertError } = await supabase
-        .from('user_challenges')
-        .upsert({
-          user_id: user.id,
-          challenge_id: currentChallenge.id,
-          challenge_repo: repoUrl,
-          challenge_live: liveUrl,
-          status: 'completed',
-          completed_at: currentTime,
-        }, { onConflict: ['user_id', 'challenge_id'] });
-
-      if (upsertError) {
-        console.error('Error upserting data:', upsertError);
-        alert('Error submitting solution: ' + upsertError.message);
-        return;
-      }
-
-      setStatus('completed');
-      alert('Congratulations! Your solution has been submitted successfully.');
-      setOverlayActive(false);
-
-    } catch (error) {
-      console.error('Error during submission:', error);
-      alert('An error occurred. Please try again.');
-    }
+    setOverlayActive(false); // Close the overlay after successful submission
+    handleOverlaySubmit(repoUrl, liveUrl); // Pass data back to parent
   };
 
   return (
@@ -127,24 +70,24 @@ const SubmitOverlay = ({ overlayActive, setOverlayActive, status, setStatus, cur
           <p>Repository URL</p>
           <input
             type="text"
-            className='overlay-input repo-url'
-            placeholder='GitHub repository URL'
-            onChange={handleRepoUrlChange}
+            className="overlay-input repo-url"
+            placeholder="GitHub repository URL"
             value={repoUrl}
+            onChange={handleRepoUrlChange}
           />
-          {repoErrorMessage && <div className='overlay-input-error'>{repoErrorMessage}</div>}
+          {repoErrorMessage && <div className="overlay-input-error">{repoErrorMessage}</div>}
         </div>
 
         <div className="github-live-url input-box">
           <p>Live site URL</p>
           <input
             type="text"
-            className='overlay-input live-url'
-            placeholder='GitHub live site URL'
-            onChange={handleLiveUrlChange}
+            className="overlay-input live-url"
+            placeholder="GitHub live site URL"
             value={liveUrl}
+            onChange={handleLiveUrlChange}
           />
-          {liveErrorMessage && <div className='overlay-input-error'>{liveErrorMessage}</div>}
+          {liveErrorMessage && <div className="overlay-input-error">{liveErrorMessage}</div>}
         </div>
 
         <div className="overlay-buttons">

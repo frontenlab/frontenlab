@@ -179,7 +179,28 @@
     cursor:none;
 
 }
+.challengeDisplay-input-links {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: 5px;
+    color: var(--PrimaryColor);
+    transition: border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
+.challengeDisplay-input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.challengeDisplay-input-box input {
+    background-color: transparent;
+}
 
 
 @media screen and (max-width: 978px) {
