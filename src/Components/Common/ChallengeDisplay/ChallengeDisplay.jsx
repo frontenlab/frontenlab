@@ -167,7 +167,9 @@ const ChallengeDisplay = (props) => {
                                 ? <button className='challengeDescription-start-button' onClick={handleStartClick}>{status === 'not-started' ? "Start" : "Download Requirements"}</button>
                                 : <Login class_name={"challengeDescription-start-button"} name={"Login to start"} />
                             }
-                            <button className={status !== 'ongoing' ? 'challengeDisplay-status' : 'challengeDisplay-status-active'}>{status === 'ongoing' ? 'Ongoing' : ''}</button>
+                            <button style={{ cursor: 'default' }} className={status !== 'ongoing' ? 'challengeDisplay-status' : 'challengeDisplay-status-active'}>{status === 'ongoing' ? 'Ongoing' : ''}</button>
+                            <button style={{ cursor: 'default' }} className={status === 'completed' ? 'challengeDisplay-status-active' : 'challengeDisplay-status'}>{status === 'completed' ? 'Completed' : ''}</button>
+
                         </div>
                     </div>
 
@@ -182,10 +184,18 @@ const ChallengeDisplay = (props) => {
                     </div>
                 </div>
 
-                {status === 'ongoing' && (
+                {status === 'ongoing'  && (
                     <div className="challengeDisplay-content-box2">
                         <h1>Submit Solution</h1>
                         <p>Submit your finished work to show your skills. Earn points, get feedback, and move up on the leaderboard as you improve your frontend development!</p>
+                        <SubmitForm onSubmit={handleSubmit} currentChallenge={currentChallenge} />
+                    </div>
+                )}
+
+                {status === 'completed'  && (
+                    <div className="challengeDisplay-content-box2">
+                        <h1>Refine and Resubmit</h1>
+                        <p> Made some changes or improvements? Submit your updated work to showcase your progress and get feedback on your latest effort!</p>
                         <SubmitForm onSubmit={handleSubmit} currentChallenge={currentChallenge} />
                     </div>
                 )}

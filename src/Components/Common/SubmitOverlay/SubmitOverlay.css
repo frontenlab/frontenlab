@@ -52,6 +52,7 @@
 
 .overlay-content p {
     margin-bottom: 5px;
+    text-align: left;
 }
 
 .overlay-buttons {
@@ -89,6 +90,9 @@
     color: #FF0000;
     font-style: italic;
     font-size: 14px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .input-box {

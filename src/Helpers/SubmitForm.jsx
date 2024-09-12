@@ -26,35 +26,17 @@ const SubmitForm = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="challengeDisplay-input-links">
-            {/* <div className="challengeDisplay-repo-url-input challengeDisplay-input-box">
-                <p>Repository URL</p>
-                <input
-                    type="text"
-                    className="overlay-input repo-url"
-                    placeholder="GitHub repository URL"
-                    {...register('repoUrl', {
-                        required: 'Repository URL is required.',
-                        pattern: {
-                            value: /^https:\/\/.+$/,
-                            message: 'Please enter a valid GitHub repository URL.',
-                        },
-                        onChange: () => clearErrors('submit'),
-                    })}
-                    onPasteCapture={handlePasteCapture} // Attach paste capture handler
-                />
-                {errors.repoUrl && <div className="overlay-input-error">{errors.repoUrl.message}</div>}
-            </div> */}
-
             <div className="challengeDisplay-live-url-input challengeDisplay-input-box">
                 <p>Live site URL</p>
                 <input
                     type="text"
                     className="overlay-input live-url"
                     placeholder="Live site URL"
+                    autoComplete="off"
                     {...register('liveUrl', {
                         required: 'Live site URL is required.',
                         pattern: {
-                            value: /^https:\/\/.+$/,
+                            value: /^https?:\/\/([\w-]+\.)?github\.io(\/[\w- ./?%&=]*)?$/,
                             message: 'Please enter a valid live site URL.',
                         },
                         onChange: () => clearErrors('submit'),

@@ -148,6 +148,8 @@
     width: 180px;
     height: 36px;
     cursor: pointer;
+    margin: 0 auto;
+    margin-top: -20px;
 }
 
 .no-scroll {
@@ -166,9 +168,9 @@
     border-radius: 18px;
     background-color: transparent;
     color: rgb(6, 167, 6);
-    cursor:none;
     display: none;
 }
+
 
 .challengeDisplay-status-active {
     display: block;
@@ -176,8 +178,6 @@
     border-radius: 18px;
     background-color: transparent;
     color: rgb(6, 167, 6);
-    cursor:none;
-
 }
 .challengeDisplay-input-links {
     width: 100%;
@@ -196,6 +196,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    height: 120px;
 }
 
 .challengeDisplay-input-box input {
