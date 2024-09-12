@@ -57,6 +57,7 @@ const SubmitOverlay = ({ overlayActive, setOverlayActive, handleOverlaySubmit })
     if (hasError) {
       return;
     }
+    
 
     setOverlayActive(false); // Close the overlay after successful submission
     handleOverlaySubmit(repoUrl, liveUrl); // Pass data back to parent
