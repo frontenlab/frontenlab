@@ -4,6 +4,7 @@ import './ChallengeDisplay.css';
 import { supabase } from '../../../Helpers/SupabaseClient';
 import Login from '../../../Helpers/Login';
 import SubmitForm from '../../../Helpers/SubmitForm';
+import AchievementOverlay from '../AchievementOverlay/AchievementOverlay';
 
 const ChallengeDisplay = (props) => {
     const location = useLocation();
@@ -15,7 +16,7 @@ const ChallengeDisplay = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [status, setStatus] = useState('not-started');
     const [startedAt, setStartedAt] = useState(null);
-    // const [repoUrl, setRepoUrl] = useState('');
+    const [achievementOverlayActive, setAchievementOverlayActive] = useState(false);
     const [liveUrl, setLiveUrl] = useState('');
 
     useEffect(() => {
@@ -62,7 +63,6 @@ const ChallengeDisplay = (props) => {
                     challenge_id: currentChallenge.id,
                     status: 'ongoing',
                     started_at: currentStartedAt,
-                    // challenge_repo: " ",
                     challenge_live: " ",
                 }, { onConflict: ['user_id', 'challenge_id'] });
 
@@ -122,7 +122,6 @@ const ChallengeDisplay = (props) => {
             const { data: repoData, error: repoError } = await supabase
                 .from('user_challenges')
                 .update({ 
-                    // challenge_repo: data.repoUrl,
                     challenge_live: data.liveUrl,
                     completed_at: currentEndAt,
                     status: "completed",
@@ -136,12 +135,13 @@ const ChallengeDisplay = (props) => {
 
             setStatus('completed');
             console.log('Repo URL updated successfully:', liveUrl);
+            setAchievementOverlayActive(true);
         } catch (error) {
             console.error('Error submitting the URLs:', error);
         }
     };
 
-    
+
 
     return (
         <div className="ChallengeDisplay">
@@ -199,6 +199,8 @@ const ChallengeDisplay = (props) => {
                         <SubmitForm onSubmit={handleSubmit} currentChallenge={currentChallenge} />
                     </div>
                 )}
+
+                {achievementOverlayActive && <AchievementOverlay setAchievementOverlayActive={setAchievementOverlayActive} />}
             </div>
         </div>
     );
