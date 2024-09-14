@@ -5,6 +5,8 @@ import { supabase } from '../../../Helpers/SupabaseClient';
 import Login from '../../../Helpers/Login';
 import SubmitForm from '../../../Helpers/SubmitForm';
 import AchievementOverlay from '../AchievementOverlay/AchievementOverlay';
+import { PuffLoader } from 'react-spinners';
+
 
 const ChallengeDisplay = (props) => {
     const location = useLocation();
@@ -14,10 +16,11 @@ const ChallengeDisplay = (props) => {
     const [imgUrl, setImgUrl] = useState(currentChallenge.imgDesktop);
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [status, setStatus] = useState('not-started');
+    const [status, setStatus] = useState(null);
     const [startedAt, setStartedAt] = useState(null);
     const [achievementOverlayActive, setAchievementOverlayActive] = useState(false);
     const [liveUrl, setLiveUrl] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         const checkUserStatus = async () => {
@@ -102,19 +105,23 @@ const ChallengeDisplay = (props) => {
     };
 
     const handleSubmit = async (data) => {
-        // setRepoUrl(data.repoUrl);
+        setIsSubmitting(true); // Show spinner
+
         setLiveUrl(data.liveUrl);
 
-        if (!data.liveUrl) return; // Exit if URLs are empty
+        if (!data.liveUrl) {
+            setIsSubmitting(false); // Hide spinner if URLs are empty
+            return;
+        }
 
         try {
-
-            const currentEndAt =new Date().toISOString();
-            console.log("Clicked")
+            const currentEndAt = new Date().toISOString();
+            console.log("Clicked");
             const { data: { user }, error: authError } = await supabase.auth.getUser();
 
             if (authError || !user) {
                 console.error('User not logged in or failed to get user:', authError);
+                setIsSubmitting(false); // Hide spinner
                 return;
             }
 
@@ -130,21 +137,27 @@ const ChallengeDisplay = (props) => {
 
             if (repoError) {
                 console.error('Error updating the repository URL:', repoError);
+                setIsSubmitting(false); // Hide spinner
                 return;
             }
 
             setStatus('completed');
-            console.log('Repo URL updated successfully:', liveUrl);
+            console.log('Repo URL updated successfully:', data.liveUrl);
             setAchievementOverlayActive(true);
         } catch (error) {
             console.error('Error submitting the URLs:', error);
+        } finally {
+            setIsSubmitting(false); // Hide spinner
         }
     };
 
-
-
     return (
         <div className="ChallengeDisplay">
+            {isSubmitting && (
+                <div className="spinner-container">
+                    <PuffLoader color="#5055b8" />
+                </div>
+            )}
             <div className="challengeDisplay-box">
                 <div className="challengeDisplay-box-img">
                     <img src={imgUrl} alt="box-img" />
@@ -164,7 +177,7 @@ const ChallengeDisplay = (props) => {
                         <p>{currentChallenge.description}</p>
                         <div className="challengeDisplay-challengeDescription-buttons">
                             {isLoggedIn
-                                ? <button className='challengeDescription-start-button' onClick={handleStartClick}>{status === 'not-started' ? "Start" : "Download Requirements"}</button>
+                                ? <button className='challengeDescription-start-button' onClick={handleStartClick}>{status === null ? "Start" : "Download Requirements"}</button>
                                 : <Login class_name={"challengeDescription-start-button"} name={"Login to start"} />
                             }
                             <button style={{ cursor: 'default' }} className={status !== 'ongoing' ? 'challengeDisplay-status' : 'challengeDisplay-status-active'}>{status === 'ongoing' ? 'Ongoing' : ''}</button>

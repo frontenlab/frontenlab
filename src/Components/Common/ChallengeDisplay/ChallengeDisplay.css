@@ -203,6 +203,21 @@
     background-color: transparent;
 }
 
+/* ChallengeDisplay.css */
+
+.spinner-container {
+    position: fixed; /* Or absolute, depending on your layout */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: add a slight background overlay */
+    z-index: 9999; /* Ensure spinner is on top of other elements */
+}
+
 
 @media screen and (max-width: 978px) {
     .challengeDisplay-box-buttons > button {

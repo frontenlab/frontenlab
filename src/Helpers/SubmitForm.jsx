@@ -8,6 +8,7 @@ const SubmitForm = ({ onSubmit }) => {
         handleSubmit,
         formState: { errors },
         clearErrors,
+        reset,
     } = useForm();
 
     const handlePasteCapture = (e) => {
@@ -24,8 +25,13 @@ const SubmitForm = ({ onSubmit }) => {
         document.execCommand('insertText', false, normalizedData);
     };
 
+    const onSubmitForm = (data) => {
+        onSubmit(data);  // Call the onSubmit handler
+        reset();         // Reset the form after submission
+    };
+
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="challengeDisplay-input-links">
+        <form onSubmit={handleSubmit(onSubmitForm)} className="challengeDisplay-input-links">
             <div className="challengeDisplay-live-url-input challengeDisplay-input-box">
                 <p>Live site URL</p>
                 <input

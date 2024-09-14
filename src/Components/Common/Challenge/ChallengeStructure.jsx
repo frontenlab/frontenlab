@@ -1,20 +1,46 @@
-import React from 'react'
-import './ChallengeStructure.css'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import './ChallengeStructure.css';
+import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const ChallengeStructure = (props) => {
+  const [challengeLoading, setChallengeLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setChallengeLoading(false); // Image has finished loading
+  };
+
+  // Check if the image is already cached
+  useEffect(() => {
+    const img = new Image();
+    img.src = props.imgDesktop;
+    img.onload = handleImageLoad; // Handle if image is cached
+  }, [props.imgDesktop]);
 
   const formattedTitle = props.title.replace(/\s+/g, '-');
 
   return (
-    <div className={"challenge"}>
-      <Link to={`/challenge/${formattedTitle}`} state={{ currentChallenge: props }}><img src={props.imgDesktop} alt="challenge-img" /></Link>
+    <div className="challenge">
+      <Link to={`/challenge/${formattedTitle}`} state={{ currentChallenge: props }}>
+        {challengeLoading ? (
+          <Skeleton height={300} width={390} /> // Show skeleton if loading
+        ) : (
+          <img
+            src={props.imgDesktop}
+            alt="challenge-img"
+            onLoad={handleImageLoad}
+            onError={() => setChallengeLoading(false)} // In case image fails to load
+            style={{ display: challengeLoading ? 'none' : 'block' }}
+          />
+        )}
+      </Link>
       <h3>{props.title}</h3>
       <p>{props.description}</p>
       <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default ChallengeStructure
+export default ChallengeStructure;

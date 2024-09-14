@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
 .achievement-container {
@@ -41,24 +42,32 @@
     text-align: center;
 }
 
+.social-share-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
 
-.achievement-content button{
+.social-share-buttons button{
     cursor: pointer;
-    border-radius: 4px;
-    width: 120px;
-    height: 40px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
     background-color: var(--AccentColor);
     color: var(--WhiteColor);
     border: none;
     outline: none;
-    margin: 0 auto;
     transition: background-color 0.3s;
 }
 
-.achievement-content button:hover {
+.social-share-buttons button:hover {
     background-color: var(--HoverColor);
 }
 
+.share-icon {
+    font-size: 20px;
+}
 
 .achievement-img {
     width: 200px;
@@ -79,3 +88,10 @@
     font-size: 24px;
     cursor: pointer;
 }
+
+.no-scroll {
+    overflow: hidden; 
+}
+
+
+
