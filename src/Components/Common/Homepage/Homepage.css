@@ -28,7 +28,7 @@
     border: none;
     color: var(--WhiteColor);
     background-color: var(--AccentColor);
-    margin: 20px 0px 70px;
+    margin: 20px 0px;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -50,6 +50,7 @@
     width: 100%;
     height: auto;
     max-width: 100%;
+    margin-top: 70px;
 }
 
 hr {

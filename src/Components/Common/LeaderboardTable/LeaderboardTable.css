@@ -2,25 +2,55 @@
     color: var(--PrimaryColor);
 }
 
-.leaderboard-table .css-1zts0j {
-    color: var(--PrimaryColor);
-    font-size: 16px;
-    text-align: center;
-    padding: 25px;
+.leaderboard-table-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--BorderColor);
+    border-radius: 18px;
+    padding: 0px 20px;
+    height: 80px;
+    margin-bottom: 20px;
 }
 
-.leaderboard-table .css-xumdn4  {
-    border-bottom: 1px solid var(--BorderColor);
-    text-align: center;
-    padding: 25px;
+.leaderboard-rank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.leaderboard-rank-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.leaderboard-rank-profile-img {
+    width: 40px;
+    height: auto;
+}
+
+.leaderboard-rank-profile-img img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.leaderboard-table-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    margin: 30px 0px 20px;
+}
+
+.leaderboard-table-heading p {
+    font-weight: 900;
 }
 
 @media screen and (max-width: 480px) {
-    .leaderboard-table .css-xumdn4 {
-        padding: 10px 5px;
-    }
-    
-    .leaderboard-table .css-1zts0j {
-        padding: 10px 5px;
+    .leaderboard-rank {
+        gap:20px;
     }
 }

@@ -13,7 +13,7 @@ const Cta = () => {
         <HiOutlineComputerDesktop className='computer' />
         <BsStars className='star'/>
         <h1>Get Started with Challenges</h1>
-        <button className='cta-button'>Get Started</button>
+        <button className='cta-button' onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Get Started</button>
 
     </div>
   )

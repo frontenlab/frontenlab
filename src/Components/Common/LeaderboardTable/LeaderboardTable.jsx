@@ -1,48 +1,81 @@
 import './LeaderboardTable.css'
 import React from 'react';
-import { ChakraProvider } from '@chakra-ui/react'
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableContainer,
-  } from '@chakra-ui/react'
 import LeaderboardContent from '../../../Helpers/LeaderboardContent';
-
+import male2 from '../../../Assets/Images/male2.jpg'
+import { supabase } from '../../../Helpers/SupabaseClient';
+import PuffLoader from 'react-spinners/PuffLoader'; 
+import { useState, useEffect } from 'react';
 
 const LeaderboardTable = () => {
+
+    const [loading, setLoading] = useState(true);
+    const [leaderboardData, setLeaderboardData] = useState([]);
+
+    useEffect(()=> {
+        const fetchLeaderboardData = async () => {
+            try {
+                const {data, error} = await supabase
+                    .from('users')
+                    .select('name, avatar_url, points')
+                    .order('points', {ascending:false})
+                    .limit(10);
+
+                    if (error) {
+                        console.error('Error fetching leaderboard data:', error);
+                    } else {
+                        setLeaderboardData(data); 
+                    }
+            } catch(error) {
+                console.log("Error fetching data")
+            } finally {
+                setLoading(false);
+            }
+
+        }
+        fetchLeaderboardData();
+    }, [])
+
+    if(loading){
+        return (
+            <div className="spinner-container">
+                <PuffLoader color="#5055b8" size={60} />
+            </div>
+        )
+    }
+
   return (
     <div className="leaderboard-table">
-        <ChakraProvider>
-            <TableContainer>
-                <Table variant='simple'>
-                    <Thead>
-                    <Tr>
-                        <Th >Rank</Th>
-                        <Th>Name</Th>
-                        <Th>Points</Th>
-                    </Tr>
-                    </Thead>
-                    <Tbody>
-                    {LeaderboardContent.map((value, index)=> (
-
-                        
-                        <Tr>
-                            <Td>{value.rank}</Td>
-                            <Td>{value.name}</Td>
-                            <Td >{value.points}</Td>
-                        </Tr>
-                    ))}
-                    
-                    </Tbody>
-                </Table>
-            </TableContainer>
-        </ChakraProvider>
-    </div>
-  )
+        <div className="leaderboard-table-heading">
+            <p>Rank</p>
+            <p>Points</p>
+        </div>
+        {leaderboardData.length === 0 ? (
+            <p>No data available</p>
+        ) : (
+            leaderboardData.map((user, index) => (
+            <div key={index} className="leaderboard-table-box">
+                <div className="leaderboard-rank">
+                <p className="rank">{index + 1}</p>
+                <div className="leaderboard-rank-profile">
+                    <div className="leaderboard-rank-profile-img">
+                    <img
+                        src={user.avatar_url || male2} // Use the default image if there's no profile image
+                        alt="profile-img"
+                    />
+                    </div>
+                    <div className="leaderboard-rank-profile-name">
+                    <p>{user.name}</p>
+                    </div>
+                </div>
+                </div>
+                <div className="leaderboard-points">
+                <p>{user.points}</p>
+                </div>
+            </div>
+            ))
+        )}
+        </div>
+    )
 }
 
 export default LeaderboardTable

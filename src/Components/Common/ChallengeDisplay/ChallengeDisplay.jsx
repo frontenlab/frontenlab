@@ -22,42 +22,59 @@ const ChallengeDisplay = (props) => {
     const [liveUrl, setLiveUrl] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const [points, setPoints] = useState(0); // Initialize points state
+    const [submissions, setSubmissions] = useState(0);
+
     useEffect(() => {
-        const checkUserStatus = async () => {
-            const { data: { user } } = await supabase.auth.getUser();
-            setIsLoggedIn(!!user);
-
-            if (user) {
-                const { data, error } = await supabase
-                    .from('user_challenges')
-                    .select('*')
-                    .eq('user_id', user.id)
-                    .eq('challenge_id', currentChallenge.id)
-                    .maybeSingle();
-
-                if (data) {
-                    setStatus(data.status);
-                    setStartedAt(data.started_at);
-                    // setRepoUrl(data.challenge_repo || '');
-                    setLiveUrl(data.challenge_live || '');
-                } else if (error) {
-                    console.error("Error fetching status", error);
-                }
-            }
-        };
-
-        checkUserStatus();
+        checkUserStatus();  // Call the function inside useEffect
     }, [currentChallenge.id]);
-
+    
+    const checkUserStatus = async () => {
+        const { data: { user } } = await supabase.auth.getUser();
+        setIsLoggedIn(!!user);
+    
+        if (user) {
+            // Fetch challenge status
+            const { data: challengeData, error } = await supabase
+                .from('user_challenges')
+                .select('*')
+                .eq('user_id', user.id)
+                .eq('challenge_id', currentChallenge.id)
+                .maybeSingle();
+    
+            if (challengeData) {
+                setStatus(challengeData.status);
+                setStartedAt(challengeData.started_at);
+                setLiveUrl(challengeData.challenge_live || '');
+            } else if (error) {
+                console.error("Error fetching status", error);
+            }
+    
+            // Fetch user points and submission count
+            // const { data: userData, error: userError } = await supabase
+            //     .from('users')
+            //     .select('points, submission')
+            //     .eq('id', user.id)
+            //     .single();
+    
+            // if (userData) {
+            //     setPoints(userData.points);
+            //     setSubmissions(userData.submission);
+            // } else if (userError) {
+            //     console.error('Error fetching user points:', userError);
+            // }
+        }
+    };
+    
     const handleStartClick = async () => {
         if (!isLoggedIn) {
             window.location.href = '/'; // Redirect to login if not logged in
             return;
         }
-
+    
         try {
             const currentStartedAt = startedAt || new Date().toISOString();
-
+    
             const { data: { user } } = await supabase.auth.getUser();
             const { error } = await supabase
                 .from('user_challenges')
@@ -68,16 +85,18 @@ const ChallengeDisplay = (props) => {
                     started_at: currentStartedAt,
                     challenge_live: " ",
                 }, { onConflict: ['user_id', 'challenge_id'] });
-
+    
             if (error) throw error;
-
+    
             setStatus('ongoing');
             setStartedAt(currentStartedAt);
-            window.location.reload();
+    
+            checkUserStatus(); // Call checkUserStatus after upsert
         } catch (error) {
             console.error('Error updating status:', error);
         }
     };
+    
 
     useEffect(() => {
         if (currentChallenge) {
@@ -106,25 +125,38 @@ const ChallengeDisplay = (props) => {
 
     const handleSubmit = async (data) => {
         setIsSubmitting(true); // Show spinner
-
+    
         setLiveUrl(data.liveUrl);
-
+    
         if (!data.liveUrl) {
             setIsSubmitting(false); // Hide spinner if URLs are empty
             return;
         }
-
+    
         try {
             const currentEndAt = new Date().toISOString();
             console.log("Clicked");
             const { data: { user }, error: authError } = await supabase.auth.getUser();
-
+    
             if (authError || !user) {
                 console.error('User not logged in or failed to get user:', authError);
                 setIsSubmitting(false); // Hide spinner
                 return;
             }
-
+    
+            // Check if the user already submitted the challenge for the first time
+            const { data: challengeData, error: challengeError } = await supabase
+                .from('user_challenges')
+                .select('status')
+                .eq('user_id', user.id)
+                .eq('challenge_id', currentChallenge.id)
+                .maybeSingle();
+    
+            if (challengeError) {
+                console.error('Error checking the challenge status:', challengeError);
+                return;
+            }
+    
             // Update the repository and live URLs
             const { data: repoData, error: repoError } = await supabase
                 .from('user_challenges')
@@ -134,13 +166,48 @@ const ChallengeDisplay = (props) => {
                     status: "completed",
                 })
                 .match({ user_id: user.id, challenge_id: currentChallenge.id });
-
+    
             if (repoError) {
                 console.error('Error updating the repository URL:', repoError);
                 setIsSubmitting(false); // Hide spinner
                 return;
             }
-
+    
+            if (challengeData.status !== 'completed') {
+                // Fetch the current points and submission count
+                const { data: userData, error: userError } = await supabase
+                    .from('users')
+                    .select('points, submission')
+                    .eq('id', user.id)
+                    .maybeSingle();
+    
+                if (userError) {
+                    console.error('Error fetching user data:', userError);
+                    return;
+                }
+    
+                const newPoints = (userData.points || 0) + 10;
+                const newSubmissions = (userData.submission || 0) + 1;
+    
+                // Update the points and submission count
+                const { data: updateData, error: updateError } = await supabase
+                    .from('users')
+                    .update({
+                        points: newPoints,
+                        submission: newSubmissions
+                    })
+                    .eq('id', user.id);
+    
+                if (updateError) {
+                    console.error('Error updating user points and submissions:', updateError);
+                    return;
+                }
+    
+                console.log('Points and submission count updated:', updateData);
+            } else {
+                console.log('Challenge already completed. No points or submission increment.');
+            }
+    
             setStatus('completed');
             console.log('Repo URL updated successfully:', data.liveUrl);
             setAchievementOverlayActive(true);
@@ -150,6 +217,7 @@ const ChallengeDisplay = (props) => {
             setIsSubmitting(false); // Hide spinner
         }
     };
+    
 
     return (
         <div className="ChallengeDisplay">

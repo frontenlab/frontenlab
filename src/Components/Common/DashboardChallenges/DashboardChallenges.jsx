@@ -7,27 +7,19 @@ import ChallengeStructure from '../Challenge/ChallengeStructure'
 import AllChallengesContent from '../../../Helpers/AllChallengesContent'
 import useChallenges from '../../../Helpers/fetchChallenges'
 import SkeletonCard from '../../UI/SkeletonCard/SkeletonCard'
-
+import { PuffLoader } from 'react-spinners'
 
 const DashboardChallenges = ({category}) => {
 
   const {challenges, loading, error} = useChallenges();
   const filteredChallenges = challenges.filter(challenge => challenge.category === category);
 
-  if (loading) {
+  if(loading){
     return (
-        <div className="AllChallenges">
-            <h1 className='allChallenge-title'>Explore Frontend Challenges</h1>
-            <p className='allChallenge-description'>
-                Find categorized frontend challenges and projects to sharpen your skills and advance your frontend development expertise.
-            </p>
-            <div className="AllChallenges-container">
-                {[...Array(6)].map((_, index) => (
-                    <SkeletonCard key={index} />
-                ))}
-            </div>
+        <div className="spinner-container">
+            <PuffLoader color="#5055b8" size={60} />
         </div>
-    );
+    )
 }
 
   if(error) return <p>Error : {error}</p>

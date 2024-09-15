@@ -87,28 +87,28 @@ const Sidebar = () => {
 
    // UseEffect function for hiding the sidebar when the screen size reaches 768px
 
-   useEffect(()=>{
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+  //  useEffect(()=>{
+  //   const handleResize = () => {
+  //     setIsMobile(window.innerWidth <= 768);
+  //   };
     
-    window.addEventListener('resize', handleResize);
-    handleResize();
+  //   window.addEventListener('resize', handleResize);
+  //   handleResize();
     
-    return () => window.removeEventListener('resize', handleResize);
-  },[])
+  //   return () => window.removeEventListener('resize', handleResize);
+  // },[])
 
-  useEffect(()=> {
-    if (isMobile) {
-      if (menuIcon === 1) {
-        document.body.style.overflow = "auto"; // Allow scrolling
-      } else {
-        document.body.style.overflow = "hidden"; // Prevent scrolling
-      }
-    } else {
-      document.body.style.overflow = "auto"; // Always allow scrolling on non-mobile view
-    }
-  },[menuIcon, isMobile])
+  // useEffect(()=> {
+  //   if (isMobile) {
+  //     if (menuIcon === 1) {
+  //       document.body.style.overflow = "auto"; // Allow scrolling
+  //     } else {
+  //       document.body.style.overflow = "hidden"; // Prevent scrolling
+  //     }
+  //   } else {
+  //     document.body.style.overflow = "auto"; // Always allow scrolling on non-mobile view
+  //   }
+  // },[menuIcon, isMobile])
 
   // UseEffect for Active target links
 

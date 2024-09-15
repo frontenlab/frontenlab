@@ -14,6 +14,97 @@
     font-size: 2em;
 }
 
+.leaderboard-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.leaderboard-top-img {
+    width: 150px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.crown-icon {
+    font-size: 48px;
+    color: #D4AF37;
+}
+
+
+.leaderboard-top-img img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.leaderboard-top-boxes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.leaderboard-top-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid var(--BorderColor);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    min-width: 120px;
+    padding: 10px 0px;
+    
+}
+
+.top-box2 {
+    position: relative;
+    top: -40px;
+}
+
+.leaderboard-bold {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
+
+
+@media (max-width: 978px) {
+
+    .leaderboard-top-boxes {
+        gap: 20px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .leaderboard-top-boxes {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .leaderboard-top-box {
+        max-width: 400px;
+    }
+
+    .top-box2 {
+        position: block;
+        top: 0;
+    }
+}
+
 @media screen and (max-width: 480px) {
     .leaderboard-container {
         gap: 20px;
