@@ -3,6 +3,7 @@ import ChallengeStructure from '../Challenge/ChallengeStructure'
 import './AllChallenges.css'
 import useChallenges from '../../../Helpers/fetchChallenges'
 import SkeletonCard from '../../UI/SkeletonCard/SkeletonCard'
+import PuffLoader from 'react-spinners/PuffLoader'; 
 
 const AllChallenges = () => {
 
@@ -10,15 +11,12 @@ const AllChallenges = () => {
 
   if (loading) {
     return (
-        <div className="AllChallenges">
-            <div className="AllChallenges-container">
-                {[...Array(6)].map((_, index) => (
-                    <SkeletonCard key={index} />
-                ))}
-            </div>
-        </div>
+      <div className="loader-container">
+        <PuffLoader color="#36d7b7" size={60} />
+        <p>Loading challenges...</p>
+      </div>
     );
-}
+  }
 
   if(error) return <p>Error : {error}</p>
   return (

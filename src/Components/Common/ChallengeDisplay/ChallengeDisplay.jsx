@@ -24,6 +24,7 @@ const ChallengeDisplay = (props) => {
 
     const [loading, setLoading] = useState(0)
 
+    
 
 
     useEffect(() => {
@@ -85,105 +86,91 @@ const ChallengeDisplay = (props) => {
     };
     
 
-    //testing
-    useEffect(() => {
-        const fetchUserData = async () => {
-          try {
-            const { data: { session } } = await supabase.auth.getSession();
-    
-            if (session) {
-              const { data, error } = await supabase
-                .from('users')
-                .select('points, submission')
-                .eq('id', session.user.id)
-                .single();
-    
-              if (error) {
-                console.error('Error fetching user data:', error);
-              }
-            }
-          } catch (error) {
-            console.error('Error fetching user data:', error);
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        fetchUserData();
-      }, []);
-    //testing
 
     const handleSubmit = async (data) => {
         setIsSubmitting(true); // Show spinner
-
+    
         setLiveUrl(data.liveUrl);
-
+    
         if (!data.liveUrl) {
             setIsSubmitting(false); // Hide spinner if URLs are empty
             return;
         }
-
+    
         try {
             const currentEndAt = new Date().toISOString();
             console.log("Clicked");
             const { data: { user }, error: authError } = await supabase.auth.getUser();
-
+    
             if (authError || !user) {
                 console.error('User not logged in or failed to get user:', authError);
                 setIsSubmitting(false); // Hide spinner
                 return;
             }
-
-            //Check if the user already submitted the challenge for the first time
-            const {data: challengeData, error: challengeError} = await supabase
+    
+            // Check if the user already submitted the challenge
+            const { data: challengeData, error: challengeError } = await supabase
                 .from('user_challenges')
                 .select('status')
                 .eq('user_id', user.id)
                 .eq('challenge_id', currentChallenge.id)
                 .maybeSingle();
-
-                if(challengeError){
-                    console.error('Error checking the challenge status:', challengeError);
-                    return;
-                }
-
-            // Update the repository and live URLs
+    
+            if (challengeError) {
+                console.error('Error checking the challenge status:', challengeError);
+                return;
+            }
+    
+            // Update the repository and live URLs in `user_challenges`
             const { data: repoData, error: repoError } = await supabase
                 .from('user_challenges')
                 .update({ 
                     challenge_live: data.liveUrl,
                     completed_at: currentEndAt,
                     status: "completed",
+                    points: 10 // Add 10 points for this challenge
                 })
                 .match({ user_id: user.id, challenge_id: currentChallenge.id });
-
+    
             if (repoError) {
                 console.error('Error updating the repository URL:', repoError);
                 setIsSubmitting(false); // Hide spinner
                 return;
             }
-
-            if (challengeData.status !== 'completed') {
-                // Call the RPC function to increment points and submission count
-                const { data: rpcData, error: rpcError } = await supabase
-                    .rpc('increment_points_and_submissions', {
-                        user_id: user.id, 
-                        points_to_add: 10, 
-                        submissions_to_add: 1
-                    });
     
-                if (rpcError) {
-                    console.error('Error updating user points and submissions:', rpcError);
-                    return;
-                }
+            // Fetch all user challenges to calculate total points and submission count
+            const { data: allChallenges, error: fetchError } = await supabase
+                .from('user_challenges')
+                .select('points')
+                .eq('user_id', user.id);
     
-                console.log('Points and submission count updated.');
-            } else {
-                console.log('Challenge already completed. No points or submission increment.');
+            if (fetchError) {
+                console.error('Error fetching user challenges:', fetchError);
+                return;
             }
-
+    
+            // Calculate total points and submissions
+            const totalPoints = allChallenges.reduce((acc, challenge) => acc + (challenge.points || 0), 0);
+            const totalSubmissions = allChallenges.length;
+    
+            console.log('Total points:', totalPoints, 'Total submissions:', totalSubmissions);
+    
+            // Update the `users` table with the new total points and submission count
+            const { error: updateUserError } = await supabase
+                .from('users')
+                .update({
+                    points: totalPoints,
+                    submission: totalSubmissions
+                })
+                .eq('id', user.id);
+    
+            if (updateUserError) {
+                console.error('Error updating user points and submissions:', updateUserError);
+                return;
+            }
+    
+            console.log('User points and submissions updated successfully.');
             setStatus('completed');
-            console.log('Repo URL updated successfully:', data.liveUrl);
             setAchievementOverlayActive(true);
         } catch (error) {
             console.error('Error submitting the URLs:', error);
@@ -191,7 +178,7 @@ const ChallengeDisplay = (props) => {
             setIsSubmitting(false); // Hide spinner
         }
     };
-
+    
     useEffect(() => {
         if (currentChallenge) {
             setActiveBtn("button1");

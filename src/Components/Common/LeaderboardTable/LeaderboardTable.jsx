@@ -52,7 +52,8 @@ const LeaderboardTable = () => {
         {leaderboardData.length === 0 ? (
             <p>No data available</p>
         ) : (
-            leaderboardData.map((user, index) => (
+            
+            leaderboardData .filter(user => user.points > 0).map((user, index) => (
             <div key={index} className="leaderboard-table-box">
                 <div className="leaderboard-rank">
                 <p className="rank">{index + 1}</p>

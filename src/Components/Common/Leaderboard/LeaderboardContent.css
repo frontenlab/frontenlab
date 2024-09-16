@@ -41,6 +41,7 @@
 .leaderboard-top-img img {
     width: 100%;
     border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .leaderboard-top-boxes {
@@ -77,6 +78,31 @@
     font-size: 20px;
 }
 
+.leaderboard-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    gap: 30px;
+}
+
+.leaderboard-info-img {
+    width: 200px;
+    height: auto;
+}
+
+.leaderboard-info-img img {
+    width: 100%;
+    height: auto;
+}
+
+.leaderboard-info p {
+    font-size: 22px;
+    text-align: center;
+    width: 600px;
+}
 
 
 
