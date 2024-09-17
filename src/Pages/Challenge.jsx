@@ -5,6 +5,7 @@ import Navbar from '../Components/Common/Navbar/Navbar';
 import Footer from '../Components/Common/Footer/Footer';
 import useChallenges from '../Helpers/fetchChallenges';
 import SkeletonChallenge from '../Components/UI/SkeletonChallenge/SkeletonChallenge';
+import ErrorMessage from '../Components/Common/ErrorMessage/ErrorMessage';
 
 const Challenge = () => {
     const { challengeId } = useParams();
@@ -16,9 +17,9 @@ const Challenge = () => {
       return <SkeletonChallenge />;
   }
 
-    if (error) {
-        return <p>Error: {error}</p>;
-    }
+  if(error) return (
+    <ErrorMessage heading={"Network Error"} description={"Check your internet connection and try again"} />
+  )
 
 
     const currentChallenge = challenges.find((e) => e.title === formattedChallengeId);

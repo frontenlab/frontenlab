@@ -1,10 +1,11 @@
 .user-challenges {
     width: 100%;
+    
 }
 
 .user-challenges-title {
     color: var(--PrimaryColor);
-    font-size: 48px;
+    font-size: 32px;
     text-align: center;
     margin-bottom: 10px;
 }
@@ -15,6 +16,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 70vh;
 }
 
 

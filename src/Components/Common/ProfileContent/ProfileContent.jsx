@@ -75,7 +75,7 @@ const ProfileContent = () => {
   if (loading) {
     return (
       <div className="loader-container">
-        <PuffLoader color="#36d7b7" size={60} />
+        <PuffLoader color="#5055b8" size={60} />
         <p>Loading challenges...</p>
       </div>
     );

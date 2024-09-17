@@ -1,0 +1,27 @@
+.comingSoon-container {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comingSoon-container h1 {
+    color: var(--PrimaryColor);
+    font-size: 38px;
+}
+
+.comingSoon-container p {
+    text-align: center;
+}
+
+.colored-text {
+    color: var(--AccentColor);
+}
+
+@media screen and (max-width: 480px) {
+    .comingSoon-container h1 {
+        font-size: 28px;
+    }
+}

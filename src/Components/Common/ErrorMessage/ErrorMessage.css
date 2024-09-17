@@ -1,0 +1,19 @@
+.errorMessage-container {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.errorMessage-container h1 {
+    color: var(--PrimaryColor);
+    font-size: 38px;
+}
+
+.errorMessage-container p {
+    text-align: center;
+}
+
+

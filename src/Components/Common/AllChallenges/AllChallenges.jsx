@@ -4,6 +4,7 @@ import './AllChallenges.css'
 import useChallenges from '../../../Helpers/fetchChallenges'
 import SkeletonCard from '../../UI/SkeletonCard/SkeletonCard'
 import PuffLoader from 'react-spinners/PuffLoader'; 
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
 const AllChallenges = () => {
 
@@ -12,13 +13,15 @@ const AllChallenges = () => {
   if (loading) {
     return (
       <div className="loader-container">
-        <PuffLoader color="#36d7b7" size={60} />
+        <PuffLoader color="#5055b8" size={60} />
         <p>Loading challenges...</p>
       </div>
     );
   }
 
-  if(error) return <p>Error : {error}</p>
+  if(error) return (
+    <ErrorMessage heading={"Network Error"} description={"Check your internet connection and try again"} />
+  )
   return (
     <div className="AllChallenges">
         <div className="AllChallenges-content">
