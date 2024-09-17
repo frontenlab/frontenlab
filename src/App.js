@@ -17,6 +17,7 @@ import Settings from './Components/Common/SettingsPage/Settings';
 import Competition from './Pages/Competition/Competition';
 import WeeklyCompetition from './Pages/WeeklyCompetition';
 import ProtectedRoute from './Helpers/ProtectedRoute';
+import UserChallenges from './Components/Common/UserChallenges/UserChallenges';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -52,6 +53,7 @@ const App = () => {
           <Route path='/competitions' element={<WeeklyCompetition />}>
             <Route path=':competitionName' element={<WeeklyCompetition />} />
           </Route>
+          <Route path='/user-challenges/:status' element={<UserChallenges />} />
           
         </Routes>
       </BrowserRouter>

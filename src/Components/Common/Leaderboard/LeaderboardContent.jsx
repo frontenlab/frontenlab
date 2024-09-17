@@ -6,10 +6,10 @@ import Footer from '../Footer/Footer'
 import LeaderboardTable from '../LeaderboardTable/LeaderboardTable'
 import { FaCrown } from "react-icons/fa6";
 import male2 from '../../../Assets/Images/male2.jpg'
-import notAvailable from '../../../Assets/Images/not-available.png'
 import { supabase } from '../../../Helpers/SupabaseClient';
 import PuffLoader from 'react-spinners/PuffLoader'; 
 import { useState, useEffect } from 'react';
+import NotAvailable from '../../UI/NotAvailable/NotAvailable'
 
 
 const LeaderboardContent = () => {
@@ -87,12 +87,9 @@ const LeaderboardContent = () => {
           <LeaderboardTable />
         </div>
         ) : (
-          <div className="leaderboard-info">
-            <div className="leaderboard-info-img">
-              <img src={notAvailable} alt="not-available img" />
-            </div>
-            <p>No top scorers yet! Be the first to complete challenges and earn your spot on the leaderboard.</p>
-          </div>
+          <NotAvailable 
+            description={"No top scorers yet! Be the first to complete challenges and earn your spot on the notAvailable."}
+          />
         )}
         </div>
       <Footer />

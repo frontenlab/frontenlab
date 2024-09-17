@@ -1,0 +1,23 @@
+.notAvailable-info-img {
+    width: 200px;
+    height: auto;
+}
+
+.notAvailable-info-img img {
+    width: 100%;
+    height: auto;
+}
+
+.notAvailable-info p {
+    font-size: 18px;
+    text-align: center;
+    width: 600px;
+}
+
+.notAvailable-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+}

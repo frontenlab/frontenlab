@@ -9,6 +9,7 @@ import useChallenges from '../../../Helpers/fetchChallenges'
 import SkeletonCard from '../../UI/SkeletonCard/SkeletonCard'
 import { PuffLoader } from 'react-spinners'
 
+
 const DashboardChallenges = ({category}) => {
 
   const {challenges, loading, error} = useChallenges();

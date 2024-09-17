@@ -1,0 +1,47 @@
+.user-challenges {
+    width: 100%;
+}
+
+.user-challenges-title {
+    color: var(--PrimaryColor);
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+.user-challenges-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.user-challenges-content p {
+    color: var(--PrimaryColor);
+    
+}
+
+.user-challenges-description {
+    text-align: center;
+}
+
+.user-challenges-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 40px;
+    margin: 50px 0px;
+
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    flex-direction: column;
+}

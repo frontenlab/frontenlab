@@ -5,8 +5,10 @@ import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../Helpers/SupabaseClient';
+import Skeleton from 'react-loading-skeleton'; 
 import 'react-loading-skeleton/dist/skeleton.css'; 
 import PuffLoader from 'react-spinners/PuffLoader'; 
+import NotAvailable from '../../UI/NotAvailable/NotAvailable';
 
 const ProfileContent = () => {
   const [userData, setUserData] = useState(null);
@@ -134,7 +136,9 @@ const ProfileContent = () => {
             ))}
           </div>
         ) : (
-          <p>No completed challenges found for this user.</p>
+          <NotAvailable 
+            description={"You din't yet completed any challenge."}
+          />
         )}
       </div>
     </div>
