@@ -4,11 +4,14 @@ import banner from '../../../Assets/Images/banner.png'
 import Login from '../../../Helpers/Login'
 import { supabase } from '../../../Helpers/SupabaseClient'
 import { useEffect } from 'react'
+import PuffLoader from 'react-spinners/PuffLoader'; 
+
 
 
 const Homepage = () => {
 
   const[user, setUser] = useState(null);
+  const[loading, setLoading] = useState(true);
 
   useEffect(()=> {
     const fetchUser = async () => {
@@ -16,9 +19,20 @@ const Homepage = () => {
       if (user) {
         setUser(user)
       }
+      
+      setLoading(false);
     }
     fetchUser();
   }, [])
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <PuffLoader color="#5055b8" size={60} />
+        <p>Loading challenges...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="Homepage">

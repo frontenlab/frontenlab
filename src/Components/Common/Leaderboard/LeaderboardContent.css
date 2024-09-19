@@ -88,24 +88,6 @@
     gap: 30px;
 }
 
-.leaderboard-info-img {
-    width: 200px;
-    height: auto;
-}
-
-.leaderboard-info-img img {
-    width: 100%;
-    height: auto;
-}
-
-.leaderboard-info p {
-    font-size: 22px;
-    text-align: center;
-    width: 600px;
-}
-
-
-
 
 @media (max-width: 978px) {
 

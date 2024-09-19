@@ -194,10 +194,10 @@ const ChallengeDisplay = (props) => {
                 setImgUrl(currentChallenge.imgDesktop);
                 break;
             case "button2":
-                setImgUrl(currentChallenge.tablet_img);
+                setImgUrl(currentChallenge.imgTablet);
                 break;
             case "button3":
-                setImgUrl(currentChallenge.mobile_img);
+                setImgUrl(currentChallenge.imgMobile);
                 break;
             default:
                 setImgUrl(currentChallenge.imgDesktop);

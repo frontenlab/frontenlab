@@ -30,7 +30,7 @@ const AllChallenges = () => {
 
           <div className="AllChallenges-container">
             {challenges.map((challenge, index) => {
-                return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.template_img} imgTablet={challenge.tablets_img} imgMobile={challenge.mobile_img} title={challenge.title} description={challenge.description} category={challenge.category}/>
+                return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.template_img} imgTablet={challenge.tablet_img} imgMobile={challenge.mobile_img} title={challenge.title} description={challenge.description} category={challenge.category}/>
             })}
           </div>
         </div>

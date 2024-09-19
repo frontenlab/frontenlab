@@ -42,6 +42,7 @@ const UserChallenges = () => {
     
         if (challengeError) throw new Error(`Fetch user challenges error: ${challengeError.message}`);
     
+
         if (userChallenges.length > 0) {
           // Get challenge details
           const { data: challenges, error: challengesError } = await supabase

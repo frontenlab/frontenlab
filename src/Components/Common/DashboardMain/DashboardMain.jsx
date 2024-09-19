@@ -69,6 +69,8 @@ const DashboardMain = () => {
     fetchChallengesData();
   }, []); // Empty dependency array to run only once on mount
 
+  
+
   return (
     <div className="DashboardMain">
         <div className="dashboardMain-box ongoing-box">
