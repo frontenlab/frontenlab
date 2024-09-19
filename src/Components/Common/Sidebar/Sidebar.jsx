@@ -98,17 +98,17 @@ const Sidebar = () => {
   //   return () => window.removeEventListener('resize', handleResize);
   // },[])
 
-  // useEffect(()=> {
-  //   if (isMobile) {
-  //     if (menuIcon === 1) {
-  //       document.body.style.overflow = "auto"; // Allow scrolling
-  //     } else {
-  //       document.body.style.overflow = "hidden"; // Prevent scrolling
-  //     }
-  //   } else {
-  //     document.body.style.overflow = "auto"; // Always allow scrolling on non-mobile view
-  //   }
-  // },[menuIcon, isMobile])
+  useEffect(()=> {
+    if (isMobile) {
+      if (menuIcon === 1) {
+        document.body.style.overflow = "auto"; // Allow scrolling
+      } else {
+        document.body.style.overflow = "hidden"; // Prevent scrolling
+      }
+    } else {
+      document.body.style.overflow = "auto"; // Always allow scrolling on non-mobile view
+    }
+  },[menuIcon, isMobile])
 
   // UseEffect for Active target links
 
