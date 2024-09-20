@@ -78,8 +78,11 @@ const UserChallenges = () => {
   if (fetchError) return <p>Error: {fetchError}</p>;
 
   return (
-    <div className="user-challenges">
+    <div>
       <Navbar />
+    
+    <div className="user-challenges">
+      
       <div className="user-challenges-content">
         <h1 className='user-challenges-title'>
           {status === 'ongoing' ? 'Ongoing Challenges' : 'Completed Challenges'}
@@ -110,7 +113,9 @@ const UserChallenges = () => {
             />
         )}
       </div>
-      <Footer />
+
+    </div>
+    <Footer />
     </div>
   );
 }

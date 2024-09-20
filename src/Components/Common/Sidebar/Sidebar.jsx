@@ -14,7 +14,10 @@ import { supabase } from '../../../Helpers/SupabaseClient';
 import Skeleton from 'react-loading-skeleton'; 
 import 'react-loading-skeleton/dist/skeleton.css'; 
 
-const Sidebar = () => {
+const Sidebar = ({ sidebarActive, setSidebarActive }) => {
+
+
+
 
   const [menuIcon, setMenuIcon] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); //To use for handleResize function
@@ -85,6 +88,29 @@ const Sidebar = () => {
     }
   },[location])
 
+
+  // useEffect(() => {
+  //   // Function to handle screen resize
+  //   const handleResize = () => {
+  //     if (window.innerWidth <= 580) {
+  //       setMenuIcon(0); // Open the sidebar when screen width <= 580px
+  //       setSidebarActive(true); // Also update the parent component's state
+  //     } else {
+  //       setMenuIcon(1); // Close the sidebar when screen width > 580px
+  //       setSidebarActive(false); // Update the parent component's state
+  //     }
+  //   };
+
+  //   // Check on component mount and whenever the window is resized
+  //   window.addEventListener('resize', handleResize);
+
+  //   // Cleanup the event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, [setSidebarActive]);
+  
+
    // UseEffect function for hiding the sidebar when the screen size reaches 768px
 
   //  useEffect(()=>{
@@ -98,17 +124,17 @@ const Sidebar = () => {
   //   return () => window.removeEventListener('resize', handleResize);
   // },[])
 
-  useEffect(()=> {
-    if (isMobile) {
-      if (menuIcon === 1) {
-        document.body.style.overflow = "auto"; // Allow scrolling
-      } else {
-        document.body.style.overflow = "hidden"; // Prevent scrolling
-      }
-    } else {
-      document.body.style.overflow = "auto"; // Always allow scrolling on non-mobile view
-    }
-  },[menuIcon, isMobile])
+  // useEffect(()=> {
+  //   if (isMobile) {
+  //     if (menuIcon === 1) {
+  //       document.body.style.overflow = "auto"; // Allow scrolling
+  //     } else {
+  //       document.body.style.overflow = "hidden"; // Prevent scrolling
+  //     }
+  //   } else {
+  //     document.body.style.overflow = "auto"; // Always allow scrolling on non-mobile view
+  //   }
+  // },[menuIcon, isMobile])
 
   // UseEffect for Active target links
 
@@ -123,6 +149,8 @@ const Sidebar = () => {
       localStorage.removeItem('activeLink');
     }
   }, [location]);
+
+  
 
   //Handlers
 
@@ -145,6 +173,21 @@ const Sidebar = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  const handleMobileMenuClick = () => {
+    setMenuIcon(prev_val => (prev_val === 0 ? 1 : 0));
+    setSidebarActive(!sidebarActive);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  
+  // const handleMobileMenuClick = () => {
+  //   setMenuIcon((prev_val) => {
+  //     const newMenuIcon = prev_val === 0 ? 1 : 0;
+  //     setSidebarActive(newMenuIcon === 1); // Set sidebarActive based on the new value
+  //     return newMenuIcon;
+  //   });
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // };
+  
 
   // Conditional rendering within JSX
   if (loading) {
@@ -173,7 +216,7 @@ const Sidebar = () => {
         {fetchError && <p>{fetchError}</p>}
       {userData && (
         <div className="sidebar-profile">
-          <div className="sidebar-profile-close-icon "><IoMdClose onClick={handleMenuClick} /></div>
+          <div className="sidebar-profile-close-icon "><IoMdClose className='desktop-close-icon' onClick={handleMenuClick} /> <IoMdClose className='mobile-close-icon' onClick={handleMobileMenuClick} /></div>
           <div className="sidebar-profile-img">
             {userData.avatar_url ? (
               <img src={userData.avatar_url} alt="profile-img" />
@@ -211,7 +254,8 @@ const Sidebar = () => {
 
         <div className={menuIcon === 1 ? "sidebar-menu-container": "sidebar-menu-container-hide"}>
           <div className="sidebar-menu-content" >
-              <div className="sidebar-icon-container" onClick={handleMenuClick}><SlMenu className='sidebar-menu sidebar-icon'  /></div>
+              <div className="sidebar-icon-container desktop-menu-icon" onClick={handleMenuClick}><SlMenu className='sidebar-menu sidebar-icon'  /></div>
+              <div className="sidebar-icon-container mobile-menu-icon" onClick={handleMobileMenuClick}><SlMenu className='sidebar-menu sidebar-icon'  /></div>
               <li className="sidebar-icon-container" ><NavLink to="/my" ><RiHome7Line className='sidebar-icon sidebar-icon' /></NavLink></li>
               <div className="sidebar-icon-container" onClick={handleMenuClick}><PiSteps className='sidebar-icon sidebar-icon' /></div>
               <li className="sidebar-icon-container" ><NavLink to="/leaderboard"><MdOutlineLeaderboard className='sidebar-icon sidebar-icon' /></NavLink></li> 

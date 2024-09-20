@@ -6,6 +6,7 @@
     padding: 20px;
     box-sizing: border-box;
     position: relative;
+    overflow-x: hidden;
 }
 
 .Sidebar-hide {
@@ -273,17 +274,40 @@
     height: 100%;
 }
 
+.mobile-menu-icon {
+    display: none;
+}
+
+.mobile-close-icon {
+    display: none;
+}
+
 @media screen and (max-width: 590px) {
     .Sidebar {
         display: block;
-        position: fixed;
-        width: 93%;
+        position: absolute;
+        width: 92%;
         background-color: var(--BackgroundColor);
         z-index: 1000;
-        height:85vh;
+        overflow-y: auto;
+        
     }
 
-    
+    .desktop-close-icon {
+        display: none;
+    }
+
+    .mobile-close-icon {
+        display: flex;
+    }
+
+    .desktop-menu-icon {
+        display: none;
+    }
+
+    .mobile-menu-icon {
+        display: flex;
+    }
 }
 
 @media screen and (max-width: 480px) {

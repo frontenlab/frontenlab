@@ -1,6 +1,6 @@
 .user-challenges {
     width: 100%;
-    
+    height: 80vh;
 }
 
 .user-challenges-title {
@@ -16,7 +16,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 70vh;
 }
 
 
@@ -36,7 +35,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 40px;
-    margin: 50px 0px;
+    margin-top: 50px;
 
 }
 

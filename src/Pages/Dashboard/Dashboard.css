@@ -19,8 +19,24 @@
     box-sizing: border-box; 
 }
 
+.dashboard-content {
+    transition: all 0.3s ease; /* Optional smooth transition */
+}
+
+.hide-content {
+    display: none; /* Or visibility: hidden; if you want to keep layout space */
+}
+
+.footer-space {
+    margin-top: 800px;
+}
+
 @media screen and (max-width: 480px){
     .dashboard-home{
         padding: 0px;
     }
+}
+
+@media screen and (max-width: 590px) {
+    
 }
