@@ -11,6 +11,7 @@ import { supabase } from '../../../Helpers/SupabaseClient';
 import Skeleton from 'react-loading-skeleton'; 
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useNavigate } from 'react-router-dom';
+import flash from '../../../Assets/Images/flash.svg'
 
 const Navbar = () => {
 
@@ -20,6 +21,7 @@ const Navbar = () => {
     const [dropdownActive, setDropdownActive] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
+    const [points, setPoints] = useState(0);
 
     const handleMenuClick = () =>{
         setMenu(!menu);
@@ -68,13 +70,15 @@ const Navbar = () => {
                 // Fetch current user data to check the name
                 const { data: existingUser, error: fetchError } = await supabase
                     .from('users')
-                    .select('name')
+                    .select('name, points')
                     .eq('id', session.user.id)
                     .maybeSingle();
     
                 if (fetchError) {
                     console.error('Error fetching user data:', fetchError);
-                } 
+                } else if (existingUser) {
+                    setPoints(existingUser.points);
+                }
             } else {
                 setUser(null);
             }
@@ -122,6 +126,11 @@ const Navbar = () => {
             {   loading ? (<Skeleton className='navbar-skeleton' circle={true} height={40} width={40} />):
                 user ? (
                 <div className="login-profile">
+                    <div className="points-img">
+                        <img src={flash} alt="points" />
+                        <p>{points}</p>
+                    </div>
+                    
                     <li className='navbar-dashboard-link'><NavLink to="/my" >Dashboard</NavLink></li>
                     <div className="login-profile-img" >
                         <img src={user.user_metadata.avatar_url} alt="github-profile-img" className="login-profile-image" onClick={handleDropdownClick} />

@@ -7,20 +7,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 65px;
+    height: 75px;
     border: 1px solid var(--BorderColor);
     border-radius: 14px;
-    padding-right: 30px;
-    padding-left: 10px;
+    padding:0px 20px;
     box-sizing: border-box;
     color: var(--PrimaryColor);
     position: relative;
 }
 
 
-.Navbar-logo-img{
+.Navbar-logo-image{
     flex-shrink: 0;
     cursor: pointer;
+    width: 180px;
+    height: auto;
+}
+
+.Navbar-logo-image img {
+    width: 100%;
 }
 
 .Navbar-logo {
@@ -178,6 +183,19 @@
 
 .mobile-sidebar-login-btn {
     display: none;
+}
+
+.points-img {
+    width: 45px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+}
+
+.points-img img {
+    width: 100%;
 }
 
 @media screen and (max-width: 768px) {

@@ -9,7 +9,15 @@
 
 
 .footer-logo-image {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    flex-shrink: 0;
+    cursor: pointer;
+    width: 190px;
+    height: 42px;
+}
+
+.footer-logo-image img {
+    width: 100%;
 }
 
 .footer-slogan {
