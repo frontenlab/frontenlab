@@ -5,10 +5,11 @@ import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../Helpers/SupabaseClient';
-import Skeleton from 'react-loading-skeleton'; 
 import 'react-loading-skeleton/dist/skeleton.css'; 
 import PuffLoader from 'react-spinners/PuffLoader'; 
 import NotAvailable from '../../UI/NotAvailable/NotAvailable';
+import { useParams } from 'react-router-dom';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const ProfileContent = () => {
   const [userData, setUserData] = useState(null);
@@ -16,69 +17,90 @@ const ProfileContent = () => {
   const [loading, setLoading] = useState(true);
   const [completedChallenges, setCompletedChallenges] = useState([]);
   const location = useLocation();
+  const { username } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true); // Start loading state
+  
       try {
-        // Get session from Supabase
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError) throw new Error(`Session error: ${sessionError.message}`);
-        if (!session) throw new Error('No session found');
-
-        // Fetch user data
-        const { data: user, error: userError } = await supabase
-          .from('users')
-          .select('avatar_url, username, name, bio, points, submission, github_url, linkedin_url')
-          .eq('id', session.user.id)
-          .single();
-        
-        if (userError) throw new Error(`Fetch user data error: ${userError.message}`);
-        setUserData(user);
-
-        // Fetch completed challenges
-        const { data: userChallenges, error: challengeError } = await supabase
-          .from('user_challenges')
-          .select('challenge_id')
-          .eq('user_id', session.user.id)
-          .eq('status', 'completed');
-
-        if (challengeError) throw new Error(`Fetch user challenges error: ${challengeError.message}`);
-
-        if (userChallenges.length > 0) {
-          // Get challenge details
-          const { data: challenges, error: challengesError } = await supabase
-            .from('challenges')
-            .select('*')
-            .in('id', userChallenges.map(challenge => challenge.challenge_id));
-
-          if (challengesError) throw new Error(`Fetch challenges error: ${challengesError.message}`);
-          setCompletedChallenges(challenges);
+        if (username) {
+          // Fetch data for the user with the given username from the URL
+          const { data: user, error: userError } = await supabase
+            .from('users')
+            .select('id, avatar_url, username, name, bio, points, submission, github_url, linkedin_url')
+            .eq('username', username) // Use the username from the URL
+            .maybeSingle();
+            
+  
+          if (userError) throw new Error(`User fetch error: ${userError.message}`);
+          if (!user) throw new Error('User not found'); // Handle user not found
+  
+          setUserData(user); // Set the fetched user data
+  
+  
+          // Fetch completed challenges for the user using their 'id'
+          const { data: userChallenges, error: challengeError } = await supabase
+            .from('user_challenges')
+            .select('challenge_id')
+            .eq('user_id', user.id)
+            .eq('status', 'completed');
+            
+  
+          if (challengeError) throw new Error(`Fetch user challenges error: ${challengeError.message}`);
+  
+          if (userChallenges.length > 0) {
+            const { data: challenges, error: challengesError } = await supabase
+              .from('challenges')
+              .select('*')
+              .in('id', userChallenges.map(challenge => challenge.challenge_id));
+              
+  
+            if (challengesError) throw new Error(`Fetch challenges error: ${challengesError.message}`);
+            setCompletedChallenges(challenges);
+          }
+        } else {
+          throw new Error('No username provided in the URL.');
         }
       } catch (error) {
-        setFetchError(error.message);
-        console.error('Error fetching data:', error);
+        // Handle specific user not found error without logging
+        if (error.message === 'User not found') {
+          setFetchError('User not found. Please check the username.');
+        } else {
+          setFetchError(error.message);
+          console.error('Error fetching data:', error); // Log only other errors
+        }
       } finally {
-        setLoading(false);
+        setLoading(false); // End loading state
       }
     };
-
+  
     fetchData();
-  }, []);
+  }, [username]); // Only run when the `username` changes
+  
 
-  useEffect(() => {
-    if (location.state?.showToast) {
-      toast.success('Your profile has been successfully updated.');
-      location.state.showToast = false;
-    }
-  }, [location.state]);
-
+  
+  // Display content based on user data
+  
+  
   if (loading) {
     return (
       <div className="loader-container">
         <PuffLoader color="#5055b8" size={60} />
-        <p>Loading challenges...</p>
+        <p>Loading profile...</p>
       </div>
     );
+  } 
+  // else {
+  //   if (!userData) {
+  //     return (
+  //       <ErrorMessage heading={"Login To Continue"} description={"Please log in to view profile"} />
+  //     )
+  //   }
+  // }
+
+  if (fetchError) {
+    return <p>Error: {fetchError}</p>;
   }
 
   return (

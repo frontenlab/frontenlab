@@ -20,7 +20,7 @@ const Sidebar = ({ sidebarActive, setSidebarActive }) => {
 
 
   const [menuIcon, setMenuIcon] = useState(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); //To use for handleResize function
+  // const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); //To use for handleResize function
   const [targetActive, setTargetActive] = useState(1);
   const [activeLink, setActiveLink] = useState('');
 
@@ -32,6 +32,7 @@ const Sidebar = ({ sidebarActive, setSidebarActive }) => {
   const location = useLocation();
 
 
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -41,7 +42,6 @@ const Sidebar = ({ sidebarActive, setSidebarActive }) => {
           throw new Error(`Session error: ${sessionError.message}`);
         }
 
-        console.log('Session:', session);
 
         if (session) {
           // Fetch user data from 'users' table
@@ -51,9 +51,7 @@ const Sidebar = ({ sidebarActive, setSidebarActive }) => {
             .eq('id', session.user.id)
             .maybeSingle(); // Fetch a single row
 
-          console.log('Fetched data:', data);
-          console.log('Fetch error:', error);
-          console.log(session.user.id);
+
 
           if (error) {
             throw new Error(`Fetch error: ${error.message}`);
@@ -75,6 +73,7 @@ const Sidebar = ({ sidebarActive, setSidebarActive }) => {
         console.error('Error fetching user data:', error);
       }  finally {
         setLoading(false); // Ensure loading is set to false after fetching
+        
       }
     };
 
@@ -88,53 +87,6 @@ const Sidebar = ({ sidebarActive, setSidebarActive }) => {
     }
   },[location])
 
-
-  // useEffect(() => {
-  //   // Function to handle screen resize
-  //   const handleResize = () => {
-  //     if (window.innerWidth <= 580) {
-  //       setMenuIcon(0); // Open the sidebar when screen width <= 580px
-  //       setSidebarActive(true); // Also update the parent component's state
-  //     } else {
-  //       setMenuIcon(1); // Close the sidebar when screen width > 580px
-  //       setSidebarActive(false); // Update the parent component's state
-  //     }
-  //   };
-
-  //   // Check on component mount and whenever the window is resized
-  //   window.addEventListener('resize', handleResize);
-
-  //   // Cleanup the event listener on component unmount
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, [setSidebarActive]);
-  
-
-   // UseEffect function for hiding the sidebar when the screen size reaches 768px
-
-  //  useEffect(()=>{
-  //   const handleResize = () => {
-  //     setIsMobile(window.innerWidth <= 768);
-  //   };
-    
-  //   window.addEventListener('resize', handleResize);
-  //   handleResize();
-    
-  //   return () => window.removeEventListener('resize', handleResize);
-  // },[])
-
-  // useEffect(()=> {
-  //   if (isMobile) {
-  //     if (menuIcon === 1) {
-  //       document.body.style.overflow = "auto"; // Allow scrolling
-  //     } else {
-  //       document.body.style.overflow = "hidden"; // Prevent scrolling
-  //     }
-  //   } else {
-  //     document.body.style.overflow = "auto"; // Always allow scrolling on non-mobile view
-  //   }
-  // },[menuIcon, isMobile])
 
   // UseEffect for Active target links
 

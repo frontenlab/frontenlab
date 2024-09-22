@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Switch } from "react-router-dom";
 import Home from './Pages/Home/Home';
 import Challenges from './Pages/Challenges/Challenges';
 import About from './Pages/About/About';
@@ -25,10 +25,11 @@ import ErrorMessage from './Components/Common/ErrorMessage/ErrorMessage';
 import useOnlineStatus from './Helpers/useOnlineStatus';
 
 const App = () => {
-  const isOnline = useOnlineStatus(); // Call the custom hook
+  const isOnline = useOnlineStatus(); 
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   if (!isOnline) {
-    return <ErrorMessage heading={"Network Error"} description={"Check your internet connection and try again."} />; // Show error message when offline
+    return <ErrorMessage heading={"Network Error"} description={"Check your internet connection and try again."} />; 
   }
 
   return (
@@ -52,7 +53,7 @@ const App = () => {
           <Route path='/settings' element={<Settings />} />
         </Route>
         <Route path='/leaderboard' element={<Leaderboard />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/:username' element={<Profile />} />
         <Route path='/terms' element={<Terms />} />
         <Route path='/privacy' element={<Privacy />} />
         <Route path='/contact' element={<Contact />} />

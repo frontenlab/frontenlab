@@ -22,6 +22,7 @@ const Navbar = () => {
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const [points, setPoints] = useState(0);
+    const [username, setUsername] = useState('');
 
     const handleMenuClick = () =>{
         setMenu(!menu);
@@ -70,7 +71,7 @@ const Navbar = () => {
                 // Fetch current user data to check the name
                 const { data: existingUser, error: fetchError } = await supabase
                     .from('users')
-                    .select('name, points')
+                    .select('name, points, username')
                     .eq('id', session.user.id)
                     .maybeSingle();
     
@@ -78,6 +79,7 @@ const Navbar = () => {
                     console.error('Error fetching user data:', fetchError);
                 } else if (existingUser) {
                     setPoints(existingUser.points);
+                    setUsername(existingUser.username);
                 }
             } else {
                 setUser(null);
@@ -102,7 +104,7 @@ const Navbar = () => {
 
         <div className={menu? "Navbar-links": "Navbar-links Navbar-links-active"}>
             <ul>
-                <li><NavLink exact to="/" >Home</NavLink></li>
+                <li><NavLink to="/" >Home</NavLink></li>
                 <li><NavLink to="/challenges" >Challenges</NavLink></li>
                 <li><NavLink to="/competitions" >Competitions</NavLink></li>
                 {user ? (
@@ -155,7 +157,7 @@ const Navbar = () => {
             { dropdownActive &&
                 <div className="profile-dropdown" ref={dropdownRef}>
                     <li><NavLink to="/" >Home</NavLink></li>
-                    <li><NavLink to="/profile" >Profile</NavLink></li>
+                    <li><NavLink to={`/profile/${username}`}>Profile</NavLink></li>
                     <li><NavLink to="/settings" >Settings</NavLink></li>
                     <button onClick={handleSignOut} className='profile-dropdown-button'>Sign Out</button>
                 </div>
