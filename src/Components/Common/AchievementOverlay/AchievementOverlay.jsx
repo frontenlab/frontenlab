@@ -6,8 +6,11 @@ import { useEffect } from 'react';
 import { FaXTwitter } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
 import { TiSocialLinkedin } from "react-icons/ti";
+import { useNavigate } from 'react-router-dom';
 
 const AchievementOverlay = ({setAchievementOverlayActive}) => {
+
+    const navigate = useNavigate();
 
     useEffect(() => {
       document.body.classList.add('no-scroll');
@@ -18,6 +21,12 @@ const AchievementOverlay = ({setAchievementOverlayActive}) => {
 
     const handleAchievementClose = () => {
         setAchievementOverlayActive(false);
+        window.scrollTo({
+          top: 0, 
+          behavior: 'smooth' 
+        });
+        navigate('/profile')
+        
     }
 
     const handleShare = (platform) => {

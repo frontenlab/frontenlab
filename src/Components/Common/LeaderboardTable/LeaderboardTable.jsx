@@ -5,9 +5,11 @@ import male2 from '../../../Assets/Images/male2.jpg'
 import { supabase } from '../../../Helpers/SupabaseClient';
 import PuffLoader from 'react-spinners/PuffLoader'; 
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LeaderboardTable = () => {
 
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [leaderboardData, setLeaderboardData] = useState([]);
 
@@ -16,7 +18,7 @@ const LeaderboardTable = () => {
             try {
                 const {data, error} = await supabase
                     .from('users')
-                    .select('name, avatar_url, points')
+                    .select('name, avatar_url, points, username')
                     .order('points', {ascending:false})
                     .limit(10);
 
@@ -43,6 +45,10 @@ const LeaderboardTable = () => {
         )
     }
 
+    const handleUserNameClick = (userName) => {
+        navigate(`/profile/${userName}`);
+    }
+
   return (
     <div className="leaderboard-table">
         <div className="leaderboard-table-heading">
@@ -65,7 +71,7 @@ const LeaderboardTable = () => {
                     />
                     </div>
                     <div className="leaderboard-rank-profile-name">
-                    <p>{user.name}</p>
+                    <div className='userName' onClick={() => handleUserNameClick(user.username)}>{user.name}</div>
                     </div>
                 </div>
                 </div>

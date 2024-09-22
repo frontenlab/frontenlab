@@ -50,6 +50,10 @@
     font-weight: 900;
 }
 
+.userName {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 480px) {
     .leaderboard-rank {
         gap:20px;

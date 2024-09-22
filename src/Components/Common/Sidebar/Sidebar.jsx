@@ -13,10 +13,12 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { supabase } from '../../../Helpers/SupabaseClient';
 import Skeleton from 'react-loading-skeleton'; 
 import 'react-loading-skeleton/dist/skeleton.css'; 
+import { useAuth } from '../../../Helpers/AuthContext';
 
 const Sidebar = ({ sidebarActive, setSidebarActive }) => {
 
 
+  const { isLoggedIn } = useAuth();
 
 
   const [menuIcon, setMenuIcon] = useState(0);
@@ -78,7 +80,7 @@ const Sidebar = ({ sidebarActive, setSidebarActive }) => {
     };
 
     fetchUser();
-  }, []);
+  }, [isLoggedIn]);
 
   //For changing the color of the challenge link when it is not active
   useEffect(()=>{
@@ -153,12 +155,14 @@ const Sidebar = ({ sidebarActive, setSidebarActive }) => {
         </div>
       </div>
     );
+  } else {
+      if (!userData) {
+        return <div>No user data found. Please log in.</div>;
+      }
   }
 
   // Render nothing or an error message if userData is still null
-  if (!userData) {
-    return <div>No user data found. Please log in.</div>;
-  }
+  
 
   return (
 
