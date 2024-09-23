@@ -98,7 +98,7 @@ const Navbar = () => {
     <div className="Navbar">
         <div className="Navbar-logo">
             <div className="Navbar-logo-image">
-                <img src={frontenlabImage} alt="fronenlab-logo" />
+                <img src={frontenlabImage} alt="fronenlab-logo" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(() => navigate('/'), 300); }}  />
             </div>
         </div>
 

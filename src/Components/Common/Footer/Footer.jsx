@@ -5,9 +5,11 @@ import { NavLink } from 'react-router-dom';
 import { FaInstagram } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
 import { FaXTwitter } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
 
+    const navigate = useNavigate();
     const currentYear = new Date().getFullYear();
   return (
     <div className="Footer">
@@ -16,7 +18,7 @@ const Footer = () => {
         <div className='footer-first'>
             <div className="footer-main">
                 <div className="footer-logo-image">
-                    <img src={frontenlabImage} alt="fronenlab-logo" />
+                    <img src={frontenlabImage} alt="fronenlab-logo" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(() => navigate('/'), 300); }}  />
                 </div>
 
                 <h1 className="footer-slogan">Develop your frontend skills with practical projects and support.</h1> 

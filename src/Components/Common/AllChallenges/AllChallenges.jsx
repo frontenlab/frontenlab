@@ -5,6 +5,7 @@ import useChallenges from '../../../Helpers/fetchChallenges'
 import PuffLoader from 'react-spinners/PuffLoader'; 
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
+
 const AllChallenges = () => {
 
   const {challenges, loading, error} = useChallenges();
