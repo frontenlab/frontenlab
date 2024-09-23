@@ -21,6 +21,20 @@ const ChallengeStructure = (props) => {
 
   const formattedTitle = props.title.replace(/\s+/g, '-');
 
+  const getDifficultyClass = (difficulty) => {
+    switch (difficulty.toLowerCase()) {
+      case 'easy':
+        return 'difficulty-text difficulty-easy';
+      case 'intermediate':
+        return 'difficulty-text difficulty-intermediate';
+      case 'hard':
+        return 'difficulty-text difficulty-hard';
+      default:
+        return '';
+    }
+  };
+  
+
   return (
     <div className="challenge">
       <Link to={`/challenge/${formattedTitle}`} state={{ currentChallenge: props }}>
@@ -38,6 +52,7 @@ const ChallengeStructure = (props) => {
       </Link>
       <h3>{props.title}</h3>
       <p>{props.description}</p>
+      <div className={`difficulty-text ${getDifficultyClass(props.difficulty)}`}>{props.difficulty.toUpperCase()}</div>
       <Outlet />
     </div>
   );

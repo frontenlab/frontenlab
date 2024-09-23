@@ -104,6 +104,7 @@ const UserChallenges = () => {
                 imgMobile={challenge.mobile_img} 
                 title={challenge.title} 
                 description={challenge.description} 
+                difficulty={challenge.difficulty}
               />
             ))}
           </div>

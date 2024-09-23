@@ -1,9 +1,10 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { supabase } from '../../../Helpers/SupabaseClient';
 import './SettingsContent.css';
 import { useNavigate } from 'react-router-dom';
 import SettingsSkeleton from '../../../Helpers/SettingsLoadingSkeleton';
+import DOMPurify from 'dompurify';
 
 // Debounce function
 function debounce(func, delay) {
@@ -23,16 +24,14 @@ const socialMaxLength = 100;
 const SettingsContent = () => {
   const [linkedinUrl, setLinkedinUrl] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
-  const [githubErrorMessage, setGithubErrorMessage] = useState('');
-  const [linkedinErrorMessage, setLinkedinErrorMessage] = useState('');
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
+  const [username, setUsername] = useState('');
 
   const linkedinPattern = /^https:\/\/(www\.)?linkedin\.com\/.*$/i;
   const githubPattern = /^https:\/\/(www\.)?github\.com\/.*$/i;
-
   const allowedUrlCharacters = /^[a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]*$/;
 
   const navigate = useNavigate();
@@ -45,18 +44,17 @@ const SettingsContent = () => {
         if (session) {
           const { data, error } = await supabase
             .from('users')
-            .select('avatar_url, name, bio, linkedin_url, github_url')
+            .select('avatar_url, name, bio, linkedin_url, github_url, username')
             .eq('id', session.user.id)
             .single();
 
-          if (error) {
-            console.error('Error fetching user data:', error);
-          } else {
+          if (!error) {
             setUserData(data);
             setName(data.name || '');
             setBio(data.bio || '');
             setLinkedinUrl(data.linkedin_url || '');
             setGithubUrl(data.github_url || '');
+            setUsername(data.username || '');
           }
         }
       } catch (error) {
@@ -77,17 +75,17 @@ const SettingsContent = () => {
         const { error } = await supabase
           .from('users')
           .update({
-            name,
-            bio,
-            linkedin_url: linkedinUrl,
-            github_url: githubUrl,
+            name: DOMPurify.sanitize(name),  // Sanitize input
+            bio: DOMPurify.sanitize(bio),    // Sanitize input
+            linkedin_url: DOMPurify.sanitize(linkedinUrl), // Sanitize input
+            github_url: DOMPurify.sanitize(githubUrl),     // Sanitize input
           })
           .eq('id', session.user.id);
 
-        if (error) {
-          toast.error('There was an issue updating your profile.');
+        if (!error) {
+          navigate(`/profile/${username}`, { state: { showToast: true } });
         } else {
-          navigate('/profile', { state: { showToast: true } });
+          toast.error('There was an issue updating your profile.');
         }
       }
     } catch (error) {
@@ -96,7 +94,6 @@ const SettingsContent = () => {
     }
     console.log("Attempting to update:", { name, bio, linkedinUrl, githubUrl });
   };
-
 
   const showToast = debounce((message) => toast.error(message), 1100);
 
@@ -136,38 +133,23 @@ const SettingsContent = () => {
     let value = e.target.value;
 
     if (!allowedUrlCharacters.test(value)) {
-      value = value.replace(/[^a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]/g, ''); // Replace unwanted characters with ''
+      value = value.replace(/[^a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]/g, '');
     }
 
     setLinkedinUrl(value);
-
-    if (!value || (linkedinPattern.test(value) && value.length >= socialMinLength && value.length <= socialMaxLength)) {
-      setLinkedinErrorMessage('');
-    } else {
-      setLinkedinErrorMessage('Please enter a valid LinkedIn URL.');
-    }
   };
 
   const handleGithubChange = (e) => {
     let value = e.target.value;
 
     if (!allowedUrlCharacters.test(value)) {
-      value = value.replace(/[^a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]/g, ''); // Replace unwanted characters with ''
+      value = value.replace(/[^a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]/g, '');
     }
 
     setGithubUrl(value);
-
-    if (!value || (githubPattern.test(value) && value.length >= socialMinLength && value.length <= socialMaxLength)) {
-      setGithubErrorMessage('');
-    } else {
-      setGithubErrorMessage('Please enter a valid GitHub URL.');
-    }
   };
 
   const handleSettingsUpdateClick = () => {
-    if (linkedinErrorMessage || githubErrorMessage) {
-      return;
-    }
     handleUpdate();
   };
 
@@ -207,7 +189,6 @@ const SettingsContent = () => {
           value={linkedinUrl}
           onChange={handleLinkedinChange}
         />
-        {linkedinErrorMessage && <div className="error-message">{linkedinErrorMessage}</div>}
         <p>GitHub</p>
         <input
           type="text"
@@ -216,7 +197,6 @@ const SettingsContent = () => {
           value={githubUrl}
           onChange={handleGithubChange}
         />
-        {githubErrorMessage && <div className="error-message">{githubErrorMessage}</div>}
       </div>
 
       <div className="settings-button">

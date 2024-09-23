@@ -2,7 +2,6 @@ import React from 'react'
 import ChallengeStructure from '../Challenge/ChallengeStructure'
 import './AllChallenges.css'
 import useChallenges from '../../../Helpers/fetchChallenges'
-import SkeletonCard from '../../UI/SkeletonCard/SkeletonCard'
 import PuffLoader from 'react-spinners/PuffLoader'; 
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
@@ -30,7 +29,7 @@ const AllChallenges = () => {
 
           <div className="AllChallenges-container">
             {challenges.map((challenge, index) => {
-                return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.template_img} imgTablet={challenge.tablet_img} imgMobile={challenge.mobile_img} title={challenge.title} description={challenge.description} category={challenge.category}/>
+                return <ChallengeStructure key={challenge.id} id={challenge.id} imgDesktop={challenge.template_img} imgTablet={challenge.tablet_img} imgMobile={challenge.mobile_img} title={challenge.title} description={challenge.description} category={challenge.category} difficulty={challenge.difficulty}/>
             })}
           </div>
         </div>

@@ -39,13 +39,15 @@
 }
 
 .sidebar-profile-img {
-    width: 44px;
-    height: 44px;
+    width: 54px;
+    height: 54px;
 }
 
 .sidebar-profile-img img {
     width: 100%;
     height: auto;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 100%;
 }
 
 .sidebar-line {

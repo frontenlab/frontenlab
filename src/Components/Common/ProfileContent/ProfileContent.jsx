@@ -19,6 +19,14 @@ const ProfileContent = () => {
   const location = useLocation();
   const { username } = useParams();
 
+
+  useEffect(()=>{
+      if(location.state?.showToast){
+          toast.success('Your profile has been successfully updated.');
+          location.state.showToast = false;
+      }
+  }, [location.state])
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true); // Start loading state
@@ -154,6 +162,7 @@ const ProfileContent = () => {
                 title={challenge.title}
                 description={challenge.description}
                 category={challenge.category}
+                difficulty={challenge.difficulty}
               />
             ))}
           </div>
