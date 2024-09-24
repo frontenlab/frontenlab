@@ -51,7 +51,7 @@ const ChallengeStructure = (props) => {
         )}
       </Link>
       <h3>{props.title}</h3>
-      <p>{props.description}</p>
+      <div className='challenge-description'>{props.description}</div>
       <div className={`difficulty-text ${getDifficultyClass(props.difficulty)}`}>{props.difficulty.toUpperCase()}</div>
       <Outlet />
     </div>
