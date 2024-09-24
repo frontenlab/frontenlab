@@ -18,8 +18,8 @@ function debounce(func, delay) {
 const pattern = /^[a-zA-Z0-9 ]*$/; // Pattern to allow only alphanumeric characters and spaces
 const nameMaxLength = 50; 
 const bioMaxLength = 150; 
-const socialMinLength = 15;
-const socialMaxLength = 100;
+// const socialMinLength = 15;
+// const socialMaxLength = 100;
 
 const SettingsContent = () => {
   const [linkedinUrl, setLinkedinUrl] = useState('');
@@ -30,8 +30,8 @@ const SettingsContent = () => {
   const [bio, setBio] = useState('');
   const [username, setUsername] = useState('');
 
-  const linkedinPattern = /^https:\/\/(www\.)?linkedin\.com\/.*$/i;
-  const githubPattern = /^https:\/\/(www\.)?github\.com\/.*$/i;
+  // const linkedinPattern = /^https:\/\/(www\.)?linkedin\.com\/.*$/i;
+  // const githubPattern = /^https:\/\/(www\.)?github\.com\/.*$/i;
   const allowedUrlCharacters = /^[a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]*$/;
 
   const navigate = useNavigate();
