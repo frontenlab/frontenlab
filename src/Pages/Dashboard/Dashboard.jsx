@@ -1,37 +1,3 @@
-// import React from 'react'
-// import './Dashboard.css'
-// import Sidebar from '../../Components/Common/Sidebar/Sidebar'
-// import Navbar from '../../Components/Common/Navbar/Navbar'
-// import Footer from '../../Components/Common/Footer/Footer'
-// import DashboardMain from '../../Components/Common/DashboardMain/DashboardMain'
-// // import ExploreChallenges from '../../Components/Common/ExploreChallenges/ExploreChallenges'
-// // import MyContributionGraph from '../../Components/Common/ContributonGraph/MyContributionGraph'
-// import NewChallenges from '../../Components/Common/NewChallenges/NewChallenges'
-// import { useState } from 'react'
-
-
-// const Dashboard = () => {
-
-//   const [sidebarActive, setSidebarActive] = useState(true);
-
-//   return (
-//     <div className="Dashboard">
-//       <Navbar />
-//       <div className="dashboard-home">
-//         <Sidebar sidebarActive={sidebarActive} setSidebarActive={setSidebarActive} />
-//         <div className={`dashboard-content ${sidebarActive ? 'hide-content' : ''}`}>
-//           <DashboardMain  />
-//           <NewChallenges dashboardTitle={"dashboardTitle"}/>
-//         </div>
-//         <div className='footer-space'></div>
-//       </div>
-//       <Footer />
-//     </div>
-
-//   )
-// }
-
-// export default Dashboard
 
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
@@ -40,6 +6,7 @@ import Navbar from '../../Components/Common/Navbar/Navbar';
 import Footer from '../../Components/Common/Footer/Footer';
 import DashboardMain from '../../Components/Common/DashboardMain/DashboardMain';
 import NewChallenges from '../../Components/Common/NewChallenges/NewChallenges';
+
 
 const Dashboard = () => {
   const [sidebarActive, setSidebarActive] = useState(true); // State for sidebar toggle

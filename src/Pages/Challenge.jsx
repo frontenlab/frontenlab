@@ -7,6 +7,7 @@ import useChallenges from '../Helpers/fetchChallenges';
 import SkeletonChallenge from '../Components/UI/SkeletonChallenge/SkeletonChallenge';
 import ErrorMessage from '../Components/Common/ErrorMessage/ErrorMessage';
 
+
 const Challenge = () => {
     const { challengeId } = useParams();
     const { challenges, loading, error } = useChallenges();

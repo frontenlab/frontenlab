@@ -39,7 +39,7 @@ const ChallengeStructure = (props) => {
     <div className="challenge">
       <Link to={`/challenge/${formattedTitle}`} state={{ currentChallenge: props }}>
         {challengeLoading ? (
-          <Skeleton height={300} width={390} /> // Show skeleton if loading
+          <Skeleton height={210} width={366} /> // Show skeleton if loading
         ) : (
           <img
             src={props.imgDesktop}
@@ -51,7 +51,7 @@ const ChallengeStructure = (props) => {
         )}
       </Link>
       <h3>{props.title}</h3>
-      <p>{props.description}</p>
+      <div className='challenge-description'>{props.description}</div>
       <div className={`difficulty-text ${getDifficultyClass(props.difficulty)}`}>{props.difficulty.toUpperCase()}</div>
       <Outlet />
     </div>

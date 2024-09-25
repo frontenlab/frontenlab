@@ -2,12 +2,13 @@
     flex: 1 1 calc(33.333% - 20px);
     max-width: 390px;
     min-width: 250px;
-    height: fit-content;
+    height: 380px;
     background-color: var(--BoxColor);
     border-radius: 18px;
     cursor: pointer;
     transition: transform 0.3s ease;
     position: relative;
+    
 }
 
 .challenge img {
@@ -23,10 +24,16 @@
     font-size: 20px;
 }
 
-.challenge p {
+.challenge-description {
     color: var(--PrimaryColor);
     padding: 0px 15px 30px;
     font-size: 15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    line-height: 1.6em;
 }
 
 .challenge:hover {
