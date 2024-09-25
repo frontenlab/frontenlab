@@ -64,6 +64,7 @@
     border-radius: 8px;
     cursor: pointer;
     font-family: 'Alata', 'Helvetica Neue';
+    margin-top: 15px;
 }
 
 .contact-content button:hover {
@@ -75,6 +76,12 @@
 .contact-img img{
     width: 100%;
     height: auto;
+}
+
+.contact-email {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 @media screen and (max-width:1200px) {
