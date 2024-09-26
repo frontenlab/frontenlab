@@ -6,11 +6,13 @@ const Login = ({ name, class_name }) => {
     const [loading, setLoading] = useState(false);
     const { setIsLoggedIn } = useAuth();
 
+    const redirectUrl = process.env.NEXT_PUBLIC_REDIRECT_URL;
+
     const handleGithubLogin = async () => {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: 'github',
             options: {
-                redirectTo: `${window.location.origin}/my`,
+                redirectTo: redirectUrl,
             },
         });
 
