@@ -20,7 +20,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const serviceId = 'service_770n1d8';
+    const serviceId = 'service_ot66mlj';
     const templateId = 'template_27rznor';
     const publicKey = 'dkYzPUX7dZduOvSve';
 
