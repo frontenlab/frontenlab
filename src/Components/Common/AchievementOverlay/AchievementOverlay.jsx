@@ -8,7 +8,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { TiSocialLinkedin } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 
-const AchievementOverlay = ({setAchievementOverlayActive}) => {
+const AchievementOverlay = ({setAchievementOverlayActive, username}) => {
 
     const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const AchievementOverlay = ({setAchievementOverlayActive}) => {
           top: 0, 
           behavior: 'smooth' 
         });
-        navigate('/profile')
+        navigate(`/profile/${username}`)
         
     }
 

@@ -21,11 +21,41 @@ const ChallengeDisplay = (props) => {
     const [achievementOverlayActive, setAchievementOverlayActive] = useState(false);
     const [liveUrl, setLiveUrl] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const [loading, setLoading] = useState(0)
-
+    const [username, setUsername] = useState('');
+    const [loading, setLoading] = useState(0);
+    const [user, setUser] = useState(null);
     
 
+    useEffect(() => {
+        // Function to fetch user data
+        const fetchUser = async () => {
+            setLoading(true);
+            const { data: { session } } = await supabase.auth.getSession();
+    
+            if (session) {
+                setUser(session.user);
+    
+                // Fetch current user data to check the name
+                const { data: existingUser, error: fetchError } = await supabase
+                    .from('users')
+                    .select('username')
+                    .eq('id', session.user.id)
+                    .maybeSingle();
+    
+                if (fetchError) {
+                    console.error('Error fetching user data:', fetchError);
+                } else if (existingUser) {
+                    setUsername(existingUser.username);
+                }
+            } else {
+                setUser(null);
+            }
+            setLoading(false);
+        };
+    
+        fetchUser();
+    
+    }, []);
 
     useEffect(() => {
         checkUserStatus();  // Call the function inside useEffect
@@ -84,6 +114,7 @@ const ChallengeDisplay = (props) => {
             console.error('Error updating status:', error);
         }
     };
+
     
 
 
@@ -99,7 +130,6 @@ const ChallengeDisplay = (props) => {
     
         try {
             const currentEndAt = new Date().toISOString();
-            console.log("Clicked");
             const { data: { user }, error: authError } = await supabase.auth.getUser();
     
             if (authError || !user) {
@@ -153,7 +183,6 @@ const ChallengeDisplay = (props) => {
             const totalPoints = allChallenges.reduce((acc, challenge) => acc + (challenge.points || 0), 0);
             const totalSubmissions = allChallenges.length;
     
-            console.log('Total points:', totalPoints, 'Total submissions:', totalSubmissions);
     
             // Update the `users` table with the new total points and submission count
             const { error: updateUserError } = await supabase
@@ -169,7 +198,6 @@ const ChallengeDisplay = (props) => {
                 return;
             }
     
-            console.log('User points and submissions updated successfully.');
             setStatus('completed');
             setAchievementOverlayActive(true);
         } catch (error) {
@@ -267,7 +295,7 @@ const ChallengeDisplay = (props) => {
                     </div>
                 )}
 
-                {achievementOverlayActive && <AchievementOverlay setAchievementOverlayActive={setAchievementOverlayActive} />}
+                {achievementOverlayActive && <AchievementOverlay setAchievementOverlayActive={setAchievementOverlayActive} username={username} />}
             </div>
         </div>
     );

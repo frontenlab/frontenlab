@@ -92,7 +92,6 @@ const SettingsContent = () => {
       console.error('Error updating profile:', error);
       toast.error('An unexpected error occurred.');
     }
-    console.log("Attempting to update:", { name, bio, linkedinUrl, githubUrl });
   };
 
   const showToast = debounce((message) => toast.error(message), 1100);

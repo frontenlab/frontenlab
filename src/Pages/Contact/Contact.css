@@ -14,6 +14,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 20px;
+    width: 50%;
 }
 
 .contact-container h1 {
@@ -23,54 +24,11 @@
 
 .contact-container p {
     color: var(--PrimaryColor);
-    margin-bottom: 5px;
 }
 
-.contact-container input {
-    width: 100%;
-    height: 46px;
-    outline: none;
-    border: 1px solid var(--BorderColor);
-    border-radius: 5px;
-    padding: 0px 15px;
-    box-sizing: border-box;
-    color: var(--PrimaryColor);
-    background-color: var(--BackgroundColor);
+.accent-color {
+    color: var(--AccentColor);
 }
-
-.contact-container::placeholder {
-    color: var(--BorderColor);
-}
-
-.contact-container textarea {
-    width: 100%;
-    height: 300px;
-    outline: none;
-    border: 1px solid var(--BorderColor);
-    border-radius: 5px;
-    padding: 15px;
-    box-sizing: border-box;
-    background-color: var(--BackgroundColor);
-    color: var(--PrimaryColor);
-}
-
-.contact-content button {
-    width: 200px;
-    height: 43px;
-    outline: none;
-    border: none;
-    color: var(--WhiteColor);
-    background-color: var(--AccentColor);
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'Alata', 'Helvetica Neue';
-    margin-top: 15px;
-}
-
-.contact-content button:hover {
-    background-color: var(--HoverColor);
-}
-
 
 
 .contact-img img{
@@ -78,11 +36,6 @@
     height: auto;
 }
 
-.contact-email {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
 @media screen and (max-width:1200px) {
     .contact-container {
