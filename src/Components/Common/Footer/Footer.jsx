@@ -42,17 +42,17 @@ const Footer = () => {
                 <div className="footer-social">
                     <div className="social linkedin">
                         <CiLinkedin className='footer-icon'/>
-                        <a href="https://www.linkedin.com/company/frontenlab">Linkedin</a>
+                        <a href="https://www.linkedin.com/company/frontenlab" target="_blank" rel="noopener noreferrer">Linkedin</a>
                     </div>
 
                     <div className="social Instagram ">
                         <FaInstagram className='footer-icon' />
-                        <a href="https://www.instagram.com/frontenlab/">Instagram</a>
+                        <a href="https://www.instagram.com/frontenlab/" target="_blank" rel="noopener noreferrer">Instagram</a>
                     </div>
 
                     <div className="social X">
                         <FaXTwitter className='footer-icon' />
-                        <a href="https://x.com/frontenlab">X</a>
+                        <a href="https://x.com/frontenlab" target="_blank" rel="noopener noreferrer">X</a>
                     </div>
                 </div>
             </div>
