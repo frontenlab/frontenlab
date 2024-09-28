@@ -9,6 +9,12 @@ import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
 
+    const handleLinkClick = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', 
+        });
+      };
     const navigate = useNavigate();
     const currentYear = new Date().getFullYear();
   return (
@@ -26,26 +32,27 @@ const Footer = () => {
 
             <div className='footer-secondary'>
                 <div className="footer-links">
-                    <li><NavLink to="/about" >About</NavLink></li>
-                    <li><NavLink to="/contact" >Contact</NavLink></li> 
-                    <li><NavLink to="/challenges" >Challenges</NavLink></li> 
-                    <li><NavLink to="/leaderboard" >Leaderboard</NavLink></li> 
+                    {/* <li><NavLink to="/about" >About</NavLink></li> */}
+                    <li><NavLink to="/" onClick={handleLinkClick}>Home</NavLink></li> 
+                    <li><NavLink to="/contact" onClick={handleLinkClick} >Contact</NavLink></li> 
+                    <li><NavLink to="/challenges" onClick={handleLinkClick}>Challenges</NavLink></li> 
+                    <li><NavLink to="/competitions" onClick={handleLinkClick}>Competitions</NavLink></li> 
                 </div>
 
                 <div className="footer-social">
                     <div className="social linkedin">
                         <CiLinkedin className='footer-icon'/>
-                        <a href="https://linkedin.com">Linkedin</a>
+                        <a href="https://www.linkedin.com/company/frontenlab">Linkedin</a>
                     </div>
 
                     <div className="social Instagram ">
                         <FaInstagram className='footer-icon' />
-                        <a href="https://instagram.com">Instagram</a>
+                        <a href="https://www.instagram.com/frontenlab/">Instagram</a>
                     </div>
 
                     <div className="social X">
                         <FaXTwitter className='footer-icon' />
-                        <a href="https://x.com">X</a>
+                        <a href="https://x.com/frontenlab">X</a>
                     </div>
                 </div>
             </div>
@@ -54,8 +61,8 @@ const Footer = () => {
 
         <div className="footer-second">
             <div className="footer-second-links">
-                <li><NavLink to="/terms" >Terms and Condition</NavLink></li>
-                <li><NavLink to="/privacy" >Privacy policy</NavLink></li> 
+                <li><NavLink to="/terms" onClick={handleLinkClick} >Terms and Condition</NavLink></li>
+                <li><NavLink to="/privacy" onClick={handleLinkClick}>Privacy policy</NavLink></li> 
             </div>
 
             <div className="footer-second-copyright">

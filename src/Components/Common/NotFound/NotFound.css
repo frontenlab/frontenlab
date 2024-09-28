@@ -1,0 +1,30 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Center content vertically */
+    text-align: center;
+    color: var(--PrimaryColor);
+  }
+  
+  .not-found h1 {
+    font-size: 3rem;
+  }
+  
+  .not-found p {
+    margin: 20px 0;
+  }
+  
+  .not-found a {
+    color: var(--PrimaryColor); 
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .not-found a:hover {
+    color: var(--AccentColor);
+
+  }
+  

@@ -23,10 +23,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import ComingSoon from './Components/Common/ComingSoon/ComingSoon';
 import ErrorMessage from './Components/Common/ErrorMessage/ErrorMessage'; 
 import useOnlineStatus from './Helpers/useOnlineStatus';
+import NotFound from './Components/Common/NotFound/NotFound';
 
 const App = () => {
   const isOnline = useOnlineStatus(); 
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   if (!isOnline) {
     return <ErrorMessage heading={"Network Error"} description={"Check your internet connection and try again."} />; 
@@ -62,6 +63,7 @@ const App = () => {
           <Route path=':competitionName' element={<ComingSoon />} />
         </Route>
         <Route path='/user-challenges/:status' element={<UserChallenges />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
