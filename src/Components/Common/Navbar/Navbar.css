@@ -138,7 +138,7 @@
 
 .profile-dropdown {
     position: absolute !important;
-    top: 70px !important;
+    top: 75px !important;
     right: 0px !important;
     display: flex;
     flex-direction: column;
