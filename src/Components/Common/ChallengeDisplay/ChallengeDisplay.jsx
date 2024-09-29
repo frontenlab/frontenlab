@@ -109,10 +109,9 @@ const ChallengeDisplay = (props) => {
             setStatus('ongoing');
             setStartedAt(currentStartedAt);
             
-            // Call the download function after the challenge status has been set to ongoing
-            await downloadZipFile(currentChallenge.zip_file); // Use the zip file path
+            await downloadZipFile(currentChallenge.zip_file); 
 
-            checkUserStatus(); // Call checkUserStatus after upsert
+            checkUserStatus(); 
         } catch (error) {
             console.error('Error updating status:', error);
         }
@@ -123,8 +122,8 @@ const ChallengeDisplay = (props) => {
         try {
             const { data, error } = await supabase
                 .storage
-                .from('your-bucket-name') // Replace with your Supabase bucket name
-                .download(filePath); // Use the path from currentChallenge
+                .from('challenges') 
+                .download(filePath); 
 
             if (error) throw error;
 
