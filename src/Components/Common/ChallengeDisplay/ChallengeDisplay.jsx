@@ -90,6 +90,7 @@ const ChallengeDisplay = (props) => {
             return;
         }
 
+
         try {
             const currentStartedAt = startedAt || new Date().toISOString();
 
@@ -105,6 +106,8 @@ const ChallengeDisplay = (props) => {
                 }, { onConflict: ['user_id', 'challenge_id'] });
 
             if (error) throw error;
+
+            console.log(currentChallenge.zip_file)
 
             setStatus('ongoing');
             setStartedAt(currentStartedAt);
