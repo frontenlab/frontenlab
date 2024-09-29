@@ -134,12 +134,13 @@ const ChallengeDisplay = (props) => {
     // Function to download the ZIP file
     const downloadZipFile = async (filePath) => {
         try {
+            // Assuming `filePath` is a full URL, extract only the relative path
+            const relativePath = filePath.replace('https://vtxigjowfvmjejnmwhxd.supabase.co/storage/v1/object/public/', '');
+    
             const { data, error } = await supabase
                 .storage
                 .from('challenges') 
-                .download(filePath); 
-
-                console.log(filePath);
+                .download(relativePath); // Use relative path here
     
             if (error) throw error;
     
@@ -156,6 +157,7 @@ const ChallengeDisplay = (props) => {
             console.error('Error downloading the file:', error);
         }
     };
+    
 
     const handleSubmit = async (data) => {
         setIsSubmitting(true); // Show spinner
