@@ -24,6 +24,7 @@ const ChallengeDisplay = (props) => {
     const [username, setUsername] = useState('');
     const [loading, setLoading] = useState(0);
     const [user, setUser] = useState(null);
+    const [currentZipFile, setCurrentZipFile] = useState(null);
     
 
     useEffect(() => {
@@ -81,6 +82,18 @@ const ChallengeDisplay = (props) => {
             } else if (error) {
                 console.error("Error fetching status", error);
             }
+
+            const { data: challengeDetails, error: challengeError } = await supabase
+                .from('challenges')
+                .select('zip_file')
+                .eq('id', currentChallenge.id)
+                .maybeSingle();
+
+            if (challengeError) {
+                console.error("Error fetching challenge details", challengeError);
+            } else if (challengeDetails) {
+                setCurrentZipFile(challengeDetails.zip_file); // Store zip file path in state
+            }
         }
     };
     
@@ -89,11 +102,10 @@ const ChallengeDisplay = (props) => {
             window.location.href = '/'; // Redirect to login if not logged in
             return;
         }
-
-
+    
         try {
             const currentStartedAt = startedAt || new Date().toISOString();
-
+    
             const { data: { user } } = await supabase.auth.getUser();
             const { error } = await supabase
                 .from('user_challenges')
@@ -104,22 +116,21 @@ const ChallengeDisplay = (props) => {
                     started_at: currentStartedAt,
                     challenge_live: " ",
                 }, { onConflict: ['user_id', 'challenge_id'] });
-
+    
             if (error) throw error;
-
-            console.log(currentChallenge.zip_file)
-
+    
+            // Now use the retrieved zip file path
+            await downloadZipFile(currentZipFile); 
+    
             setStatus('ongoing');
             setStartedAt(currentStartedAt);
             
-            await downloadZipFile(currentChallenge.zip_file); 
-
             checkUserStatus(); 
         } catch (error) {
             console.error('Error updating status:', error);
         }
     };
-
+    
     // Function to download the ZIP file
     const downloadZipFile = async (filePath) => {
         try {
@@ -128,8 +139,10 @@ const ChallengeDisplay = (props) => {
                 .from('challenges') 
                 .download(filePath); 
 
+                console.log(filePath);
+    
             if (error) throw error;
-
+    
             // Create a blob URL and trigger the download
             const url = window.URL.createObjectURL(data);
             const a = document.createElement('a');
@@ -143,8 +156,6 @@ const ChallengeDisplay = (props) => {
             console.error('Error downloading the file:', error);
         }
     };
-    
-
 
     const handleSubmit = async (data) => {
         setIsSubmitting(true); // Show spinner
