@@ -28,7 +28,7 @@ const NewChallenges = ({dashboardTitle}) => {
   }
 
   // Limit to first 3 challenges
-  const limitedChallenges = challenges.slice(0, 3);
+  const limitedChallenges = challenges.slice(-3);
 
   return (
     <div className="NewChallenge">
