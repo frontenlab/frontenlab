@@ -89,10 +89,10 @@ const ChallengeDisplay = (props) => {
             window.location.href = '/'; // Redirect to login if not logged in
             return;
         }
-    
+
         try {
             const currentStartedAt = startedAt || new Date().toISOString();
-    
+
             const { data: { user } } = await supabase.auth.getUser();
             const { error } = await supabase
                 .from('user_challenges')
@@ -103,18 +103,44 @@ const ChallengeDisplay = (props) => {
                     started_at: currentStartedAt,
                     challenge_live: " ",
                 }, { onConflict: ['user_id', 'challenge_id'] });
-    
+
             if (error) throw error;
-    
+
             setStatus('ongoing');
             setStartedAt(currentStartedAt);
-    
+            
+            // Call the download function after the challenge status has been set to ongoing
+            await downloadZipFile(currentChallenge.zip_file); // Use the zip file path
+
             checkUserStatus(); // Call checkUserStatus after upsert
         } catch (error) {
             console.error('Error updating status:', error);
         }
     };
 
+    // Function to download the ZIP file
+    const downloadZipFile = async (filePath) => {
+        try {
+            const { data, error } = await supabase
+                .storage
+                .from('your-bucket-name') // Replace with your Supabase bucket name
+                .download(filePath); // Use the path from currentChallenge
+
+            if (error) throw error;
+
+            // Create a blob URL and trigger the download
+            const url = window.URL.createObjectURL(data);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentChallenge.title}.zip`; // Use the challenge title for the file name
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Error downloading the file:', error);
+        }
+    };
     
 
 
