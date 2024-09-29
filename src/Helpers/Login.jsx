@@ -13,7 +13,6 @@ const Login = ({ name, class_name }) => {
             provider: 'github',
             options: {
                 redirectTo: process.env.REACT_APP_SUPABASE_REDIRECT_URL,
-                prompt: 'select_account',
             },
         });
 
