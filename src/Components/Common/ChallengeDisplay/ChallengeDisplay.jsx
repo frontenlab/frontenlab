@@ -25,6 +25,7 @@ const ChallengeDisplay = (props) => {
     const [loading, setLoading] = useState(0);
     const [user, setUser] = useState(null);
     const [currentZipFile, setCurrentZipFile] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     
 
     useEffect(() => {
@@ -119,7 +120,8 @@ const ChallengeDisplay = (props) => {
     
             if (error) throw error;
     
-            // Use the retrieved zip file path
+            setIsLoading(true);
+            
             await downloadZipFile(currentZipFile);
     
             setStatus('ongoing');
@@ -128,23 +130,21 @@ const ChallengeDisplay = (props) => {
             checkUserStatus();
         } catch (error) {
             console.error('Error updating status:', error);
+        } finally {
+            setIsLoading(false);
         }
     };
     
     // Function to download the ZIP file
     const downloadZipFile = async (filePath) => {
         try {
-            // Assuming `filePath` already starts with 'public/challenges/'
-            // Remove the base URL if it's present in the path
             const relativePath = filePath.replace('https://vtxigjowfvmjejnmwhxd.supabase.co/storage/v1/object/public/', '');
             
-            // Download the file from the 'public' bucket
             const { data, error } = await supabase
                 .storage
-                .from('public') // Update the bucket name to 'public' or whatever your bucket is named
+                .from('public') 
                 .download(relativePath); 
     
-            console.log("Downloading file from: ", relativePath);
     
             if (error) throw error;
     
@@ -278,6 +278,14 @@ const ChallengeDisplay = (props) => {
                 setImgUrl(currentChallenge.imgDesktop);
         }
     };
+
+    if(isLoading){
+        return (
+            <div className="spinner-container">
+                <PuffLoader color="#5055b8" size={60} />
+            </div>
+        )
+    }
     
 
     return (
