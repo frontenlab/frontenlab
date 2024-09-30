@@ -141,6 +141,8 @@ const ChallengeDisplay = (props) => {
                 .storage
                 .from('challenges') 
                 .download(relativePath); // Use relative path here
+
+                console.log(relativePath)
     
             if (error) throw error;
     
