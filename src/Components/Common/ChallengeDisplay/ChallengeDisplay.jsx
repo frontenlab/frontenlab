@@ -119,14 +119,13 @@ const ChallengeDisplay = (props) => {
     
             if (error) throw error;
     
-            // Now use the retrieved zip file path
-            await downloadZipFile(currentZipFile); 
-            console.log("Before slicing: ", currentZipFile);
+            // Use the retrieved zip file path
+            await downloadZipFile(currentZipFile);
     
             setStatus('ongoing');
             setStartedAt(currentStartedAt);
-            
-            checkUserStatus(); 
+    
+            checkUserStatus();
         } catch (error) {
             console.error('Error updating status:', error);
         }
@@ -135,15 +134,16 @@ const ChallengeDisplay = (props) => {
     // Function to download the ZIP file
     const downloadZipFile = async (filePath) => {
         try {
-            // Assuming `filePath` is a full URL, extract only the relative path
-            const relativePath = filePath.replace('https://vtxigjowfvmjejnmwhxd.supabase.co/storage/v1/object/challenges', '');
+            // Assuming `filePath` already starts with 'public/challenges/'
+            // Remove the base URL if it's present in the path
+            const relativePath = filePath.replace('https://vtxigjowfvmjejnmwhxd.supabase.co/storage/v1/object/public/', '');
     
             const { data, error } = await supabase
                 .storage
-                .from('challenges') 
-                .download(relativePath); // Use relative path here
-
-                console.log(relativePath)
+                .from('challenges')
+                .download(relativePath); // Pass the relative path
+    
+            console.log("Downloading file from: ", relativePath);
     
             if (error) throw error;
     
@@ -160,6 +160,7 @@ const ChallengeDisplay = (props) => {
             console.error('Error downloading the file:', error);
         }
     };
+    
     
 
     const handleSubmit = async (data) => {
