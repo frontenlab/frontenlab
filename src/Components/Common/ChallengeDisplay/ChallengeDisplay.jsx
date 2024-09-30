@@ -137,11 +137,12 @@ const ChallengeDisplay = (props) => {
             // Assuming `filePath` already starts with 'public/challenges/'
             // Remove the base URL if it's present in the path
             const relativePath = filePath.replace('https://vtxigjowfvmjejnmwhxd.supabase.co/storage/v1/object/public/', '');
-    
+            
+            // Download the file from the 'public' bucket
             const { data, error } = await supabase
                 .storage
-                .from('challenges')
-                .download(relativePath); // Pass the relative path
+                .from('public') // Update the bucket name to 'public' or whatever your bucket is named
+                .download(relativePath); 
     
             console.log("Downloading file from: ", relativePath);
     
@@ -160,6 +161,7 @@ const ChallengeDisplay = (props) => {
             console.error('Error downloading the file:', error);
         }
     };
+    
     
     
 
