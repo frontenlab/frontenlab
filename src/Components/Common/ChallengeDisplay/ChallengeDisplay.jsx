@@ -121,6 +121,7 @@ const ChallengeDisplay = (props) => {
     
             // Now use the retrieved zip file path
             await downloadZipFile(currentZipFile); 
+            console.log("Before slicing: ", currentZipFile);
     
             setStatus('ongoing');
             setStartedAt(currentStartedAt);
