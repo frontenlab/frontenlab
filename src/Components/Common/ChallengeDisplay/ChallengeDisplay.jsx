@@ -135,7 +135,7 @@ const ChallengeDisplay = (props) => {
     const downloadZipFile = async (filePath) => {
         try {
             // Assuming `filePath` is a full URL, extract only the relative path
-            const relativePath = filePath.replace('https://vtxigjowfvmjejnmwhxd.supabase.co/storage/v1/object/public/', '');
+            const relativePath = filePath.replace('https://vtxigjowfvmjejnmwhxd.supabase.co/storage/v1/object/', '');
     
             const { data, error } = await supabase
                 .storage
