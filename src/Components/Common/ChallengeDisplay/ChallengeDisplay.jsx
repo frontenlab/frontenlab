@@ -198,27 +198,32 @@ const ChallengeDisplay = (props) => {
                 return;
             }
     
-            // Update the repository and live URLs in `user_challenges`
-            const { data: repoData, error: repoError } = await supabase
-                .from('user_challenges')
-                .update({ 
-                    challenge_live: data.liveUrl,
-                    completed_at: currentEndAt,
-                    status: "completed",
-                    points: 10 // Add 10 points for this challenge
-                })
-                .match({ user_id: user.id, challenge_id: currentChallenge.id });
+            // If the challenge is already completed, don't increase submission count again
+            const isChallengeAlreadyCompleted = challengeData?.status === 'completed';
     
-            if (repoError) {
-                console.error('Error updating the repository URL:', repoError);
-                setIsSubmitting(false); // Hide spinner
-                return;
+            // Update the repository and live URLs in `user_challenges` only if it's not already completed
+            if (!isChallengeAlreadyCompleted) {
+                const { data: repoData, error: repoError } = await supabase
+                    .from('user_challenges')
+                    .update({ 
+                        challenge_live: data.liveUrl,
+                        completed_at: currentEndAt,
+                        status: "completed",
+                        points: 10 // Add 10 points for this challenge
+                    })
+                    .match({ user_id: user.id, challenge_id: currentChallenge.id });
+    
+                if (repoError) {
+                    console.error('Error updating the repository URL:', repoError);
+                    setIsSubmitting(false); // Hide spinner
+                    return;
+                }
             }
     
             // Fetch all user challenges to calculate total points and submission count
             const { data: allChallenges, error: fetchError } = await supabase
                 .from('user_challenges')
-                .select('points')
+                .select('points, status')  // Also select 'status' to filter completed challenges
                 .eq('user_id', user.id);
     
             if (fetchError) {
@@ -226,17 +231,18 @@ const ChallengeDisplay = (props) => {
                 return;
             }
     
-            // Calculate total points and submissions
+            // Calculate total points
             const totalPoints = allChallenges.reduce((acc, challenge) => acc + (challenge.points || 0), 0);
-            const totalSubmissions = allChallenges.length;
     
+            // Calculate total submissions, but only count challenges with status "completed"
+            const totalSubmissions = allChallenges.filter(challenge => challenge.status === 'completed').length;
     
             // Update the `users` table with the new total points and submission count
             const { error: updateUserError } = await supabase
                 .from('users')
                 .update({
                     points: totalPoints,
-                    submission: totalSubmissions
+                    submission: totalSubmissions // Update only if the submission is new
                 })
                 .eq('id', user.id);
     
@@ -253,6 +259,7 @@ const ChallengeDisplay = (props) => {
             setIsSubmitting(false); // Hide spinner
         }
     };
+    
     
     useEffect(() => {
         if (currentChallenge) {

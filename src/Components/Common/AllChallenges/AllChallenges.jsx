@@ -32,6 +32,7 @@ const AllChallenges = () => {
         <h1 className='allChallenge-title'>Explore Frontend Challenges</h1>
         <p className='allChallenge-description'>Find categorized frontend challenges and projects to sharpen your skills and advance your frontend development expertise.</p>
 
+        
         <div className="AllChallenges-container">
           {reversedChallenges.map((challenge) => (
             <ChallengeStructure

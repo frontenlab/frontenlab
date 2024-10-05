@@ -33,11 +33,11 @@
     height: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start; 
     gap: 40px;
     margin: 50px 0px;
-
 }
+
 
 .loader-container {
     display: flex;
