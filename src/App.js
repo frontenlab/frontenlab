@@ -24,6 +24,7 @@ import ComingSoon from './Components/Common/ComingSoon/ComingSoon';
 import ErrorMessage from './Components/Common/ErrorMessage/ErrorMessage'; 
 import useOnlineStatus from './Helpers/useOnlineStatus';
 import NotFound from './Components/Common/NotFound/NotFound';
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
   const isOnline = useOnlineStatus(); 
@@ -65,6 +66,7 @@ const App = () => {
         <Route path='/user-challenges/:status' element={<UserChallenges />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 };
