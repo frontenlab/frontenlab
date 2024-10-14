@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import './ChallengeDisplay.css';
 import { supabase } from '../../../Helpers/SupabaseClient';
 import Login from '../../../Helpers/Login';
@@ -11,7 +11,9 @@ import { PuffLoader } from 'react-spinners';
 const ChallengeDisplay = (props) => {
     const location = useLocation();
     const currentChallenge = location.state?.currentChallenge;
+    const { challengeName } = useParams();
 
+    const [challenge, setChallenge] = useState(currentChallenge || null);
     const [activeBtn, setActiveBtn] = useState("button1");
     const [imgUrl, setImgUrl] = useState(currentChallenge.imgDesktop);
 
@@ -26,6 +28,52 @@ const ChallengeDisplay = (props) => {
     const [user, setUser] = useState(null);
     const [currentZipFile, setCurrentZipFile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    
+
+    useEffect(() => {
+        if (!currentChallenge) {
+            fetchChallengeByName(); // Fetch challenge if not provided via state
+        } else {
+            setIsLoading(false);
+        }
+    }, [challengeName]);
+
+    const fetchChallengeByName = async () => {
+        try {
+            setIsLoading(true);
+            const { data, error } = await supabase
+                .from('challenges')
+                .select('*')
+                .eq('name', challengeName)
+                .maybeSingle();
+
+            if (error) {
+                console.error('Error fetching challenge:', error);
+                return;
+            }
+            if (data) {
+                setChallenge(data);
+                setImgUrl(data.imgDesktop); // Set initial image to desktop version
+            }
+        } catch (error) {
+            console.error('Unexpected error:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+
+    if (isLoading) {
+        return (
+            <div className="spinner-container">
+                <PuffLoader color="#5055b8" size={60} />
+            </div>
+        );
+    }
+
+
+
+
     
 
     useEffect(() => {
