@@ -10,12 +10,10 @@ import { PuffLoader } from 'react-spinners';
 
 const ChallengeDisplay = (props) => {
     const location = useLocation();
-    const currentChallenge = location.state?.currentChallenge;
-    const { challengeName } = useParams();
-
-    const [challenge, setChallenge] = useState(currentChallenge || null);
+    const [currentChallenge, setCurrentChallenge] = useState(location.state?.currentChallenge || null);
     const [activeBtn, setActiveBtn] = useState("button1");
-    const [imgUrl, setImgUrl] = useState(currentChallenge.imgDesktop);
+    const [imgUrl, setImgUrl] = useState(currentChallenge.imgDesktop || '');
+    const { challengeName } = useParams();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [status, setStatus] = useState(null);
@@ -31,50 +29,35 @@ const ChallengeDisplay = (props) => {
     
 
     useEffect(() => {
-        if (!currentChallenge) {
-            fetchChallengeByName(); // Fetch challenge if not provided via state
-        } else {
-            setIsLoading(false);
-        }
-    }, [challengeName]);
-
-    const fetchChallengeByName = async () => {
-        try {
-            setIsLoading(true);
+        const fetchChallenge = async () => {
             const { data, error } = await supabase
-                .from('challenges')
+                .from('challenges') // Assuming 'challenges' is your table name
                 .select('*')
-                .eq('name', challengeName)
-                .maybeSingle();
+                .eq('name', challengeName) // Adjust according to your column name
+                .single(); // Fetch a single record
 
             if (error) {
                 console.error('Error fetching challenge:', error);
-                return;
+            } else {
+                setCurrentChallenge(data); // Set the fetched challenge
+                setImgUrl(data?.imgDesktop || ''); // Update image URL
+                setIsLoading(false); // Set loading to false after fetching
             }
-            if (data) {
-                setChallenge(data);
-                setImgUrl(data.imgDesktop); // Set initial image to desktop version
-            }
-        } catch (error) {
-            console.error('Unexpected error:', error);
-        } finally {
-            setIsLoading(false);
+        };
+
+        // Fetch challenge only if it's not already available in state
+        if (!currentChallenge) {
+            fetchChallenge();
+        } else {
+            setImgUrl(currentChallenge.imgDesktop); // Update imgUrl if challenge is already present
+            setIsLoading(false); // No need to load if challenge is in state
         }
-    };
-
-
-    if (isLoading) {
-        return (
-            <div className="spinner-container">
-                <PuffLoader color="#5055b8" size={60} />
-            </div>
-        );
-    }
+    }, [currentChallenge, challengeName]); // Dependencies include currentChallenge and challengeName
 
 
 
 
-    
+
 
     useEffect(() => {
         // Function to fetch user data

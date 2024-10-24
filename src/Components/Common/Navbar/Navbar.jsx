@@ -23,6 +23,12 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [points, setPoints] = useState(0);
     const [username, setUsername] = useState('');
+    const [overFlow, setOverFlow] = useState(0);
+
+
+    const handleOverflow = () => {
+        setOverFlow(overFlow === 1 ? 0 : 1);
+    }
 
     const handleMenuClick = () =>{
         setMenu(!menu);
@@ -31,6 +37,18 @@ const Navbar = () => {
     const handleDropdownClick = () => {
         setDropdownActive(!dropdownActive);
     }
+
+    useEffect(()=> {
+        if(overFlow === 1){
+            document.documentElement.style.overflow = "hidden";
+        } else {
+            document.documentElement.style.overflow = "";
+        }
+        
+        return () => {
+            document.documentElement.style.overflow = "";
+        }
+    }, [overFlow])
 
     useEffect(()=>{
         const handleClickOutside = (event) => {
@@ -145,9 +163,9 @@ const Navbar = () => {
             
             <div className="Navbar-menu">
                 {
-                    menu?<SlMenu className='menu-icon icon' onClick={handleMenuClick}/>
+                    menu?<SlMenu className='menu-icon icon' onClick={() => {handleMenuClick(); handleOverflow(1) }}/>
                     :
-                    <RiCloseLargeFill className='close-icon icon' onClick={handleMenuClick} />
+                    <RiCloseLargeFill className='close-icon icon' onClick={() => {handleMenuClick(); handleOverflow(1) }} />
                 }
                 
 
