@@ -25,6 +25,7 @@ import ErrorMessage from './Components/Common/ErrorMessage/ErrorMessage';
 import useOnlineStatus from './Helpers/useOnlineStatus';
 import NotFound from './Components/Common/NotFound/NotFound';
 import { Analytics } from "@vercel/analytics/react"
+import ChallengeDisplay from './Components/Common/ChallengeDisplay/ChallengeDisplay';
 
 const App = () => {
   const isOnline = useOnlineStatus(); 
@@ -47,8 +48,8 @@ const App = () => {
         <Route path='/challenges/hero' element={<DashboardChallenges category="hero"/>} />
         <Route path='/challenges/features' element={<DashboardChallenges category="features"/>} />
         <Route path='/challenge' element={<Challenge />}>
-          <Route path=':challengeId' element={<Challenge />} />
-        </Route>
+        <Route path=':challengeId' element={<ChallengeDisplay />} /> {/* Use ChallengeDisplay for the specific challenge */}
+    </Route>
         <Route path='/about' element={<About />} />
         <Route element={<ProtectedRoute />}>
           <Route path='/my' element={<Dashboard />} />

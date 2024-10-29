@@ -10,10 +10,15 @@ import { PuffLoader } from 'react-spinners';
 
 const ChallengeDisplay = (props) => {
     const location = useLocation();
-    const [currentChallenge, setCurrentChallenge] = useState(location.state?.currentChallenge || null);
     const [activeBtn, setActiveBtn] = useState("button1");
+    
+    const challengeName = location.pathname.split('/').pop();
+
+    const [newCurrentChallenge, setNewCurrentChallenge] = useState(null)
+    const [currentChallenge, setCurrentChallenge] = useState(location.state?.currentChallenge || null);
     const [imgUrl, setImgUrl] = useState(currentChallenge.imgDesktop || '');
-    const { challengeName } = useParams();
+    console.log(challengeName)
+
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [status, setStatus] = useState(null);
@@ -28,33 +33,32 @@ const ChallengeDisplay = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     
 
+
     useEffect(() => {
         const fetchChallenge = async () => {
+            setIsLoading(true); // Start loading
+
             const { data, error } = await supabase
-                .from('challenges') // Assuming 'challenges' is your table name
+                .from('challenges')
                 .select('*')
                 .eq('name', challengeName) // Adjust according to your column name
-                .single(); // Fetch a single record
+                .maybeSingle(); // Fetch a single record
 
             if (error) {
                 console.error('Error fetching challenge:', error);
             } else {
-                setCurrentChallenge(data); // Set the fetched challenge
-                setImgUrl(data?.imgDesktop || ''); // Update image URL
-                setIsLoading(false); // Set loading to false after fetching
+                setNewCurrentChallenge(data); // Set the fetched challenge
             }
+
+            setIsLoading(false); // End loading
         };
 
-        // Fetch challenge only if it's not already available in state
-        if (!currentChallenge) {
-            fetchChallenge();
-        } else {
-            setImgUrl(currentChallenge.imgDesktop); // Update imgUrl if challenge is already present
-            setIsLoading(false); // No need to load if challenge is in state
+        if (challengeName) {
+            fetchChallenge(); // Fetch the challenge whenever challengeName is available
         }
-    }, [currentChallenge, challengeName]); // Dependencies include currentChallenge and challengeName
+    }, [challengeName]);
 
-
+    
 
 
 
