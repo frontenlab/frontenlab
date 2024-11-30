@@ -6,6 +6,7 @@ import Login from '../../../Helpers/Login';
 import SubmitForm from '../../../Helpers/SubmitForm';
 import AchievementOverlay from '../AchievementOverlay/AchievementOverlay';
 import { PuffLoader } from 'react-spinners';
+import test_img from '../../../Assets/Images/Trophy.png'
 
 
 const ChallengeDisplay = (props) => {
@@ -15,9 +16,8 @@ const ChallengeDisplay = (props) => {
     const challengeName = location.pathname.split('/').pop();
 
     const [newCurrentChallenge, setNewCurrentChallenge] = useState(null)
-    const [currentChallenge, setCurrentChallenge] = useState(location.state?.currentChallenge || null);
-    const [imgUrl, setImgUrl] = useState(currentChallenge.imgDesktop || '');
-    console.log(challengeName)
+    const [currentChallenge, setCurrentChallenge] = useState(null);
+    const [imgUrl, setImgUrl] = useState(null); // Initialize as null
 
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,31 +34,27 @@ const ChallengeDisplay = (props) => {
     
 
 
-    useEffect(() => {
-        const fetchChallenge = async () => {
-            setIsLoading(true); // Start loading
-
-            const { data, error } = await supabase
-                .from('challenges')
-                .select('*')
-                .eq('name', challengeName) // Adjust according to your column name
-                .maybeSingle(); // Fetch a single record
-
-            if (error) {
-                console.error('Error fetching challenge:', error);
-            } else {
-                setNewCurrentChallenge(data); // Set the fetched challenge
-            }
-
-            setIsLoading(false); // End loading
-        };
-
-        if (challengeName) {
-            fetchChallenge(); // Fetch the challenge whenever challengeName is available
-        }
-    }, [challengeName]);
 
     
+    const testFetch = async () => {
+        const { data, error } = await supabase
+            .from('challenges')
+            .select('*')
+            .eq('name', 'test-challenge')
+            .maybeSingle();
+    
+        if (error) {
+            console.error('Error:', error);
+            console.log(challengeName)
+        } else {
+            console.log('Data:', data);
+        }
+    };
+    
+    testFetch();
+    
+    
+        
 
 
 
@@ -328,7 +324,8 @@ const ChallengeDisplay = (props) => {
             </div>
         )
     }
-    
+
+
 
     return (
         <div className="ChallengeDisplay">
