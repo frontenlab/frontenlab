@@ -13,10 +13,10 @@ const ChallengeDisplay = (props) => {
     const location = useLocation();
     const [activeBtn, setActiveBtn] = useState("button1");
     
-    const challengeName = location.pathname.split('/').pop();
+    const challengeName = location.pathname.split('/').pop().replace(/-/g, ' ');
 
     const [newCurrentChallenge, setNewCurrentChallenge] = useState(null)
-    const [currentChallenge, setCurrentChallenge] = useState(null);
+    const [currentChallenge, setCurrentChallenge] = useState("");
     const [imgUrl, setImgUrl] = useState(null); // Initialize as null
 
 
@@ -34,101 +34,119 @@ const ChallengeDisplay = (props) => {
     
 
 
+    
 
+    useEffect(() => {
+        // Function to fetch the challenge
+        const fetchChallenge = async () => {
+          setLoading(true);
+          try {
+            // Fetch challenge data from Supabase using the challengeName
+            const { data, error } = await supabase
+              .from('challenges')
+              .select('*')
+              .eq('title', challengeName) // Assuming 'title' is the column name in Supabase
+              .maybeSingle();
     
-    const testFetch = async () => {
-        const { data, error } = await supabase
-            .from('challenges')
-            .select('*')
-            .eq('name', 'test-challenge')
-            .maybeSingle();
+            if (error) {
+              throw error;
+            }
     
-        if (error) {
-            console.error('Error:', error);
-            console.log(challengeName)
-        } else {
-            console.log('Data:', data);
+            // Set the challenge data if the fetch is successful
+            setCurrentChallenge(data);
+            console.log('Challenge fetched:', challengeName);
+          } catch (error) {
+            console.error('Error fetching challenge:', error);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        if (challengeName) {
+          fetchChallenge(); // Automatically fetch challenge when `challengeName` is available
         }
-    };
-    
-    testFetch();
-    
-    
-        
-
+      }, [challengeName]); 
 
 
 
     useEffect(() => {
-        // Function to fetch user data
         const fetchUser = async () => {
             setLoading(true);
             const { data: { session } } = await supabase.auth.getSession();
-    
+
             if (session) {
                 setUser(session.user);
-    
-                // Fetch current user data to check the name
+
+                // Fetch user data
                 const { data: existingUser, error: fetchError } = await supabase
                     .from('users')
                     .select('username')
                     .eq('id', session.user.id)
                     .maybeSingle();
-    
+
                 if (fetchError) {
                     console.error('Error fetching user data:', fetchError);
                 } else if (existingUser) {
                     setUsername(existingUser.username);
                 }
+
+                // Check if user is logged in
+                setIsLoggedIn(true);
             } else {
                 setUser(null);
+                setIsLoggedIn(false);
             }
             setLoading(false);
         };
-    
+
         fetchUser();
-    
     }, []);
 
+    // Fetch challenge status and details if the user is logged in and challenge data is available
     useEffect(() => {
-        checkUserStatus();  // Call the function inside useEffect
-    }, [currentChallenge.id]);
-    
-    const checkUserStatus = async () => {
-        const { data: { user } } = await supabase.auth.getUser();
-        setIsLoggedIn(!!user);
-    
-        if (user) {
-            // Fetch challenge status
-            const { data: challengeData, error } = await supabase
-                .from('user_challenges')
-                .select('*')
-                .eq('user_id', user.id)
-                .eq('challenge_id', currentChallenge.id)
-                .maybeSingle();
-    
-            if (challengeData) {
-                setStatus(challengeData.status);
-                setStartedAt(challengeData.started_at);
-                setLiveUrl(challengeData.challenge_live || '');
-            } else if (error) {
-                console.error("Error fetching status", error);
-            }
+        const checkUserStatus = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
 
-            const { data: challengeDetails, error: challengeError } = await supabase
-                .from('challenges')
-                .select('zip_file')
-                .eq('id', currentChallenge.id)
-                .maybeSingle();
+            if (user && currentChallenge) {
+                setIsLoggedIn(true);
 
-            if (challengeError) {
-                console.error("Error fetching challenge details", challengeError);
-            } else if (challengeDetails) {
-                setCurrentZipFile(challengeDetails.zip_file); // Store zip file path in state
+                // Fetch challenge status
+                const { data: challengeData, error } = await supabase
+                    .from('user_challenges')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .eq('challenge_id', currentChallenge.id)
+                    .maybeSingle();
+
+                if (challengeData) {
+                    setStatus(challengeData.status);
+                    setStartedAt(challengeData.started_at);
+                    setLiveUrl(challengeData.challenge_live || '');
+                } else if (error) {
+                    console.error("Error fetching challenge status:", error);
+                }
+
+                // Fetch challenge details (zip file)
+                const { data: challengeDetails, error: challengeError } = await supabase
+                    .from('challenges')
+                    .select('zip_file')
+                    .eq('id', currentChallenge.id)
+                    .maybeSingle();
+
+                if (challengeError) {
+                    console.error("Error fetching challenge details:", challengeError);
+                } else if (challengeDetails) {
+                    setCurrentZipFile(challengeDetails.zip_file); // Store zip file path in state
+                }
             }
+        };
+
+        if (isLoggedIn && currentChallenge) {
+            checkUserStatus();
         }
-    };
-    
+    }, [isLoggedIn, currentChallenge]);
+
+
     const handleStartClick = async () => {
         if (!isLoggedIn) {
             window.location.href = '/'; // Redirect to login if not logged in
@@ -158,7 +176,6 @@ const ChallengeDisplay = (props) => {
             setStatus('ongoing');
             setStartedAt(currentStartedAt);
     
-            checkUserStatus();
         } catch (error) {
             console.error('Error updating status:', error);
         } finally {
@@ -292,12 +309,7 @@ const ChallengeDisplay = (props) => {
     };
     
     
-    useEffect(() => {
-        if (currentChallenge) {
-            setActiveBtn("button1");
-            setImgUrl(currentChallenge.imgDesktop);
-        }
-    }, [currentChallenge]);
+   
 
     const handleButtonClick = (button) => () => {
         setActiveBtn(button);
@@ -334,6 +346,9 @@ const ChallengeDisplay = (props) => {
                     <PuffLoader color="#5055b8" />
                 </div>
             )}
+
+            
+            
             <div className="challengeDisplay-box">
                 <div className="challengeDisplay-box-img">
                     <img src={imgUrl} alt="box-img" />
@@ -350,7 +365,6 @@ const ChallengeDisplay = (props) => {
                 <div className="challengeDisplay-content-box1">
                     <div className="challengeDisplay-challengeDescription contentBox">
                         <h1>Description</h1>
-                        <p>{currentChallenge.description}</p>
                         <div className="challengeDisplay-challengeDescription-buttons">
                             {isLoggedIn
                                 ? <button className='challengeDescription-start-button' onClick={handleStartClick}>{status === null ? "Start" : "Download Requirements"}</button>
