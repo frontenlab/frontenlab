@@ -6,7 +6,7 @@ import Footer from '../Components/Common/Footer/Footer';
 import useChallenges from '../Helpers/fetchChallenges';
 import SkeletonChallenge from '../Components/UI/SkeletonChallenge/SkeletonChallenge';
 import ErrorMessage from '../Components/Common/ErrorMessage/ErrorMessage';
-
+import NotFound from '../Components/Common/NotFound/NotFound';
 
 const Challenge = () => {
     const { challengeId } = useParams();
@@ -31,7 +31,7 @@ const Challenge = () => {
             {currentChallenge ? (
                 <ChallengeDisplay currentChallenge={currentChallenge} />
             ) : (
-                <p>Challenge not found</p>
+                <NotFound />
             )}
             <Footer />
         </div>
