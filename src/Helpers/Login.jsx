@@ -66,7 +66,6 @@ const Login = ({ name, class_name }) => {
             }
           } else {
             // Handle case when user is not logged in
-            console.log("No session found");
           }
           setLoading(false);
         };
