@@ -6,8 +6,8 @@ import Login from '../../../Helpers/Login';
 import SubmitForm from '../../../Helpers/SubmitForm';
 import AchievementOverlay from '../AchievementOverlay/AchievementOverlay';
 import { PuffLoader } from 'react-spinners';
-import test_img from '../../../Assets/Images/Trophy.png'
-
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const ChallengeDisplay = (props) => {
     const location = useLocation();
@@ -15,10 +15,8 @@ const ChallengeDisplay = (props) => {
     
     const challengeName = location.pathname.split('/').pop().replace(/-/g, ' ');
 
-    const [newCurrentChallenge, setNewCurrentChallenge] = useState(null)
     const [currentChallenge, setCurrentChallenge] = useState("");
     const [imgUrl, setImgUrl] = useState(null); // Initialize as null
-
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [status, setStatus] = useState(null);
@@ -35,37 +33,40 @@ const ChallengeDisplay = (props) => {
 
 
     
+    useEffect(() => {
+        if (currentChallenge?.template_img) {
+            setImgUrl(currentChallenge.template_img);
+        }
+    }, [currentChallenge]);
 
     useEffect(() => {
         // Function to fetch the challenge
         const fetchChallenge = async () => {
-          setLoading(true);
-          try {
-            // Fetch challenge data from Supabase using the challengeName
-            const { data, error } = await supabase
-              .from('challenges')
-              .select('*')
-              .eq('title', challengeName) // Assuming 'title' is the column name in Supabase
-              .maybeSingle();
-    
-            if (error) {
-              throw error;
+            setLoading(true);
+            try {
+                const { data, error } = await supabase
+                .from('challenges')
+                .select('*')
+                .eq('title', challengeName) 
+                .maybeSingle();
+        
+                if (error) {
+                throw error;
+                }
+        
+                setCurrentChallenge(data);
+                
+            } catch (error) {
+                console.error('Error fetching challenge:', error);
+            } finally {
+                setLoading(false);
             }
-    
-            // Set the challenge data if the fetch is successful
-            setCurrentChallenge(data);
-            console.log('Challenge fetched:', challengeName);
-          } catch (error) {
-            console.error('Error fetching challenge:', error);
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        if (challengeName) {
-          fetchChallenge(); // Automatically fetch challenge when `challengeName` is available
-        }
-      }, [challengeName]); 
+            };
+        
+            if (challengeName) {
+            fetchChallenge();
+            }
+        }, [challengeName]); 
 
 
 
@@ -90,7 +91,6 @@ const ChallengeDisplay = (props) => {
                     setUsername(existingUser.username);
                 }
 
-                // Check if user is logged in
                 setIsLoggedIn(true);
             } else {
                 setUser(null);
@@ -102,7 +102,6 @@ const ChallengeDisplay = (props) => {
         fetchUser();
     }, []);
 
-    // Fetch challenge status and details if the user is logged in and challenge data is available
     useEffect(() => {
         const checkUserStatus = async () => {
             const { data: { user } } = await supabase.auth.getUser();
@@ -210,7 +209,10 @@ const ChallengeDisplay = (props) => {
         }
     };
     
-    
+    const preloadImage = (url) => {
+        const img = new Image();
+        img.src = url; // This will preload the image
+    };
     
 
     const handleSubmit = async (data) => {
@@ -314,19 +316,27 @@ const ChallengeDisplay = (props) => {
     const handleButtonClick = (button) => () => {
         setActiveBtn(button);
 
+        let newImgUrl;
+        
         switch (button) {
             case "button1":
-                setImgUrl(currentChallenge.imgDesktop);
+                newImgUrl = currentChallenge?.template_img;
                 break;
             case "button2":
-                setImgUrl(currentChallenge.imgTablet);
+                newImgUrl = currentChallenge?.tablet_img;
                 break;
             case "button3":
-                setImgUrl(currentChallenge.imgMobile);
+                newImgUrl = currentChallenge?.mobile_img;
                 break;
             default:
-                setImgUrl(currentChallenge.imgDesktop);
+                newImgUrl = currentChallenge?.template_img;
         }
+
+        // Preload the new image
+        preloadImage(newImgUrl);
+        
+        // Change the image URL
+        setImgUrl(newImgUrl);  // Update image source
     };
 
     if(isLoading){
@@ -365,6 +375,7 @@ const ChallengeDisplay = (props) => {
                 <div className="challengeDisplay-content-box1">
                     <div className="challengeDisplay-challengeDescription contentBox">
                         <h1>Description</h1>
+                        <p>{currentChallenge?.description}</p>
                         <div className="challengeDisplay-challengeDescription-buttons">
                             {isLoggedIn
                                 ? <button className='challengeDescription-start-button' onClick={handleStartClick}>{status === null ? "Start" : "Download Requirements"}</button>
