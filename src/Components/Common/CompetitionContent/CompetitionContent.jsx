@@ -8,12 +8,15 @@ import { Link } from 'react-router-dom'
 const CompetitionContent = () => {
   return (
     <div className="CompetitionContent">
-        <div className="competitionContent-description">
-            <h1>Weekly Competition</h1>
-            <p>Join our weekly competition, complete challenges, and earn exciting rewards like swags and points! Show off your skills and climb the leaderboard every week.</p>
+        <div className="competitionContent-main">
+            <div className="competitionContent-description">
+                <h1>Frontenlab's Weekly Competition</h1>
+                <p>Bored of completing challenges alone? Join the competition, earn points, and stand a chance to win exciting swags. Compete, code, and claim your spot on the leaderboard!</p>
+            </div>
         </div>
+        
 
-        <div className="competitionContent-competition-box">
+        {/* <div className="competitionContent-competition-box">
             <div className='competitionContent-competition-box-top'>
                 <div className='competition-name'>
                     <div className='competition-no'>1</div>
@@ -28,7 +31,7 @@ const CompetitionContent = () => {
                 <p>Starts in sunday 8 a.m</p>
                 <Link to={`/competitions/Week1`}><IoMdArrowForward className='competition-arrow-icon'/></Link>
             </div>
-        </div>
+        </div> */}
         
         
     </div>

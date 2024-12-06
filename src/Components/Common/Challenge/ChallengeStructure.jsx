@@ -39,7 +39,7 @@ const ChallengeStructure = (props) => {
     <div className="challenge">
       <Link to={`/challenge/${formattedTitle}`} state={{ currentChallenge: props }}>
         {challengeLoading ? (
-          <Skeleton style={{ height: "100%", width: "100%" }} />
+          <Skeleton className="skeleton" style={{ height: "100%", width: "100%" }} />
         ) : (
           <img
             src={props.imgDesktop}
