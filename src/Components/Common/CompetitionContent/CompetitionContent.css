@@ -1,5 +1,11 @@
-.CompetitionContent {
-    height: 80vh;
+
+
+.competitionContent-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - 150px);
 }
 
 .competitionContent-description {
@@ -8,8 +14,17 @@
     align-items: center;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 50px;
     color: var(--PrimaryColor);
+    max-width: 1000px;
+}
+
+.competitionContent-description h1 {
+    font-size: 48px;
+    text-align: center;
+}
+
+.competitionContent-description p {
+    text-align: center;
 }
 
 .competitionContent-competition-box {

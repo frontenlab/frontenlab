@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Center content vertically */
+    height: 100vh; 
     text-align: center;
     color: var(--PrimaryColor);
   }
