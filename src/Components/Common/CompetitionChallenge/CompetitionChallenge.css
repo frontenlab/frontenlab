@@ -1,0 +1,41 @@
+.CompetitionChallenge {
+    height: 100%;
+    background-color: var(--BoxColor);
+    border-radius: 28px;
+}
+
+.competitionChallenge-img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.competitionChallenge-img img {
+    width: 100%;
+}
+
+.competitionChallenge-content {
+    margin-bottom: 20px;
+    padding: 0pc 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.competitionChallenge-content .competitionChallenge-title {
+    font-size: 34px;
+}
+
+.competitionChallenge-description {
+    font-size: 16px;
+}
+
+.competitionChallenge-button {
+    padding: 8px 30px;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--AccentColor);
+    color: var(--WhiteColor);
+    margin: 10px 20px 20px;
+}

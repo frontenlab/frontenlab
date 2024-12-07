@@ -1,11 +1,12 @@
 .CompetitionDisplay{
     display: flex;
+    justify-content: space-between;
     gap: 30px;
 }
 
 
 .competitionDisplay-left {
-    max-width: 75%;
+    width: 100%;
     padding: 25px;
     border-radius: 14px;
     border: 1px solid var(--BorderColor);
@@ -13,7 +14,7 @@
 }
 
 .competitionDisplay-left h1 {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .rule-heading {
