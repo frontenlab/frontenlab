@@ -1,6 +1,7 @@
 import React from 'react'
 import './CompetitionDisplay.css'
 import CompetitionChallenge from '../CompetitionChallenge/CompetitionChallenge'
+import male2 from '../../../Assets/Images/male2.jpg'
 
 const CompetitionDisplay = () => {
   return (
@@ -13,14 +14,38 @@ const CompetitionDisplay = () => {
       </div>
 
       <div className="competitionDisplay-right">
-        <h2>Prizes</h2>
-        <ul className="prize-list">
-          <li><strong>1st Place:</strong> 500 Points</li>
-          <li><strong>2nd Place:</strong> 300 Points</li>
-          <li><strong>3rd Place:</strong> 200 Points</li>
-          <li><strong>Participation:</strong> 50 Points </li>
-        </ul>
+        <div className="competitionDisplay-right-points">
+          <h2>Prizes</h2>
+          <ul className="prize-list">
+            <li><strong>1st Place </strong> 50 Points</li>
+            <li><strong>2nd Place </strong> 30 Points</li>
+            <li><strong>3rd Place </strong> 20 Points</li>
+            <li><strong>Participation </strong> 5 Points </li>
+          </ul>
+        </div>
+        
+        <div className="competitionDisplay-right-swags">
+        <h2>Swags</h2>
+
+          <div className="competiitonDisplay-right-swags-container">
+            <div className="swag-item swag-item1">
+              <img src={male2} alt="swag-img" />
+            </div>
+
+            <div className="swag-item swag-item2">
+              <img src={male2} alt="swag-img" />
+            </div>
+
+            <div className="swag-item swag-item3">
+              <img src={male2} alt="swag-img" />
+            </div>
+          </div>
+          
+
+        </div>
       </div>
+
+
     </div>
   )
 }

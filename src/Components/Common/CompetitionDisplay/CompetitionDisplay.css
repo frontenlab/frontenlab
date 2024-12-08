@@ -11,6 +11,7 @@
     border-radius: 14px;
     border: 1px solid var(--BorderColor);
     color: var(--PrimaryColor);
+    box-sizing: border-box;
 }
 
 .competitionDisplay-left h1 {
@@ -50,7 +51,7 @@
 }
 
 
-.competitionDisplay-right {
+.competitionDisplay-right-points {
     width: 250px;
     min-width: 250px;
     padding: 25px 15px;
@@ -76,12 +77,61 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 10px;
     align-items: center;
 }
 
 .prize-list li {
     margin-bottom: 10px;
     font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.competitionDisplay-right {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.competitionDisplay-right h2 {
+    margin-bottom: 20px;
+}
+
+.competitionDisplay-right-swags {
+    width: 250px;
+    min-width: 250px;
+    padding: 25px 15px;
+    height: fit-content;
+    border-radius: 14px;
+    border: 1px solid var(--BorderColor);
+    color: var(--PrimaryColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.competiitonDisplay-right-swags-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.competitionDisplay-right-swags .swag-item {
+    width: 80px;
+    height: auto;
+}
+
+.competitionDisplay-right-swags .swag-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 100%;
+
 }
 
 @media screen and (max-width: 768px) {
@@ -96,10 +146,26 @@
     .competitionDisplay-right {
         width: 100%;
     }
+
+    .competitionDisplay-right-points {
+        width: 100%;
+    }
+
+    .competitionDisplay-right-swags {
+        width: 100%;
+    }
+
+    .competiitonDisplay-right-swags-container {
+        flex-direction: row;
+    }
 }
 
 @media screen and (max-width: 480px) {
     .competitionDisplay-left {
         padding: 15px;
+    }
+
+    .competiitonDisplay-right-swags-container {
+        gap: 20px;
     }
 }
