@@ -1,9 +1,20 @@
-import React from 'react'
-import './CompetitionDisplay.css'
-import CompetitionChallenge from '../CompetitionChallenge/CompetitionChallenge'
-import male2 from '../../../Assets/Images/male2.jpg'
+import React from 'react';
+import './CompetitionDisplay.css';
+import CompetitionChallenge from '../CompetitionChallenge/CompetitionChallenge';
+import male2 from '../../../Assets/Images/male2.jpg';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const CompetitionDisplay = () => {
+  const location = useLocation();
+
+  // Check if the current route matches the dynamic `challengeName` route
+  const isChallengeRoute = location.pathname.includes('/challengeName');
+
+  if (isChallengeRoute) {
+    // Render only the Outlet when the path includes `/challengeName`
+    return <Outlet />;
+  }
+
   return (
     <div className="CompetitionDisplay">
       <div className="competitionDisplay-left">
@@ -23,31 +34,24 @@ const CompetitionDisplay = () => {
             <li><strong>Participation </strong> 5 Points </li>
           </ul>
         </div>
-        
-        <div className="competitionDisplay-right-swags">
-        <h2>Swags</h2>
 
+        <div className="competitionDisplay-right-swags">
+          <h2>Swags</h2>
           <div className="competiitonDisplay-right-swags-container">
             <div className="swag-item swag-item1">
               <img src={male2} alt="swag-img" />
             </div>
-
             <div className="swag-item swag-item2">
               <img src={male2} alt="swag-img" />
             </div>
-
             <div className="swag-item swag-item3">
               <img src={male2} alt="swag-img" />
             </div>
           </div>
-          
-
         </div>
       </div>
-
-
     </div>
-  )
-}
+  );
+};
 
-export default CompetitionDisplay
+export default CompetitionDisplay;

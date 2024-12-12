@@ -51,8 +51,8 @@ const App = () => {
         <Route path='/challenges/hero' element={<DashboardChallenges category="hero"/>} />
         <Route path='/challenges/features' element={<DashboardChallenges category="features"/>} />
         <Route path='/challenge' element={<Challenge />}>
-        <Route path=':challengeId' element={<ChallengeDisplay />} /> {/* Use ChallengeDisplay for the specific challenge */}
-    </Route>
+          <Route path=':challengeId' element={<ChallengeDisplay />} /> {/* Use ChallengeDisplay for the specific challenge */}
+        </Route>
         <Route path='/about' element={<About />} />
         <Route element={<ProtectedRoute />}>
           <Route path='/my' element={<Dashboard />} />
@@ -65,9 +65,10 @@ const App = () => {
         <Route path='/contact' element={<Contact />} />
         
         <Route path='/competitions' element={<Competition />} />
-        <Route path='/competitions' element={<CompetitionStructure />}>
-          <Route path=':competitionName' element={<CompetitionStructure />} />
+        <Route path='/competitions/:competitionName' element={<CompetitionStructure />} >
+          <Route path='challengeName' element={<ChallengeDisplay />} />
         </Route>
+
 
         {/* <Route path='/competitions' element={<ComingSoon />} />
         <Route path='/competitions' element={<ComingSoon />}>

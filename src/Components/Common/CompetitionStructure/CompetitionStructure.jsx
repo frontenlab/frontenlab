@@ -10,6 +10,7 @@ const CompetitionStructure = () => {
             <Navbar />
             <CompetitionDisplay />
             <Footer />
+            
         </div>
     )
 }

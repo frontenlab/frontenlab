@@ -1,4 +1,5 @@
 .CompetitionChallenge {
+    max-width: 500px;
     height: 100%;
     background-color: var(--BoxColor);
     border-radius: 28px;
@@ -29,13 +30,24 @@
 
 .competitionChallenge-description {
     font-size: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .competitionChallenge-button {
     padding: 8px 30px;
-    border-radius: 4px;
+    border-radius: 8px;
     border: none;
     background-color: var(--AccentColor);
     color: var(--WhiteColor);
     margin: 10px 20px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.competitionChallenge-button:hover {
+    background-color: var(--HoverColor);
 }
