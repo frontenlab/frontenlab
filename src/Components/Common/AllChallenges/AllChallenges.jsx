@@ -1,7 +1,7 @@
 import React from "react";
 import ChallengeStructure from "../Challenge/ChallengeStructure";
 import "./AllChallenges.css";
-import useChallenges from "../../../Helpers/fetchChallenges";
+import useChallenges from "../../../Helpers/FetchChallenges";
 import PuffLoader from "react-spinners/PuffLoader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 

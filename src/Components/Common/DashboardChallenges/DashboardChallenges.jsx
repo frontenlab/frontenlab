@@ -4,7 +4,7 @@ import Sidebar from '../Sidebar/Sidebar'
 import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
 import ChallengeStructure from '../Challenge/ChallengeStructure'
-import useChallenges from '../../../Helpers/fetchChallenges'
+import useChallenges from '../../../Helpers/FetchChallenges'
 import { PuffLoader } from 'react-spinners'
 
 

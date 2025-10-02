@@ -1,6 +1,6 @@
 import React from 'react';
 import './NewChallenges.css';
-import useChallenges from '../../../Helpers/fetchChallenges'; // Use the same hook as before
+import useChallenges from '../../../Helpers/FetchChallenges'; // Use the same hook as before
 import ChallengeStructure from '../Challenge/ChallengeStructure';
 import PuffLoader from 'react-spinners/PuffLoader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
