@@ -27,8 +27,6 @@ import NotFound from './Components/Common/NotFound/NotFound';
 import { Analytics } from "@vercel/analytics/react"
 import ChallengeDisplay from './Components/Common/ChallengeDisplay/ChallengeDisplay';
 import Competition from './Pages/Competition/Competition';
-import CompetitionDisplay from './Components/Common/CompetitionDisplay/CompetitionDisplay';
-import CompetitionStructure from './Components/Common/CompetitionStructure/CompetitionStructure';
 
 const App = () => {
   const isOnline = useOnlineStatus(); 
@@ -63,12 +61,7 @@ const App = () => {
         <Route path='/terms' element={<Terms />} />
         <Route path='/privacy' element={<Privacy />} />
         <Route path='/contact' element={<Contact />} />
-        
         <Route path='/competitions' element={<Competition />} />
-        <Route path='/competitions/:competitionName' element={<CompetitionStructure />} >
-          <Route path='challengeName' element={<ChallengeDisplay />} />
-        </Route>
-
 
         {/* <Route path='/competitions' element={<ComingSoon />} />
         <Route path='/competitions' element={<ComingSoon />}>
