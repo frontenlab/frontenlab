@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import ChallengeDisplay from '../Components/Common/ChallengeDisplay/ChallengeDisplay';
 import Navbar from '../Components/Common/Navbar/Navbar';
 import Footer from '../Components/Common/Footer/Footer';
-import useChallenges from '../Helpers/fetchChallenges';
+import useChallenges from '../Helpers/FetchChallenges';
 import SkeletonChallenge from '../Components/UI/SkeletonChallenge/SkeletonChallenge';
 import ErrorMessage from '../Components/Common/ErrorMessage/ErrorMessage';
 import NotFound from '../Components/Common/NotFound/NotFound';
