@@ -1,9 +1,9 @@
-import React from 'react';
-import ChallengeStructure from '../Challenge/ChallengeStructure';
-import './AllChallenges.css';
-import useChallenges from '../../../Helpers/fetchChallenges';
-import PuffLoader from 'react-spinners/PuffLoader';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import React from "react";
+import ChallengeStructure from "../Challenge/ChallengeStructure";
+import "./AllChallenges.css";
+import useChallenges from "../../../Helpers/fetchChallenges";
+import PuffLoader from "react-spinners/PuffLoader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const AllChallenges = () => {
   const { challenges, loading, error } = useChallenges();
@@ -22,17 +22,22 @@ const AllChallenges = () => {
 
   if (error) {
     return (
-      <ErrorMessage heading={"Network Error"} description={"Check your internet connection and try again"} />
+      <ErrorMessage
+        heading={"Network Error"}
+        description={"Check your internet connection and try again"}
+      />
     );
   }
 
   return (
     <div className="AllChallenges">
       <div className="AllChallenges-content">
-        <h1 className='allChallenge-title'>Explore Frontend Challenges</h1>
-        <p className='allChallenge-description'>Find categorized frontend challenges and projects to sharpen your skills and advance your frontend development expertise.</p>
+        <h1 className="allChallenge-title">Explore Frontend Challenges</h1>
+        <p className="allChallenge-description">
+          Find categorized frontend challenges and projects to sharpen your
+          skills and advance your frontend development expertise.
+        </p>
 
-        
         <div className="AllChallenges-container">
           {reversedChallenges.map((challenge) => (
             <ChallengeStructure

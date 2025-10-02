@@ -28,6 +28,7 @@ import { Analytics } from "@vercel/analytics/react"
 import ChallengeDisplay from './Components/Common/ChallengeDisplay/ChallengeDisplay';
 import Competition from './Pages/Competition/Competition';
 import CompetitionDisplay from './Components/Common/CompetitionDisplay/CompetitionDisplay';
+import CompetitionStructure from './Components/Common/CompetitionStructure/CompetitionStructure';
 
 const App = () => {
   const isOnline = useOnlineStatus(); 
@@ -50,8 +51,8 @@ const App = () => {
         <Route path='/challenges/hero' element={<DashboardChallenges category="hero"/>} />
         <Route path='/challenges/features' element={<DashboardChallenges category="features"/>} />
         <Route path='/challenge' element={<Challenge />}>
-        <Route path=':challengeId' element={<ChallengeDisplay />} /> {/* Use ChallengeDisplay for the specific challenge */}
-    </Route>
+          <Route path=':challengeId' element={<ChallengeDisplay />} /> {/* Use ChallengeDisplay for the specific challenge */}
+        </Route>
         <Route path='/about' element={<About />} />
         <Route element={<ProtectedRoute />}>
           <Route path='/my' element={<Dashboard />} />
@@ -63,15 +64,16 @@ const App = () => {
         <Route path='/privacy' element={<Privacy />} />
         <Route path='/contact' element={<Contact />} />
         
-        {/* <Route path='/competitions' element={<Competition />} />
-        <Route path='/competitions' element={<CompetitionDisplay />}>
-          <Route path=':competitionName' element={<CompetitionDisplay />} />
-        </Route> */}
+        <Route path='/competitions' element={<Competition />} />
+        <Route path='/competitions/:competitionName' element={<CompetitionStructure />} >
+          <Route path='challengeName' element={<ChallengeDisplay />} />
+        </Route>
 
-        <Route path='/competitions' element={<ComingSoon />} />
+
+        {/* <Route path='/competitions' element={<ComingSoon />} />
         <Route path='/competitions' element={<ComingSoon />}>
           <Route path=':competitionName' element={<ComingSoon />} />
-        </Route>
+        </Route> */}
 
 
         <Route path='/user-challenges/:status' element={<UserChallenges />} />

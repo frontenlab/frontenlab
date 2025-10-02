@@ -1,0 +1,53 @@
+.CompetitionChallenge {
+    max-width: 500px;
+    height: 100%;
+    background-color: var(--BoxColor);
+    border-radius: 28px;
+}
+
+.competitionChallenge-img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.competitionChallenge-img img {
+    width: 100%;
+}
+
+.competitionChallenge-content {
+    margin-bottom: 20px;
+    padding: 0pc 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.competitionChallenge-content .competitionChallenge-title {
+    font-size: 34px;
+}
+
+.competitionChallenge-description {
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.competitionChallenge-button {
+    padding: 8px 30px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--AccentColor);
+    color: var(--WhiteColor);
+    margin: 10px 20px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.competitionChallenge-button:hover {
+    background-color: var(--HoverColor);
+}

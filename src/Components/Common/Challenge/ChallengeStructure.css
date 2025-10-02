@@ -8,13 +8,11 @@
     cursor: pointer;
     transition: transform 0.3s ease;
     position: relative;
-    
 }
 
 .challenge img {
     width: 100%;
     height: auto;
-    
 }
 
 .challenge h3 {
